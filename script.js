@@ -1,0 +1,802 @@
+// Banner Slider Logic
+(function () {
+    const sliderWrapper = document.getElementById("sliderWrapper");
+    if (!sliderWrapper) return;
+    let bannerSlides = document.querySelectorAll(".slide");
+    const firstBannerClone = bannerSlides[0].cloneNode(true);
+    const lastBannerClone =
+        bannerSlides[bannerSlides.length - 1].cloneNode(true);
+    sliderWrapper.appendChild(firstBannerClone);
+    sliderWrapper.insertBefore(lastBannerClone, bannerSlides[0]);
+
+    let bannerIndex = 1;
+    const totalBannerSlides = document.querySelectorAll(".slide").length;
+    let isBannerMoving = false;
+
+    function updateBanner(animate = true) {
+        sliderWrapper.style.transition = animate
+            ? "transform 0.8s cubic-bezier(0.7,0,0.3,1)"
+            : "none";
+        sliderWrapper.style.transform = `translateX(${-bannerIndex * 100}%)`;
+
+        document.querySelectorAll(".slide").forEach((s, i) => {
+            if (i === bannerIndex) s.classList.add("active");
+            else s.classList.remove("active");
+        });
+    }
+
+    function changeBannerSlide(dir) {
+        if (isBannerMoving) return;
+        isBannerMoving = true;
+        bannerIndex += dir;
+        updateBanner();
+    }
+
+    sliderWrapper.addEventListener("transitionend", () => {
+        isBannerMoving = false;
+        if (bannerIndex === 0) {
+            bannerIndex = totalBannerSlides - 2;
+            updateBanner(false);
+        }
+        if (bannerIndex === totalBannerSlides - 1) {
+            bannerIndex = 1;
+            updateBanner(false);
+        }
+    });
+
+    setInterval(() => changeBannerSlide(1), 7000);
+    updateBanner(false);
+})();
+
+// ─── Alumni Voices — Center-Locked Horizontal Selector ───────────────────────────
+(function () {
+    const section = document.getElementById("alumni-voices");
+    if (!section) return;
+
+    // ── Data ──────────────────────────────────────────────────────
+    const ALUMNI = [
+        {
+            quote: '"TMU didn\'t just give me a degree; it gave me the wings to fly in the global tech landscape. The innovation-first culture is what sets this university apart."',
+            name: "Rahul Sharma",
+            role: "Senior Software Engineer \u2014 Google",
+            meta: "B.Tech CSE\u00a0\u00b7\u00a0Class of 2018",
+        },
+        {
+            quote: '"Empowerment is at the heart of TMU\'s education. The leadership skills and confidence I gained here have been instrumental in my growth at Microsoft."',
+            name: "Priya Gupta",
+            role: "Human Resource Manager \u2014 Microsoft",
+            meta: "MBA HRM\u00a0\u00b7\u00a0Class of 2016",
+        },
+        {
+            quote: '"The blend of academic rigor and hands-on experience at TMU is world-class. It perfectly prepared me for the dynamic challenges of the data science industry."',
+            name: "Aman Verma",
+            role: "Lead Data Scientist \u2014 Amazon",
+            meta: "MCA\u00a0\u00b7\u00a0Class of 2019",
+        },
+        {
+            quote: '"The creative freedom and mentorship at TMU allowed me to explore the intersection of technology and design. It was the perfect launchpad for my career at Meta."',
+            name: "Sneha Reddy",
+            role: "Product Designer \u2014 Meta",
+            meta: "B.Des\u00a0\u00b7\u00a0Class of 2020",
+        },
+        {
+            quote: "\"TMU's focus on industry readiness and strategic thinking gave me a competitive edge in the financial sector. I'm proud to be an alumnus of such a forward-thinking institution.\"",
+            name: "Vikram Singh",
+            role: "Executive Director \u2014 Goldman Sachs",
+            meta: "MBA\u00a0\u00b7\u00a0Class of 2015",
+        },
+    ];
+    const TOTAL = ALUMNI.length;
+
+    // ── Elements ──────────────────────────────────────────────────
+    const imgItems = section.querySelectorAll(".alm-img-item");
+    const thumbItems = section.querySelectorAll(".alm-thumb-item");
+    const thumbsWrapper = section.querySelector("#almThumbsWrapper");
+    const card = section.querySelector("#almCard");
+    const quoteEl = section.querySelector("#almQuote");
+    const nameEl = section.querySelector("#almName");
+    const roleEl = section.querySelector("#almRole");
+    const metaEl = section.querySelector("#almMeta");
+    const prevBtn = section.querySelector("#almPrev");
+    const nextBtn = section.querySelector("#almNext");
+
+    let current = 0;
+    let moving = false;
+    let autoTimer = null;
+
+    // ── Staggered Text Animations ─────────────────────────────────
+    var textEntries = [
+        { el: quoteEl, cls: "alm-quote-enter" },
+        { el: nameEl, cls: "alm-name-enter" },
+        { el: roleEl, cls: "alm-role-enter" },
+        { el: metaEl, cls: "alm-meta-enter" },
+    ];
+
+    function animateText(data) {
+        textEntries.forEach(function (t) {
+            t.el.classList.remove(t.cls);
+        });
+        quoteEl.textContent = data.quote;
+        nameEl.textContent = data.name;
+        roleEl.textContent = data.role;
+        metaEl.textContent = data.meta;
+        void quoteEl.offsetWidth; // force reflow
+        textEntries.forEach(function (t) {
+            t.el.classList.add(t.cls);
+        });
+    }
+
+    // ── Core: Go To Index ─────────────────────────────────────────
+    function goTo(targetIdx) {
+        if (moving) return;
+        moving = true;
+
+        current = ((targetIdx % TOTAL) + TOTAL) % TOTAL;
+
+        // 1. Update avatar classes and scroll
+        thumbItems.forEach(function (thumb, idx) {
+            if (idx === current) {
+                thumb.classList.add("active");
+                if (thumbsWrapper) {
+                    const scrollLeftVal = thumb.offsetLeft - thumbsWrapper.offsetWidth / 2 + thumb.offsetWidth / 2;
+                    thumbsWrapper.scrollTo({
+                        left: scrollLeftVal,
+                        behavior: "smooth"
+                    });
+                }
+            } else {
+                thumb.classList.remove("active");
+            }
+        });
+
+        // 2. Crossfade image
+        imgItems.forEach(function (img) {
+            img.classList.remove("active");
+        });
+        if (imgItems[current]) imgItems[current].classList.add("active");
+
+        // 3. Card slide-up + staggered text
+        card.classList.remove("alm-card-enter");
+        void card.offsetWidth;
+        card.classList.add("alm-card-enter");
+        animateText(ALUMNI[current]);
+
+        setTimeout(function () {
+            moving = false;
+        }, 700);
+    }
+
+    // ── Autoplay ──────────────────────────────────────────────────
+    function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(function () {
+            goTo(current + 1);
+        }, 7000);
+    }
+    function stopAuto() {
+        clearInterval(autoTimer);
+        autoTimer = null;
+    }
+
+    section.addEventListener("mouseenter", stopAuto);
+    section.addEventListener("mouseleave", startAuto);
+    section.addEventListener("touchstart", stopAuto, { passive: true });
+    section.addEventListener("touchend", startAuto, { passive: true });
+
+    // ── Navigation ────────────────────────────────────────────────
+    if (prevBtn)
+        prevBtn.addEventListener("click", function () {
+            goTo(current - 1);
+            startAuto();
+        });
+    if (nextBtn)
+        nextBtn.addEventListener("click", function () {
+            goTo(current + 1);
+            startAuto();
+        });
+    window.jumpToAlumni = function (idx) {
+        goTo(idx);
+        startAuto();
+    };
+
+    // ── Swipe ─────────────────────────────────────────────────────
+    var touchXStart = 0;
+    section.addEventListener(
+        "touchstart",
+        function (e) {
+            touchXStart = e.touches[0].clientX;
+        },
+        { passive: true },
+    );
+    section.addEventListener(
+        "touchend",
+        function (e) {
+            var dx = e.changedTouches[0].clientX - touchXStart;
+            if (Math.abs(dx) > 50) {
+                goTo(current + (dx < 0 ? 1 : -1));
+                startAuto();
+            }
+        },
+        { passive: true },
+    );
+
+    // ── Initialize ────────────────────────────────────────────────
+    var observer = new IntersectionObserver(
+        function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) section.classList.add("alm-visible");
+            });
+        },
+        { threshold: 0.2 },
+    );
+    observer.observe(section);
+
+    // Init track position
+    setTimeout(function() {
+        goTo(0);
+    }, 50);
+    startAuto();
+})();
+
+
+// YouTube Slider Logic
+(function () {
+    const ytSlider = document.getElementById("ytSlider");
+    if (!ytSlider) return;
+    let ytSlides = document.querySelectorAll(".yt-slide");
+    for (let i = 0; i < 3; i++) {
+        ytSlider.appendChild(ytSlides[i].cloneNode(true));
+        ytSlider.insertBefore(
+            ytSlides[ytSlides.length - 1 - i].cloneNode(true),
+            ytSlider.firstChild,
+        );
+    }
+    let ytIndex = 3;
+    let isYtMoving = false;
+    function updateYt(animate = true) {
+        const slideW = document.querySelector(".yt-slide").offsetWidth + 30;
+        ytSlider.style.transition = animate
+            ? "transform 0.8s cubic-bezier(0.7,0,0.3,1)"
+            : "none";
+        ytSlider.style.transform = `translateX(${-ytIndex * slideW}px)`;
+    }
+    ytSlider.addEventListener("transitionend", () => {
+        isYtMoving = false;
+        const originalCount = 8;
+        if (ytIndex >= originalCount + 3) {
+            ytIndex = 3;
+            updateYt(false);
+        } else if (ytIndex < 3) {
+            ytIndex = originalCount + 2;
+            updateYt(false);
+        }
+    });
+    window.navYt = function (dir) {
+        if (isYtMoving) return;
+        isYtMoving = true;
+        ytIndex += dir;
+        updateYt();
+    };
+    setInterval(() => {
+        if (!isYtMoving) {
+            ytIndex++;
+            updateYt();
+        }
+    }, 4000);
+    window.addEventListener("resize", () => updateYt(false));
+    updateYt(false);
+})();
+
+// Video Popup Logic
+window.openVideo = function (id) {
+    const modal = document.getElementById("videoModal");
+    const player = document.getElementById("ytPlayer");
+    player.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+};
+window.closeVideo = function () {
+    const modal = document.getElementById("videoModal");
+    document.getElementById("ytPlayer").src = "";
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+};
+
+// Gallery & Lightbox
+window.toggleGallery = function () {
+    const btn = document.getElementById("galleryToggleBtn");
+    const hiddenItems = document.querySelectorAll(".gallery-item.hidden");
+    const isExpanding = btn.textContent === "Show More";
+    hiddenItems.forEach(
+        (item) => (item.style.display = isExpanding ? "block" : "none"),
+    );
+    btn.textContent = isExpanding ? "Show Less" : "Show More";
+};
+window.openLightbox = function (src, meta) {
+    const modal = document.getElementById("lightbox");
+    document.getElementById("lightboxImg").src = src;
+
+    // Set download link
+    const dl = document.getElementById("lightboxDownload");
+    if (dl) dl.href = src;
+
+    // Populate metadata if provided
+    if (meta) {
+        const set = (id, val) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = val || "";
+        };
+        set("lightboxTitle", meta.title);
+        set("lightboxDesc", meta.desc);
+        set("lightboxLocation", meta.location);
+        set("lightboxDate", meta.date);
+        set("lightboxCatDetail", meta.category);
+        set("lightboxCategory", meta.category);
+    }
+
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+};
+window.closeLightbox = function () {
+    document.getElementById("lightbox").style.display = "none";
+    document.body.style.overflow = "auto";
+};
+
+// Blog Progress & Controls
+(function () {
+    const featuredSlider = document.getElementById("featuredBlogSlider");
+    const featuredProgress = document.getElementById("featuredProgress");
+    if (featuredSlider && featuredProgress) {
+        const update = () => {
+            const perc =
+                (featuredSlider.scrollLeft /
+                    (featuredSlider.scrollWidth - featuredSlider.clientWidth)) *
+                100;
+            featuredProgress.style.width = perc + "%";
+        };
+        featuredSlider.addEventListener("scroll", update);
+        document.getElementById("featuredPrevB").onclick = () =>
+            featuredSlider.scrollBy({
+                left: -400,
+                behavior: "smooth",
+            });
+        document.getElementById("featuredNextB").onclick = () =>
+            featuredSlider.scrollBy({
+                left: 400,
+                behavior: "smooth",
+            });
+        update();
+    }
+})();
+
+// Notice Search
+(function () {
+    const search = document.getElementById("noticeSearch");
+    const list = document.getElementById("noticeList");
+    if (search && list) {
+        search.addEventListener("keyup", () => {
+            const filter = search.value.toLowerCase();
+            const items = list.getElementsByClassName("notice-item");
+            let found = false;
+            for (let item of items) {
+                const text = item.innerText.toLowerCase();
+                const match = text.includes(filter);
+                item.style.display = match ? "" : "none";
+                if (match) found = true;
+            }
+            let msg = document.getElementById("noNoticesFound");
+            if (!found && !msg) {
+                msg = document.createElement("div");
+                msg.id = "noNoticesFound";
+                msg.style.padding = "20px";
+                msg.style.textAlign = "center";
+                msg.innerHTML = "No notices found matching your search.";
+                list.appendChild(msg);
+            } else if (found && msg) msg.remove();
+        });
+    }
+})();
+
+// Accordion Logic
+(function () {
+    document.querySelectorAll(".accordion-trigger").forEach((trigger) => {
+        trigger.onclick = () => {
+            const item = trigger.parentElement;
+            const isActive = item.classList.contains("active");
+            document.querySelectorAll(".accordion-item").forEach((i) => {
+                i.classList.remove("active");
+                i.querySelector(".accordion-content").style.maxHeight = null;
+            });
+            if (!isActive) {
+                item.classList.add("active");
+                const content = item.querySelector(".accordion-content");
+                content.style.maxHeight = content.scrollHeight + 32 + "px";
+            }
+        };
+    });
+})();
+
+// Scroll Animations
+(function () {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }, index * 50);
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.1 },
+    );
+    document
+        .querySelectorAll(
+            ".blog-card, .blog-card-featured, .news-card-v2, .notice-item",
+        )
+        .forEach((el) => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            observer.observe(el);
+        });
+})();
+
+// Recent News Infinite Auto Carousel (Mobile Only)
+(function () {
+    const newsRow = document.querySelector(".news-row-v2");
+    if (!newsRow) return;
+
+    setInterval(() => {
+        // Only run on mobile
+        if (window.innerWidth <= 768) {
+            const firstCard = newsRow.querySelector(".news-card-v2");
+            if (!firstCard) return;
+
+            const gapVal = window.getComputedStyle(newsRow).gap;
+            const gap = (gapVal === "normal" ? 0 : parseInt(gapVal, 10)) || 16;
+            const scrollAmount = firstCard.offsetWidth + gap;
+
+            // Smooth scroll to next card
+            newsRow.scrollBy({
+                left: scrollAmount,
+                behavior: "smooth",
+            });
+
+            // Wait for translation then move element
+            setTimeout(() => {
+                newsRow.style.scrollBehavior = "auto";
+                newsRow.appendChild(firstCard);
+                newsRow.scrollLeft -= scrollAmount;
+                newsRow.style.scrollBehavior = "";
+            }, 600);
+        }
+    }, 5000);
+})();
+// Stabilized Universal Infinite Blog Carousel
+(function () {
+    const grid = document.querySelector(".blog-grid");
+    if (!grid) return;
+
+    let isDown = false;
+    let startX, scrollLeft, timer;
+
+    const startAuto = () => {
+        clearInterval(timer);
+        timer = setInterval(() => {
+            if (isDown) return;
+            const card = grid.querySelector(".blog-card");
+            if (!card) return;
+
+            const gap = parseInt(getComputedStyle(grid).gap) || 30;
+            const amount = card.offsetWidth + gap;
+
+            grid.style.scrollBehavior = "smooth";
+            grid.scrollLeft += amount;
+
+            // After transition, move first to last
+            setTimeout(() => {
+                if (!isDown) {
+                    // Only move if user isn't currently dragging
+                    grid.style.scrollBehavior = "auto";
+                    grid.appendChild(card);
+                    grid.scrollLeft -= amount;
+                    grid.style.scrollBehavior = "";
+                }
+            }, 600);
+        }, 5000);
+    };
+
+    const handleStart = (e) => {
+        isDown = true;
+        grid.style.cursor = "grabbing";
+        grid.style.scrollSnapType = "none";
+        grid.style.scrollBehavior = "auto";
+        startX = (e.pageX || e.touches[0].pageX) - grid.offsetLeft;
+        scrollLeft = grid.scrollLeft;
+        clearInterval(timer);
+    };
+
+    const handleEnd = () => {
+        if (!isDown) return;
+        isDown = false;
+        grid.style.cursor = "grab";
+        grid.style.scrollSnapType = "x mandatory";
+
+        const cards = grid.querySelectorAll(".blog-card");
+        const gap = parseInt(getComputedStyle(grid).gap) || 30;
+        const width = cards[0].offsetWidth + gap;
+
+        if (grid.scrollLeft > width) {
+            grid.appendChild(cards[0]);
+            grid.scrollLeft -= width;
+        } else if (grid.scrollLeft < 0) {
+            grid.insertBefore(cards[cards.length - 1], cards[0]);
+            grid.scrollLeft += width;
+        }
+
+        startAuto();
+    };
+
+    // Manual Navigation
+    const nextSlide = () => {
+        const card = grid.querySelector(".blog-card");
+        const gap = parseInt(getComputedStyle(grid).gap) || 30;
+        const amount = card.offsetWidth + gap;
+
+        grid.style.scrollBehavior = "smooth";
+        grid.scrollLeft += amount;
+        setTimeout(() => {
+            grid.style.scrollBehavior = "auto";
+            grid.appendChild(card);
+            grid.scrollLeft -= amount;
+            grid.style.scrollBehavior = "";
+        }, 600);
+        startAuto(); // Reset auto timer
+    };
+
+    const prevSlide = () => {
+        const cards = grid.querySelectorAll(".blog-card");
+        const lastCard = cards[cards.length - 1];
+        const gap = parseInt(getComputedStyle(grid).gap) || 30;
+        const amount = lastCard.offsetWidth + gap;
+
+        grid.style.scrollBehavior = "auto";
+        grid.insertBefore(lastCard, cards[0]);
+        grid.scrollLeft += amount;
+
+        setTimeout(() => {
+            grid.style.scrollBehavior = "smooth";
+            grid.scrollLeft -= amount;
+        }, 50);
+        startAuto(); // Reset auto timer
+    };
+
+    document.getElementById("blogNext").addEventListener("click", nextSlide);
+    document.getElementById("blogPrev").addEventListener("click", prevSlide);
+
+    const handleMove = (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = (e.pageX || e.touches[0].pageX) - grid.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        grid.scrollLeft = scrollLeft - walk;
+    };
+
+    grid.addEventListener("mousedown", handleStart);
+    window.addEventListener("mouseup", handleEnd);
+    grid.addEventListener("mousemove", handleMove);
+    grid.addEventListener("touchstart", handleStart, {
+        passive: false,
+    });
+    grid.addEventListener("touchend", handleEnd);
+    grid.addEventListener("touchmove", handleMove, {
+        passive: false,
+    });
+
+    grid.style.cursor = "grab";
+    startAuto();
+})();
+
+// Showcase Infinite Slider with Drag & Lightbox
+(function () {
+    const track = document.getElementById("showcaseTrack");
+    const slider = document.getElementById("showcaseSlider");
+    if (!track || !slider) return;
+
+    // Triple clones for infinite feeling
+    const originalHTML = track.innerHTML;
+    track.innerHTML += originalHTML + originalHTML;
+
+    let scrollPos = 0;
+    let speed = 0.4; // Reduced speed as requested
+    let isPaused = false;
+    let isDragging = false;
+    let startX, startScrollPos;
+    let dragStartTime;
+
+    function step() {
+        if (!isPaused && !isDragging) {
+            scrollPos -= speed;
+            const firstItem = track.querySelector(".showcase-item");
+            if (firstItem) {
+                const itemW = firstItem.offsetWidth + 20;
+                const totalW = (track.children.length / 3) * itemW;
+
+                if (Math.abs(scrollPos) >= totalW) {
+                    scrollPos = 0;
+                }
+                track.style.transform = `translateX(${scrollPos}px)`;
+            }
+        }
+        requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+
+    const handleStart = (e) => {
+        isDragging = true;
+        dragStartTime = Date.now();
+        startX = e.pageX || e.touches[0].pageX;
+        startScrollPos = scrollPos;
+        track.style.transition = "none";
+        track.style.cursor = "grabbing";
+    };
+
+    const handleMove = (e) => {
+        if (!isDragging) return;
+        const x = e.pageX || e.touches[0].pageX;
+        const walk = x - startX;
+        scrollPos = startScrollPos + walk;
+
+        const firstItem = track.querySelector(".showcase-item");
+        if (firstItem) {
+            const itemW = firstItem.offsetWidth + 20;
+            const totalW = (track.children.length / 3) * itemW;
+
+            if (scrollPos > 0) scrollPos = -totalW;
+            if (Math.abs(scrollPos) > totalW * 2) scrollPos = -totalW;
+        }
+        track.style.transform = `translateX(${scrollPos}px)`;
+    };
+
+    const handleEnd = (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        track.style.cursor = "grab";
+
+        // Allow simple click to pass through for onclick=""
+        const dragDistance = Math.abs(
+            (e.pageX ||
+                (e.changedTouches ? e.changedTouches[0].pageX : startX)) -
+                startX,
+        );
+        if (dragDistance > 10) {
+            // It was a drag, we could prevent default if needed
+        }
+    };
+
+    slider.addEventListener("mousedown", handleStart);
+    window.addEventListener("mousemove", handleMove);
+    window.addEventListener("mouseup", handleEnd);
+
+    slider.addEventListener("touchstart", handleStart, {
+        passive: true,
+    });
+    window.addEventListener(
+        "touchmove",
+        (e) => {
+            if (isDragging) e.preventDefault();
+            handleMove(e);
+        },
+        { passive: false },
+    );
+    window.addEventListener("touchend", handleEnd);
+
+    slider.addEventListener("mouseenter", () => (isPaused = true));
+    slider.addEventListener("mouseleave", () => (isPaused = false));
+
+    slider.style.cursor = "grab";
+})();
+
+// ─── Cinematic Banner Showcase ───────────────────────────────────────────────
+(function () {
+    var section = document.getElementById("bannerShowcase");
+    if (!section) return;
+
+    var slides = Array.from(section.querySelectorAll(".bsc-slide"));
+    var dots = Array.from(section.querySelectorAll(".bsc-dot"));
+    var frame = section.querySelector(".bsc-frame");
+
+    if (!slides.length) return;
+
+    var current = 0;
+    var total = slides.length;
+    var autoTimer = null;
+    var isHover = false;
+
+    // ── Switch to a specific index ─────────────────────────────────────────
+    function goTo(idx) {
+        // Deactivate current
+        slides[current].classList.remove("active");
+        dots[current].classList.remove("active");
+        dots[current].setAttribute("aria-selected", "false");
+
+        // Wrap index
+        current = ((idx % total) + total) % total;
+
+        // Activate next
+        slides[current].classList.add("active");
+        dots[current].classList.add("active");
+        dots[current].setAttribute("aria-selected", "true");
+    }
+
+    // ── Auto-advance every 5 s ─────────────────────────────────────────────
+    function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(function () {
+            goTo(current + 1);
+        }, 5000);
+    }
+    function stopAuto() {
+        clearInterval(autoTimer);
+        autoTimer = null;
+    }
+
+    // ── Dot clicks ──────────────────────────────────────────────────────────
+    dots.forEach(function (dot) {
+        dot.addEventListener("click", function () {
+            var idx = parseInt(dot.getAttribute("data-index"), 10);
+            goTo(idx);
+            startAuto(); // reset timer after manual nav
+        });
+    });
+
+    // ── Arrow buttons ────────────────────────────────────────────────────────
+    var prevBtn = document.getElementById("bscPrev");
+    var nextBtn = document.getElementById("bscNext");
+    if (prevBtn)
+        prevBtn.addEventListener("click", function () {
+            goTo(current - 1);
+            startAuto();
+        });
+    if (nextBtn)
+        nextBtn.addEventListener("click", function () {
+            goTo(current + 1);
+            startAuto();
+        });
+
+    // ── Hover pause (desktop only) ─────────────────────────────────────────
+    if (frame) {
+        frame.addEventListener("mouseenter", function () {
+            isHover = true;
+            stopAuto();
+        });
+        frame.addEventListener("mouseleave", function () {
+            isHover = false;
+            startAuto();
+        });
+    }
+
+    // ── Scroll-reveal with IntersectionObserver ────────────────────────────
+    var revealObserver = new IntersectionObserver(
+        function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    section.classList.add("bsc-visible");
+                    revealObserver.unobserve(section);
+                    // Start autoplay only after section appears
+                    if (!isHover) startAuto();
+                }
+            });
+        },
+        { threshold: 0.15 },
+    );
+    revealObserver.observe(section);
+
+    // ── Initialize first slide as active ──────────────────────────────────
+    slides[0].classList.add("active");
+    dots[0].classList.add("active");
+    dots[0].setAttribute("aria-selected", "true");
+})();

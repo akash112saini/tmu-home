@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Notice Board - Teerthanker Mahaveer University</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        />
+        <style>
+            .full-notice-page {
+                padding: 100px 0;
+                background-color: #f8fafc;
+                min-height: 100vh;
+            }
+            .notice-card-full {
+                background: white;
+                border-radius: 16px;
+                padding: 30px;
+                margin-bottom: 25px;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+                border: 1px solid #eaecf0;
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease;
+            }
+            .notice-card-full:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            }
+            .notice-type-badge {
+                display: inline-block;
+                padding: 4px 12px;
+                border-radius: 50px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                margin-bottom: 15px;
+                text-transform: uppercase;
+            }
+            .badge-academic {
+                background: #eff6ff;
+                color: #1e40af;
+            }
+            .badge-event {
+                background: #fef2f2;
+                color: #991b1b;
+            }
+            .badge-admin {
+                background: #f0fdf4;
+                color: #166534;
+            }
+
+            .breadcrumb-nav {
+                margin-bottom: 40px;
+            }
+            .breadcrumb-item a {
+                color: var(--primary-color);
+                text-decoration: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav
+            class="navbar"
+            style="
+                position: static;
+                background: #fff;
+                border-bottom: 1px solid #eee;
+            "
+        >
+            <div class="logo-container">
+                <a href="index.html"
+                    ><img src="https://www.tmu.ac.in/logo.webp" alt="TMU Logo"
+                /></a>
+            </div>
+        </nav>
+
+        <div class="full-notice-page">
+            <div class="container">
+                <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Notice Board
+                        </li>
+                    </ol>
+                </nav>
+
+                <div class="row align-items-end mb-5">
+                    <div class="col-md-7">
+                        <h1 class="display-5 fw-bold text-dark mb-3">
+                            Notice Board
+                        </h1>
+                        <p class="text-muted lead">
+                            Stay updated with the latest news, announcements,
+                            and academic schedules from Teerthanker Mahaveer
+                            University.
+                        </p>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="notice-search-wrapper mb-0">
+                            <i class="bi bi-search" style="left: 15px"></i>
+                            <input
+                                type="text"
+                                id="fullNoticeSearch"
+                                class="notice-search-input"
+                                style="
+                                    padding: 12px 15px 12px 45px;
+                                    border-radius: 12px;
+                                "
+                                placeholder="Search clinical, exams, events..."
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="fullNoticeList">
+                    <!-- Academic Notice -->
+                    <div
+                        class="col-lg-6 notice-entry"
+                        data-title="Spring 2026 Admissions"
+                    >
+                        <div class="notice-card-full">
+                            <span class="notice-type-badge badge-academic"
+                                >Academic</span
+                            >
+                            <h3>Spring 2026 Admissions Now Open</h3>
+                            <p class="text-muted mb-4">
+                                Detailed brochure and application guidelines for
+                                the upcoming spring semester across all 14
+                                colleges. Early bird scholarships available for
+                                outstanding students.
+                            </p>
+                            <div
+                                class="d-flex justify-content-between align-items-center"
+                            >
+                                <div class="notice-footer-v2">
+                                    <i class="bi bi-calendar3"></i>
+                                    <span>Feb 15, 2026</span>
+                                </div>
+                                <div class="notice-footer-v2">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span>Block A</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Notice -->
+                    <div
+                        class="col-lg-6 notice-entry"
+                        data-title="Tech Summit 2026"
+                    >
+                        <div class="notice-card-full">
+                            <span class="notice-type-badge badge-event"
+                                >Event</span
+                            >
+                            <h3>Tech Summit 2026: AI & The Future</h3>
+                            <p class="text-muted mb-4">
+                                Two-day summit featuring keynote speakers from
+                                Google, Microsoft, and NASA. Workshops on
+                                generative AI and quantum computing.
+                                Registration open for all B.Tech and MCA
+                                students.
+                            </p>
+                            <div
+                                class="d-flex justify-content-between align-items-center"
+                            >
+                                <div class="notice-footer-v2">
+                                    <i class="bi bi-calendar3"></i>
+                                    <span>Feb 12, 2026</span>
+                                </div>
+                                <div class="notice-footer-v2">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span>Auditorium</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Administrative Notice -->
+                    <div
+                        class="col-lg-6 notice-entry"
+                        data-title="NASA Research"
+                    >
+                        <div class="notice-card-full">
+                            <span class="notice-type-badge badge-admin"
+                                >Research</span
+                            >
+                            <h3>MOU with NASA for Research Partners</h3>
+                            <p class="text-muted mb-4">
+                                Groundbreaking partnership agreement for joint
+                                research in sustainable aviation tech and deep
+                                space communication. Faculty applications for
+                                exchange program starting next month.
+                            </p>
+                            <div
+                                class="d-flex justify-content-between align-items-center"
+                            >
+                                <div class="notice-footer-v2">
+                                    <i class="bi bi-calendar3"></i>
+                                    <span>Feb 05, 2026</span>
+                                </div>
+                                <div class="notice-footer-v2">
+                                    <i class="bi bi-building"></i>
+                                    <span>Research Cell</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Another Event -->
+                    <div
+                        class="col-lg-6 notice-entry"
+                        data-title="Sports Registration"
+                    >
+                        <div class="notice-card-full">
+                            <span class="notice-type-badge badge-event"
+                                >Sports</span
+                            >
+                            <h3>Annual Sports Festival Registration</h3>
+                            <p class="text-muted mb-4">
+                                Inter-college sports meet featuring 12 different
+                                sports including Cricket, Football, and
+                                Athletics. Register your college team by the end
+                                of next week.
+                            </p>
+                            <div
+                                class="d-flex justify-content-between align-items-center"
+                            >
+                                <div class="notice-footer-v2">
+                                    <i class="bi bi-calendar3"></i>
+                                    <span>Feb 08, 2026</span>
+                                </div>
+                                <div class="notice-footer-v2">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span>Sports Ground</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="main-footer" style="padding-bottom: 20px">
+            <div class="container text-center">
+                <p style="color: rgba(255, 255, 255, 0.5); font-size: 14px">
+                    © 2026 Teerthanker Mahaveer University. All Rights Reserved.
+                </p>
+            </div>
+        </footer>
+
+        <script>
+            // Search functionality for notices
+            document
+                .getElementById("fullNoticeSearch")
+                .addEventListener("input", function (e) {
+                    const term = e.target.value.toLowerCase();
+                    const entries = document.querySelectorAll(".notice-entry");
+
+                    entries.forEach((entry) => {
+                        const title = entry
+                            .getAttribute("data-title")
+                            .toLowerCase();
+                        const text = entry.innerText.toLowerCase();
+                        if (title.includes(term) || text.includes(term)) {
+                            entry.style.display = "block";
+                        } else {
+                            entry.style.display = "none";
+                        }
+                    });
+                });
+        </script>
+    </body>
+</html>
