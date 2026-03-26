@@ -48,7 +48,7 @@
     updateBanner(false);
 })();
 
-// ─── Alumni Voices — Center-Locked Horizontal Selector ───────────────────────────
+// // ─── Alumni Voices — Infinite Horizontal Selector ───────────────────────────
 (function () {
     const section = document.getElementById("alumni-voices");
     if (!section) return;
@@ -89,9 +89,8 @@
     const TOTAL = ALUMNI.length;
 
     // ── Elements ──────────────────────────────────────────────────
+    const track = section.querySelector("#almThumbTrack");
     const imgItems = section.querySelectorAll(".alm-img-item");
-    const thumbItems = section.querySelectorAll(".alm-thumb-item");
-    const thumbsWrapper = section.querySelector("#almThumbsWrapper");
     const card = section.querySelector("#almCard");
     const quoteEl = section.querySelector("#almQuote");
     const nameEl = section.querySelector("#almName");
@@ -100,7 +99,13 @@
     const prevBtn = section.querySelector("#almPrev");
     const nextBtn = section.querySelector("#almNext");
 
-    let current = 0;
+    // Duplicate nodes to create an off-screen buffer for seamless infinite sliding
+    const originalChildren = Array.from(track.children);
+    originalChildren.forEach(child => {
+        track.appendChild(child.cloneNode(true));
+    });
+
+    let current = -1; // Force initialization on mount
     let moving = false;
     let autoTimer = null;
 
@@ -126,52 +131,124 @@
         });
     }
 
-    // ── Core: Go To Index ─────────────────────────────────────────
-    function goTo(targetIdx) {
-        if (moving) return;
-        moving = true;
-
+    function updateVisuals(targetIdx) {
         current = ((targetIdx % TOTAL) + TOTAL) % TOTAL;
 
-        // 1. Update avatar classes and scroll
-        thumbItems.forEach(function (thumb, idx) {
-            if (idx === current) {
-                thumb.classList.add("active");
-                if (thumbsWrapper) {
-                    const scrollLeftVal = thumb.offsetLeft - thumbsWrapper.offsetWidth / 2 + thumb.offsetWidth / 2;
-                    thumbsWrapper.scrollTo({
-                        left: scrollLeftVal,
-                        behavior: "smooth"
-                    });
-                }
-            } else {
-                thumb.classList.remove("active");
-            }
+        // Crossfade image
+        imgItems.forEach(function (img, i) {
+            if (i === current) img.classList.add("active");
+            else img.classList.remove("active");
         });
 
-        // 2. Crossfade image
-        imgItems.forEach(function (img) {
-            img.classList.remove("active");
-        });
-        if (imgItems[current]) imgItems[current].classList.add("active");
-
-        // 3. Card slide-up + staggered text
+        // Card slide-up + staggered text
         card.classList.remove("alm-card-enter");
         void card.offsetWidth;
         card.classList.add("alm-card-enter");
         animateText(ALUMNI[current]);
-
-        setTimeout(function () {
-            moving = false;
-        }, 700);
     }
+
+    // ── Infinite DOM Movement (Middle-Centric) ────────────────────────
+    // The active avatar is ALWAYS at index 2 (the 3rd element) in the DOM
+    function slideNext() {
+        if (moving) return;
+        moving = true;
+
+        const first = track.firstElementChild;
+        const gap = 16; // from CSS gap
+        const itemWidth = first.offsetWidth + gap; // 36 + 16 = 52
+
+        // PRE-ANIMATION: Update active classes!
+        // The element currently at index 3 will slide into the center position (index 2)
+        Array.from(track.children).forEach((el, i) => {
+            if (i === 3) el.classList.add('active'); // Scales up
+            else el.classList.remove('active');      // Scales down
+        });
+
+        // Transition track to the left
+        track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        track.style.transform = `translateX(-${itemWidth}px)`;
+
+        // Update visuals based on the up-and-coming avatar
+        const nextActiveEl = track.children[3];
+        const nextIdx = parseInt(nextActiveEl.getAttribute("data-idx"), 10);
+        updateVisuals(nextIdx);
+
+        setTimeout(function() {
+            // Instantly rearrange DOM and remove transform
+            track.style.transition = 'none';
+            track.appendChild(first);
+            track.style.transform = 'translateX(0)';
+            moving = false;
+        }, 400);
+    }
+
+    function slidePrev() {
+        if (moving) return;
+        moving = true;
+
+        const last = track.lastElementChild;
+        const gap = 16;
+        const itemWidth = last.offsetWidth + gap;
+
+        // Move DOM item first, translate left to hide it instantly
+        track.style.transition = 'none';
+        track.insertBefore(last, track.firstElementChild);
+        track.style.transform = `translateX(-${itemWidth}px)`;
+
+        // PRE-ANIMATION: Update active classes on new DOM layout
+        // The element now at index 2 is the new active one
+        Array.from(track.children).forEach((el, i) => {
+            if (i === 2) el.classList.add('active');
+            else el.classList.remove('active');
+        });
+
+        // Update visuals based on the new front avatar
+        const prevActiveEl = track.children[2];
+        const prevIdx = parseInt(prevActiveEl.getAttribute("data-idx"), 10);
+        updateVisuals(prevIdx);
+
+        // Force reflow and animate smoothly into place
+        void track.offsetWidth; 
+        track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        track.style.transform = 'translateX(0)';
+
+        setTimeout(function() {
+            moving = false;
+        }, 400);
+    }
+
+    function jumpTo(targetIdx) {
+        if (moving || targetIdx === current) return;
+
+        // Rotate the DOM until the element at index 2 matches our targetIdx
+        let targetLoops = 0;
+        while (parseInt(track.children[2].getAttribute("data-idx"), 10) !== targetIdx && targetLoops < 15) {
+            track.appendChild(track.firstElementChild);
+            targetLoops++;
+        }
+
+        Array.from(track.children).forEach((el, i) => {
+            if (i === 2) el.classList.add('active');
+            else el.classList.remove('active');
+        });
+
+        updateVisuals(targetIdx);
+    }
+
+    // Delegate click events since there are cloned nodes
+    track.addEventListener("click", function(e) {
+        const item = e.target.closest(".alm-thumb-item");
+        if (item) {
+            const idx = parseInt(item.getAttribute("data-idx"), 10);
+            jumpTo(idx);
+            startAuto();
+        }
+    });
 
     // ── Autoplay ──────────────────────────────────────────────────
     function startAuto() {
         stopAuto();
-        autoTimer = setInterval(function () {
-            goTo(current + 1);
-        }, 7000);
+        autoTimer = setInterval(slideNext, 7000);
     }
     function stopAuto() {
         clearInterval(autoTimer);
@@ -186,16 +263,16 @@
     // ── Navigation ────────────────────────────────────────────────
     if (prevBtn)
         prevBtn.addEventListener("click", function () {
-            goTo(current - 1);
+            slidePrev();
             startAuto();
         });
     if (nextBtn)
         nextBtn.addEventListener("click", function () {
-            goTo(current + 1);
+            slideNext();
             startAuto();
         });
     window.jumpToAlumni = function (idx) {
-        goTo(idx);
+        jumpTo(idx);
         startAuto();
     };
 
@@ -213,7 +290,8 @@
         function (e) {
             var dx = e.changedTouches[0].clientX - touchXStart;
             if (Math.abs(dx) > 50) {
-                goTo(current + (dx < 0 ? 1 : -1));
+                if (dx < 0) slideNext();
+                else slidePrev();
                 startAuto();
             }
         },
@@ -231,9 +309,9 @@
     );
     observer.observe(section);
 
-    // Init track position
+    // ── Initialization ────────────────────────────────────────────
     setTimeout(function() {
-        goTo(0);
+        jumpTo(0);
     }, 50);
     startAuto();
 })();
@@ -762,6 +840,9 @@ window.closeLightbox = function () {
     var total = slides.length;
     var autoTimer = null;
     var isHover = false;
+    
+    var timeStart = 0;
+    var timeRemaining = 5000;
 
     // ── Switch to a specific index ─────────────────────────────────────────
     function goTo(idx) {
@@ -777,18 +858,25 @@ window.closeLightbox = function () {
         slides[current].classList.add("active");
         dots[current].classList.add("active");
         dots[current].setAttribute("aria-selected", "true");
+        
+        // Reset remaining time on slide change
+        timeRemaining = 5000;
     }
 
-    // ── Auto-advance every 5 s ─────────────────────────────────────────────
+    // ── Auto-advance logic ─────────────────────────────────────────────
     function startAuto() {
         stopAuto();
-        autoTimer = setInterval(function () {
+        timeStart = Date.now();
+        autoTimer = setTimeout(function () {
             goTo(current + 1);
-        }, 5000);
+            if (!isHover) startAuto();
+        }, timeRemaining);
     }
     function stopAuto() {
-        clearInterval(autoTimer);
-        autoTimer = null;
+        if (autoTimer) {
+            clearTimeout(autoTimer);
+            autoTimer = null;
+        }
     }
 
     // ── Dot clicks ──────────────────────────────────────────────────────────
@@ -818,11 +906,17 @@ window.closeLightbox = function () {
     if (frame) {
         frame.addEventListener("mouseenter", function () {
             isHover = true;
+            // Calculate and accurately save remaining time
+            var elapsed = Date.now() - timeStart;
+            timeRemaining = Math.max(0, timeRemaining - elapsed);
             stopAuto();
+            section.classList.add("is-paused");
         });
         frame.addEventListener("mouseleave", function () {
             isHover = false;
             startAuto();
+            section.classList.remove("is-paused");
+            // DO NOT reset the CSS animation, just let it resume from the paused state
         });
     }
 
