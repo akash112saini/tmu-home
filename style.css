@@ -53,9 +53,16 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-x: hidden;
+    /* Match footer colour so no body background bleeds below footer */
+    background-color: #000b30;
+}
+
 body {
     font-family: "Outfit", sans-serif;
     overflow-x: hidden;
+    overflow-y: clip;
     background-color: #f8f9fa;
 }
 
@@ -557,28 +564,53 @@ body {
     margin-top: 22px;
 }
 .bsc-dot {
+    position: relative;
     width: 9px;
     height: 9px;
-    border-radius: 50%;
+    border-radius: 5px;
     background: rgba(0, 16, 85, 0.25);
     border: none;
     cursor: pointer;
     padding: 0;
+    overflow: hidden;
     transition:
         background 0.35s ease,
-        transform 0.35s ease,
         width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     outline: none;
 }
 .bsc-dot:hover {
     background: rgba(0, 16, 85, 0.45);
-    transform: scale(1.2);
 }
-.bsc-dot.active {
+.bsc-dot::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
     background: #ff7900;
-    width: 26px;
     border-radius: 5px;
-    animation: bscDotPulse 2.5s ease-in-out infinite;
+}
+
+.bsc-dot.active {
+    background: rgba(0, 16, 85, 0.15);
+    width: 50px;
+}
+.bsc-dot.active::before {
+    animation: bscProgress 5s linear forwards;
+}
+
+.banner-showcase.is-paused .bsc-dot.active::before {
+    animation-play-state: paused;
+}
+
+@keyframes bscProgress {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
 }
 
 /* ── Responsiveness ───────────────────────────── */
@@ -832,15 +864,16 @@ body {
 /* ── Header Row ─────────────────────────────────────── */
 .alm-header-row {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Now side-by-side */
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
+    margin-bottom: 24px;
 }
 
 .alm-hero-text {
-    text-align: center;
-    max-width: 100%;
+    text-align: left;
+    flex: 1;
     margin-left: 0;
 }
 
@@ -857,7 +890,7 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 0.2rem;
+    margin: 0 0 0.5rem 0; /* Left align */
 }
 
 .alm-heading {
@@ -870,24 +903,24 @@ body {
     display: block;
 }
 
-/* ── Center-Locked Horizontal Selector ─────────────────── */
+/* ── Epicenter-Aligned Horizontal Selector ─────────────────── */
 .alm-selector-container {
-    width: 100%;
-    max-width: 500px;
-    margin-top: 24px;
-    overflow: hidden;
+    flex: 1; /* Match width of text on left */
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center precisely in the available right space! */
+    align-self: flex-end; /* Drops it to the bottom of the header row */
+    transform: translateY(
+        60px
+    ); /* Pushes it down into the margin space above the card */
+    margin-top: 0;
+    position: relative;
+    z-index: 10;
 }
 
 .alm-thumbs-wrapper {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    width: 244px; /* Exactly fit 5 items (36*5 + 16*4 = 244) */
+    overflow: hidden;
     padding: 10px 0;
-    scroll-behavior: smooth;
     mask-image: linear-gradient(
         to right,
         transparent 0%,
@@ -909,10 +942,11 @@ body {
 
 .alm-thumb-track {
     display: inline-flex;
-    gap: 12px;
-    padding: 0 calc(50% - 24px); /* 48px/2 = 24px */
+    gap: 16px;
+    padding: 0;
     justify-content: flex-start;
     align-items: center;
+    will-change: transform;
 }
 
 /* Base state for all thumb items */
@@ -924,7 +958,11 @@ body {
     overflow: hidden;
     cursor: pointer;
     border: 2px solid transparent;
-    transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease, width 0.3s ease, height 0.3s ease, flex-basis 0.3s ease, border-color 0.3s ease;
+    transition:
+        transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        filter 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        border-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     opacity: 0.5;
     filter: grayscale(40%);
 }
@@ -938,20 +976,17 @@ body {
 
 /* Active center avatar */
 .alm-thumb-item.active {
-    flex: 0 0 48px;
-    width: 48px;
-    height: 48px;
+    transform: scale(1.4);
     opacity: 1;
     filter: none;
     border-color: #ff7900;
-    transform: scale(1.1);
 }
 
 .alm-thumb-item:hover {
-    opacity: 0.8 !important;
+    opacity: 0.8;
 }
 .alm-thumb-item.active:hover {
-    opacity: 1 !important;
+    opacity: 1;
 }
 
 /* ── Main Stage: grid with card overlapping image ─────── */
@@ -3073,6 +3108,7 @@ body {
 .accordion-section {
     padding: 100px 0;
     background-color: #fcfcfd;
+    margin-bottom: 0;
 }
 
 .accordion-header-group {
