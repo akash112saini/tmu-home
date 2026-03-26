@@ -239,66 +239,113 @@
 })();
 
 
-// YouTube Slider Logic
-(function () {
-    const ytSlider = document.getElementById("ytSlider");
-    if (!ytSlider) return;
-    let ytSlides = document.querySelectorAll(".yt-slide");
-    for (let i = 0; i < 3; i++) {
-        ytSlider.appendChild(ytSlides[i].cloneNode(true));
-        ytSlider.insertBefore(
-            ytSlides[ytSlides.length - 1 - i].cloneNode(true),
-            ytSlider.firstChild,
-        );
-    }
-    let ytIndex = 3;
-    let isYtMoving = false;
-    function updateYt(animate = true) {
-        const slideW = document.querySelector(".yt-slide").offsetWidth + 30;
-        ytSlider.style.transition = animate
-            ? "transform 0.8s cubic-bezier(0.7,0,0.3,1)"
-            : "none";
-        ytSlider.style.transform = `translateX(${-ytIndex * slideW}px)`;
-    }
-    ytSlider.addEventListener("transitionend", () => {
-        isYtMoving = false;
-        const originalCount = 8;
-        if (ytIndex >= originalCount + 3) {
-            ytIndex = 3;
-            updateYt(false);
-        } else if (ytIndex < 3) {
-            ytIndex = originalCount + 2;
-            updateYt(false);
-        }
+/* YouTube Slider Logic (Infinite, Drag & Timeline) */
+(function() {
+    const slider = document.getElementById('ytSlider');
+    const progressBar = document.getElementById('ytProgress');
+    const prevBtn = document.getElementById('ytPrev');
+    const nextBtn = document.getElementById('ytNext');
+    if (!slider || !progressBar) return;
+
+    // 1. Infinite Clone Setup
+    const originalSlides = Array.from(slider.querySelectorAll('.yt-slide'));
+    const slideCount = originalSlides.length;
+    if (slideCount === 0) return;
+
+    // Clone all slides and append/prepend for infinite loop
+    originalSlides.forEach(slide => {
+        const cloneBefore = slide.cloneNode(true);
+        const cloneAfter = slide.cloneNode(true);
+        slider.insertBefore(cloneBefore, slider.firstChild);
+        slider.appendChild(cloneAfter);
     });
-    window.navYt = function (dir) {
-        if (isYtMoving) return;
-        isYtMoving = true;
-        ytIndex += dir;
-        updateYt();
-    };
-    setInterval(() => {
-        if (!isYtMoving) {
-            ytIndex++;
-            updateYt();
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    const slideWidth = 324; // 300px + 24px gap
+
+    function updateProgress() {
+        const total = slider.scrollWidth;
+        const current = slider.scrollLeft;
+        const contentWidth = slideCount * slideWidth;
+        
+        // Loop Logic
+        if (current <= 0) {
+            slider.scrollLeft = contentWidth;
+        } else if (current >= contentWidth * 2) {
+            slider.scrollLeft = contentWidth;
         }
-    }, 4000);
-    window.addEventListener("resize", () => updateYt(false));
-    updateYt(false);
+
+        // Timeline: Map the position of the "original" set to 0-100%
+        let relativeScroll = (slider.scrollLeft - contentWidth);
+        const progress = (relativeScroll / contentWidth) * 100;
+        progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+    }
+
+    // Drag Functionality
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.style.cursor = 'grabbing';
+        slider.style.scrollSnapType = 'none';
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    window.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.style.cursor = 'grab';
+        slider.style.scrollSnapType = 'x mandatory';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        slider.scrollLeft = scrollLeft - walk;
+    });
+
+    // Arrow Nav Controls
+    if (prevBtn) {
+        prevBtn.onclick = () => slider.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+    }
+    if (nextBtn) {
+        nextBtn.onclick = () => slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
+    }
+
+    // Initialize position to the "middle" (original) set
+    const initPos = slideCount * slideWidth;
+    slider.scrollLeft = initPos;
+
+    slider.addEventListener('scroll', updateProgress);
+    window.addEventListener('resize', updateProgress);
+    setTimeout(updateProgress, 200);
 })();
 
-// Video Popup Logic
+// Video Popup Logic (Modern Version)
 window.openVideo = function (id) {
     const modal = document.getElementById("videoModal");
     const player = document.getElementById("ytPlayer");
-    player.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
-    modal.style.display = "flex";
+    if (!modal || !player) return;
+
+    player.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&showinfo=0`;
+    modal.classList.add("active");
+    modal.style.display = "flex"; // For transition fallback
     document.body.style.overflow = "hidden";
 };
+
 window.closeVideo = function () {
     const modal = document.getElementById("videoModal");
-    document.getElementById("ytPlayer").src = "";
-    modal.style.display = "none";
+    const player = document.getElementById("ytPlayer");
+    if (!modal || !player) return;
+
+    modal.classList.remove("active");
+    // Clear src after a slight delay to allow closing animation to complete
+    setTimeout(() => {
+        player.src = "";
+        modal.style.display = "none";
+    }, 400);
     document.body.style.overflow = "auto";
 };
 
