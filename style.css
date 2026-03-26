@@ -4279,8 +4279,12 @@ body {
 .programme-showcase {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    min-height: 0;
+    height: 500px; /* Fixed height requested */
+    background: #ffffff;
+    border-radius: var(--radius-lg-prog);
+    padding: 30px;
+    box-shadow: var(--shadow-md-prog);
+    border: 1px solid var(--border-prog);
 }
 /* Subtitle */
 .grid-subtitle {
@@ -4298,11 +4302,11 @@ body {
 
 /* Programme Grid & Scroll Container */
 .programme-scroll-container {
-    max-height: 440px;
+    max-height: 380px; /* Adjusted to fit nicely in 500px box */
     overflow-y: auto;
     overflow-x: hidden;
-    padding-right: 10px;
-    margin-top: 24px;
+    padding-right: 12px;
+    margin-top: 10px;
 }
 
 /* Custom Scrollbar for Programme Container */
@@ -4507,7 +4511,8 @@ body {
 .load-more-wrap {
     display: flex;
     justify-content: center;
-    margin-top: 2.5rem;
+    margin-top: 1.5rem;
+    padding-bottom: 2rem; /* Add padding at the bottom for better scroll end feel */
 }
 .load-more-btn {
     display: flex;
@@ -4553,11 +4558,18 @@ body {
 
     .programmes-section {
         padding: 1.5rem 0;
-        height: 90vh; /* Strict viewport height */
+        height: 90vh;
         display: flex;
         flex-direction: column;
-        overflow: hidden; /* No page scroll */
+        overflow: hidden;
         position: relative;
+    }
+    /* Reset showcase box on mobile */
+    .programme-showcase {
+        background: transparent;
+        padding: 0;
+        box-shadow: none;
+        border: none;
     }
     .glass-shell {
         padding: 0 4%;
@@ -4641,7 +4653,7 @@ body {
         padding: 4px 0 8px;
         margin: 0;
         flex: 1;
-        max-width: 68%;
+        max-width: 78%;
         margin-left: auto;
         justify-content: flex-start;
         scrollbar-width: none;

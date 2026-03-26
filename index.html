@@ -759,17 +759,14 @@
                     </div>
 
                     <!-- ═══════════════════════════════════════════
-                     DESKTOP: Programme Indicator
-                     ═══════════════════════════════════════════ -->
-                    <p id="grid-subtitle" class="grid-subtitle desktop-only">
-                        Showing programmes…
-                    </p>
-
-                    <!-- ═══════════════════════════════════════════
                      DESKTOP: Grid Content Area
                      ═══════════════════════════════════════════ -->
                     <div class="content-layout">
                         <div class="programme-showcase">
+                            <!-- Showing programmes indicator -->
+                            <p id="grid-subtitle" class="grid-subtitle desktop-only">
+                                Showing programmes…
+                            </p>
                             <div
                                 class="programme-scroll-container desktop-only"
                             >
@@ -777,29 +774,29 @@
                                     id="programme-grid"
                                     class="programme-grid"
                                 ></div>
-                            </div>
 
-                            <!-- Desktop Load More -->
-                            <div class="load-more-wrap desktop-only">
-                                <button
-                                    id="load-more-btn"
-                                    class="load-more-btn"
-                                    aria-label="Load more programmes"
-                                >
-                                    Load More
-                                    <svg
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2.5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                <!-- Desktop Load More (Moved Inside Scroll Container) -->
+                                <div class="load-more-wrap desktop-only">
+                                    <button
+                                        id="load-more-btn"
+                                        class="load-more-btn"
+                                        aria-label="Load more programmes"
                                     >
-                                        <path d="M12 5v14M5 12l7 7 7-7" />
-                                    </svg>
-                                </button>
+                                        Load More
+                                        <svg
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path d="M12 5v14M5 12l7 7 7-7" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
 
                             <!-- Mobile: Carousel (Hidden on Desktop) -->
