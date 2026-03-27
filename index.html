@@ -41,8 +41,7 @@
                     loop
                     playsinline
                     poster="images/hero_campus_fallback.png"
-                >
-                </video>
+                ></video>
                 <!-- gradient + mask live inside the layer: move together, never misalign -->
                 <div class="hero-gradient-overlay"></div>
                 <div class="hero-bottom-mask"></div>
@@ -66,9 +65,10 @@
                 <div class="usp-stat">
                     <i class="fas fa-briefcase usp-icon"></i>
                     <div class="usp-count">
-                        <span data-count="100">0</span>%
+                        <span data-count="25">0</span
+                        ><span class="usp-suffix">Years</span>
                     </div>
-                    <div class="usp-label">Excellence</div>
+                    <div class="usp-label">of Excellence</div>
                 </div>
                 <div class="usp-stat">
                     <i class="fas fa-chart-line usp-icon"></i>
@@ -205,6 +205,7 @@
                             <img
                                 src="images/gallery/11.jpg"
                                 alt="Nursing College and Dental College"
+                                loading="lazy"
                             />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">
@@ -225,7 +226,11 @@
                                 })
                             "
                         >
-                            <img src="images/gallery/3.jpg" alt="Clock Tower" />
+                            <img
+                                src="images/gallery/3.jpg"
+                                alt="Clock Tower"
+                                loading="lazy"
+                            />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">Clock Tower</h4>
                             </div>
@@ -246,6 +251,7 @@
                             <img
                                 src="images/gallery/1.jpg"
                                 alt="College of Computer Science and IT"
+                                loading="lazy"
                             />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">
@@ -269,6 +275,7 @@
                             <img
                                 src="images/gallery/2.png"
                                 alt="Faculty of Engineering"
+                                loading="lazy"
                             />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">
@@ -292,6 +299,7 @@
                             <img
                                 src="images/gallery/4.jpg"
                                 alt="MBBS Hostel Garden"
+                                loading="lazy"
                             />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">MBBS Hostel Garden</h4>
@@ -313,6 +321,7 @@
                             <img
                                 src="images/gallery/5.jpg"
                                 alt="Medical College"
+                                loading="lazy"
                             />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">Medical College</h4>
@@ -334,6 +343,7 @@
                             <img
                                 src="images/gallery/6.jpg"
                                 alt="Faculty Apartments"
+                                loading="lazy"
                             />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">Faculty Apartments</h4>
@@ -352,7 +362,11 @@
                                 })
                             "
                         >
-                            <img src="images/gallery/7.jpg" alt="Admin Block" />
+                            <img
+                                src="images/gallery/7.jpg"
+                                alt="Admin Block"
+                                loading="lazy"
+                            />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">Admin Block</h4>
                             </div>
@@ -370,7 +384,11 @@
                                 })
                             "
                         >
-                            <img src="images/gallery/8.jpg" alt="Pavilion" />
+                            <img
+                                src="images/gallery/8.jpg"
+                                alt="Pavilion"
+                                loading="lazy"
+                            />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">Pavilion</h4>
                             </div>
@@ -391,6 +409,7 @@
                             <img
                                 src="images/gallery/9.jpg"
                                 alt="Cricket Ground"
+                                loading="lazy"
                             />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">Cricket Ground</h4>
@@ -412,6 +431,7 @@
                             <img
                                 src="images/gallery/10.jpg"
                                 alt="College of Computer Science and IT"
+                                loading="lazy"
                             />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">
@@ -435,6 +455,7 @@
                             <img
                                 src="images/gallery/12.jpg"
                                 alt="Bird Eye View of Admin and Medical College"
+                                loading="lazy"
                             />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">
@@ -832,151 +853,6 @@
             </div>
         </section>
 
-        <!-- Gallery Section -->
-        <!-- <section class="gallery-section">
-            <div class="gallery-container">
-                <h2 class="gallery-title">TMU<br />A WORLD WITHIN</h2>
-                <div class="gallery-grid" id="galleryGrid">
-                    <div
-                        class="gallery-item"
-                        onclick="openLightbox('images/gallery/1.jpg')"
-                    >
-                        <img src="images/gallery/1.jpg" alt="Tea tasting" />
-                        <div class="gallery-overlay">
-                            <span class="gallery-label">Tea tasting</span>
-                        </div>
-                    </div>
-                    <div
-                        class="gallery-item"
-                        onclick="openLightbox('images/gallery/2.png')"
-                    >
-                        <img
-                            src="images/gallery/2.png"
-                            alt="Plethora of books"
-                        />
-                        <div class="gallery-overlay">
-                            <span class="gallery-label">Plethora of books</span>
-                        </div>
-                    </div>
-                    <div
-                        class="gallery-item"
-                        onclick="openLightbox('images/gallery/3.jpg')"
-                    >
-                        <img
-                            src="images/gallery/3.jpg"
-                            alt="Chrysanthemum farm"
-                        />
-                        <div class="gallery-overlay">
-                            <span class="gallery-label"
-                                >Chrysanthemum farm</span
-                            >
-                        </div>
-                    </div>
-                    <div
-                        class="gallery-item"
-                        onclick="openLightbox('images/gallery/4.jpg')"
-                    >
-                        <img
-                            src="images/gallery/4.jpg"
-                            alt="Agricultural workshops"
-                        />
-                        <div class="gallery-overlay">
-                            <span class="gallery-label"
-                                >Agricultural workshops</span
-                            >
-                        </div>
-                    </div>
-                    <div
-                        class="gallery-item"
-                        onclick="openLightbox('images/gallery/5.jpg')"
-                    >
-                        <img src="images/gallery/5.jpg" alt="Performances" />
-                        <div class="gallery-overlay">
-                            <span class="gallery-label">Performances</span>
-                        </div>
-                    </div>
-                    <div
-                        class="gallery-item"
-                        onclick="openLightbox('images/gallery/6.jpg')"
-                    >
-                        <img
-                            src="images/gallery/6.jpg"
-                            alt="A miniature village"
-                        />
-                        <div class="gallery-overlay">
-                            <span class="gallery-label"
-                                >A miniature village</span
-                            >
-                        </div>
-                    </div>
-
-                    <div
-                        class="gallery-item hidden"
-                        onclick="openLightbox('images/gallery/7.jpg')"
-                    >
-                        <img src="images/gallery/7.jpg" alt="" />
-                        <div class="gallery-overlay">
-                            <span class="gallery-label">Campus Life</span>
-                        </div>
-                    </div>
-                    <div
-                        class="gallery-item hidden"
-                        onclick="openLightbox('images/gallery/8.jpg')"
-                    >
-                        <img src="images/gallery/8.jpg" alt="" />
-                        <div class="gallery-overlay">
-                            <span class="gallery-label">Auditorium</span>
-                        </div>
-                    </div>
-                    <div
-                        class="gallery-item hidden"
-                        onclick="openLightbox('images/gallery/9.jpg')"
-                    >
-                        <img src="images/gallery/9.jpg" alt="" />
-                        <div class="gallery-overlay">
-                            <span class="gallery-label">Pathway View</span>
-                        </div>
-                    </div>
-                    <div
-                        class="gallery-item hidden"
-                        onclick="openLightbox('images/gallery/10.jpg')"
-                    >
-                        <img src="images/gallery/10.jpg" alt="" />
-                        <div class="gallery-overlay">
-                            <span class="gallery-label">Library Hall</span>
-                        </div>
-                    </div>
-                    <div
-                        class="gallery-item hidden"
-                        onclick="openLightbox('images/gallery/11.jpg')"
-                    >
-                        <img src="images/gallery/11.jpg" alt="" />
-                        <div class="gallery-overlay">
-                            <span class="gallery-label">Sunset Campus</span>
-                        </div>
-                    </div>
-                    <div
-                        class="gallery-item hidden"
-                        onclick="openLightbox('images/gallery/12.jpg')"
-                    >
-                        <img src="images/gallery/12.jpg" alt="" />
-                        <div class="gallery-overlay">
-                            <span class="gallery-label">Main Entrance</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-load-more">
-                    <button
-                        class="btn-gallery"
-                        id="galleryToggleBtn"
-                        onclick="toggleGallery()"
-                    >
-                        Show More
-                    </button>
-                </div>
-            </div>
-        </section> -->
-
         <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
             <div class="lightbox-content" onclick="event.stopPropagation()">
                 <button class="lightbox-close" onclick="closeLightbox()">
@@ -984,7 +860,12 @@
                 </button>
 
                 <div class="lightbox-image-panel">
-                    <img id="lightboxImg" src="" alt="Full View" />
+                    <img
+                        id="lightboxImg"
+                        src=""
+                        alt="Full View"
+                        loading="lazy"
+                    />
                     <div class="lightbox-img-overlay">
                         <span
                             id="lightboxCategory"
@@ -1045,271 +926,6 @@
             </div>
         </div>
 
-        <!-- ============================================
-         FEATURED BLOG SECTION (Latest from our blog)
-         ============================================ -->
-        <!-- <section class="featured-blog-section" id="blogs">
-            <div class="blog-inner-container">
-                <div class="blog-header-featured">
-                    <div class="header-left-featured">
-                        <span class="sub-featured">EduTech Insights</span>
-                        <h2>Latest from our blog</h2>
-                        <p>
-                            Interviews, tips, guides, industry best practices,
-                            and news.
-                        </p>
-                    </div>
-                    <a href="#" class="view-all-btn-featured">View all posts</a>
-                </div>
-            </div>
-
-            <div class="slider-wrap-featured">
-                <div class="blog-slider-featured" id="featuredBlogSlider">
-
-                    <a href="#" class="blog-card-featured">
-                        <div class="card-img-wrap-featured">
-                            <img
-                                src="images/blogs/1748348108_9dlheJxByS.jpg"
-                                alt="UX review presentations"
-                            />
-                            <div class="card-overlay-featured">
-                                <div class="meta-left-featured">
-                                    <span class="author-featured"
-                                        >Olivia Rhye</span
-                                    >
-                                    <span class="date-featured"
-                                        >20 Jan 2026</span
-                                    >
-                                </div>
-                                <div class="meta-right-featured">
-                                    <span class="category-featured"
-                                        >Design</span
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-content-featured">
-                            <h3>Patient-Centric Design in Healthcare</h3>
-                            <p>
-                                How we are redefining the patient experience
-                                through intuitive UX and digital innovation in
-                                healthcare portals.
-                            </p>
-                            <div class="read-post-featured">
-                                Read post
-                                <img
-                                    src="images/right-arrow.png"
-                                    alt=""
-                                    class="read-more-arrow"
-                                />
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="#" class="blog-card-featured">
-                        <div class="card-img-wrap-featured">
-                            <img
-                                src="images/blogs/1764220791_l1YMRL9V.jpg"
-                                alt="Migrating to Linear 101"
-                            />
-                            <div class="card-overlay-featured">
-                                <div class="meta-left-featured">
-                                    <span class="author-featured"
-                                        >Phoenix Baker</span
-                                    >
-                                    <span class="date-featured"
-                                        >19 Jan 2026</span
-                                    >
-                                </div>
-                                <div class="meta-right-featured">
-                                    <span class="category-featured"
-                                        >Product</span
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-content-featured">
-                            <h3>Agile Workflows for Campus Tech</h3>
-                            <p>
-                                Streamlining university operations and software
-                                projects using modern sprint management
-                                techniques.
-                            </p>
-                            <div class="read-post-featured">
-                                Read post
-                                <img
-                                    src="images/right-arrow.png"
-                                    alt=""
-                                    class="read-more-arrow"
-                                />
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="#" class="blog-card-featured">
-                        <div class="card-img-wrap-featured">
-                            <img
-                                src="images/blogs/1764566919_Mb4R5gWC.jpg"
-                                alt="Building your API stack"
-                            />
-                            <div class="card-overlay-featured">
-                                <div class="meta-left-featured">
-                                    <span class="author-featured"
-                                        >Lana Steiner</span
-                                    >
-                                    <span class="date-featured"
-                                        >18 Jan 2026</span
-                                    >
-                                </div>
-                                <div class="meta-right-featured">
-                                    <span class="category-featured"
-                                        >Engineering</span
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-content-featured">
-                            <h3>Modern API Ecosystems at TMU</h3>
-                            <p>
-                                Building a secure and scalable architecture to
-                                integrate university services and student data
-                                seamlessly.
-                            </p>
-                            <div class="read-post-featured">
-                                Read post
-                                <img
-                                    src="images/right-arrow.png"
-                                    alt=""
-                                    class="read-more-arrow"
-                                />
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="#" class="blog-card-featured">
-                        <div class="card-img-wrap-featured">
-                            <img
-                                src="images/blogs/1772087726_2VqdMWes.jpeg"
-                                alt="PM mental models"
-                            />
-                            <div class="card-overlay-featured">
-                                <div class="meta-left-featured">
-                                    <span class="author-featured"
-                                        >Demi Wilkinson</span
-                                    >
-                                    <span class="date-featured"
-                                        >17 Jan 2026</span
-                                    >
-                                </div>
-                                <div class="meta-right-featured">
-                                    <span class="category-featured"
-                                        >Leadership</span
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-content-featured">
-                            <h3>PM mental models</h3>
-                            <p>
-                                Mental models are simple expressions of complex
-                                processes or relationships.
-                            </p>
-                            <div class="read-post-featured">
-                                Read post
-                                <img
-                                    src="images/right-arrow.png"
-                                    alt=""
-                                    class="read-more-arrow"
-                                />
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="#" class="blog-card-featured">
-                        <div class="card-img-wrap-featured">
-                            <img
-                                src="images/blogs/1772520420_YHDogdml.jpg"
-                                alt="Design systems 101"
-                            />
-                            <div class="card-overlay-featured">
-                                <div class="meta-left-featured">
-                                    <span class="author-featured"
-                                        >Candice Wu</span
-                                    >
-                                    <span class="date-featured"
-                                        >16 Jan 2026</span
-                                    >
-                                </div>
-                                <div class="meta-right-featured">
-                                    <span class="category-featured"
-                                        >Management</span
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-content-featured">
-                            <h3>The Blueprint of Excellence</h3>
-                            <p>
-                                Standardizing modern learning environments
-                                through consistent design systems and academic
-                                rigor.
-                            </p>
-                            <div class="read-post-featured">
-                                Read post
-                                <img
-                                    src="images/right-arrow.png"
-                                    alt=""
-                                    class="read-more-arrow"
-                                />
-                            </div>
-                        </div>
-                    </a>
-
-                    <a
-                        href="#"
-                        class="blog-card-featured view-all-card-featured"
-                    >
-                        <div class="icon-circle-featured">
-                            <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M5 12H19M19 12L12 5M19 12L12 19"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
-                            </svg>
-                        </div>
-                        <span>View all posts</span>
-                    </a>
-                </div>
-
-                <div class="blog-inner-container">
-                    <div class="scroller-bar-featured">
-                        <div
-                            class="scroller-progress-featured"
-                            id="featuredProgress"
-                        ></div>
-                    </div>
-
-                    <div class="slider-controls-featured">
-                        <button class="control-btn-featured" id="featuredPrevB">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="control-btn-featured" id="featuredNextB">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
         <!-- Alumni Section — Advanced 3-Zone Redesign -->
         <section class="alumni-section" id="alumni-voices">
             <!-- Ambient Background Layer (Floating Blobs) -->
@@ -1349,6 +965,7 @@
                                     <img
                                         src="images/alumni-1.png"
                                         alt="Rahul Sharma"
+                                        loading="lazy"
                                     />
                                 </div>
                                 <div
@@ -1360,6 +977,7 @@
                                     <img
                                         src="images/alumni-2.png"
                                         alt="Priya Gupta"
+                                        loading="lazy"
                                     />
                                 </div>
                                 <div
@@ -1371,6 +989,7 @@
                                     <img
                                         src="images/alumni-3.png"
                                         alt="Aman Verma"
+                                        loading="lazy"
                                     />
                                 </div>
                                 <div
@@ -1382,6 +1001,7 @@
                                     <img
                                         src="images/alumni-1.png"
                                         alt="Sneha Reddy"
+                                        loading="lazy"
                                     />
                                 </div>
                                 <div
@@ -1393,6 +1013,7 @@
                                     <img
                                         src="images/alumni-2.png"
                                         alt="Vikram Singh"
+                                        loading="lazy"
                                     />
                                 </div>
                             </div>
@@ -1424,30 +1045,35 @@
                                 <img
                                     src="images/alumni-1.png"
                                     alt="Rahul Sharma"
+                                    loading="lazy"
                                 />
                             </div>
                             <div class="alm-img-item" data-idx="1">
                                 <img
                                     src="images/alumni-2.png"
                                     alt="Priya Gupta"
+                                    loading="lazy"
                                 />
                             </div>
                             <div class="alm-img-item" data-idx="2">
                                 <img
                                     src="images/alumni-3.png"
                                     alt="Aman Verma"
+                                    loading="lazy"
                                 />
                             </div>
                             <div class="alm-img-item" data-idx="3">
                                 <img
                                     src="images/alumni-1.png"
                                     alt="Sneha Reddy"
+                                    loading="lazy"
                                 />
                             </div>
                             <div class="alm-img-item" data-idx="4">
                                 <img
                                     src="images/alumni-2.png"
                                     alt="Vikram Singh"
+                                    loading="lazy"
                                 />
                             </div>
                         </div>
@@ -1518,6 +1144,7 @@
                                         <img
                                             src="images/video-testimonial/student_testimonial_1.png"
                                             alt="Student Testimonial"
+                                            loading="lazy"
                                         />
                                     </div>
                                     <div class="yt-card-overlay">
@@ -1541,6 +1168,7 @@
                                         <img
                                             src="images/video-testimonial/student_testimonial_2.png"
                                             alt="Student Testimonial"
+                                            loading="lazy"
                                         />
                                     </div>
                                     <div class="yt-card-overlay">
@@ -1564,6 +1192,7 @@
                                         <img
                                             src="images/video-testimonial/student_testimonial_3.png"
                                             alt="Student Testimonial"
+                                            loading="lazy"
                                         />
                                     </div>
                                     <div class="yt-card-overlay">
@@ -1587,6 +1216,7 @@
                                         <img
                                             src="images/video-testimonial/student_testimonial_4.png"
                                             alt="Student Testimonial"
+                                            loading="lazy"
                                         />
                                     </div>
                                     <div class="yt-card-overlay">
@@ -1610,6 +1240,7 @@
                                         <img
                                             src="images/video-testimonial/astha_sharma.webp"
                                             alt="Astha Sharma"
+                                            loading="lazy"
                                         />
                                     </div>
                                     <div class="yt-card-overlay">
@@ -1633,6 +1264,7 @@
                                         <img
                                             src="images/video-testimonial/shynie.webp"
                                             alt="Shynie"
+                                            loading="lazy"
                                         />
                                     </div>
                                     <div class="yt-card-overlay">
@@ -1676,16 +1308,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Testimonial Navigation Buttons -->
-                <!-- <div class="yt-nav">
-                    <button class="nav-arrow prev-arrow" onclick="navYt(-1)">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="nav-arrow next-arrow" onclick="navYt(1)">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div> -->
             </div>
         </section>
 
@@ -1719,6 +1341,7 @@
                                         src="images/news/1772452291_jQO544ffXc.jpeg"
                                         class="card-image"
                                         alt="Culture"
+                                        loading="lazy"
                                     />
                                 </div>
                                 <div class="card-content-v2">
@@ -1743,6 +1366,7 @@
                                         src="images/news/1768641490_J8uLmK7xFH.jpg"
                                         class="card-image"
                                         alt="Travel"
+                                        loading="lazy"
                                     />
                                 </div>
                                 <div class="card-content-v2">
@@ -1767,6 +1391,7 @@
                                         src="images/news/1771330652_PJpQ6BWZ3s.png"
                                         class="card-image"
                                         alt="Life Style"
+                                        loading="lazy"
                                     />
                                 </div>
                                 <div class="card-content-v2">
@@ -1791,6 +1416,7 @@
                                         src="images/news/1772534975_6Ed46dKADO.png"
                                         class="card-image"
                                         alt="Education"
+                                        loading="lazy"
                                     />
                                 </div>
                                 <div class="card-content-v2">
@@ -2052,7 +1678,11 @@
                     <!-- Card 1 -->
                     <div class="blog-card image-top">
                         <div class="blog-card-image">
-                            <img src="images/blogs/91.jpg" alt="Productivity" />
+                            <img
+                                src="images/blogs/91.jpg"
+                                alt="Productivity"
+                                loading="lazy"
+                            />
                         </div>
                         <div class="blog-card-content">
                             <h3>Digital Empowerment at TMU</h3>
@@ -2076,6 +1706,7 @@
                             <img
                                 src="images/blogs/1748348108_9dlheJxByS.jpg"
                                 alt="Sleep"
+                                loading="lazy"
                             />
                         </div>
                     </div>
@@ -2086,6 +1717,7 @@
                             <img
                                 src="images/blogs/1764220791_l1YMRL9V.jpg"
                                 alt="Fitness"
+                                loading="lazy"
                             />
                         </div>
                         <div class="blog-card-content">
@@ -2110,6 +1742,7 @@
                             <img
                                 src="images/blogs/1772534975_6Ed46dKADO.png"
                                 alt="AI"
+                                loading="lazy"
                             />
                         </div>
                     </div>
@@ -2120,6 +1753,7 @@
                             <img
                                 src="images/blogs/1771330652_PJpQ6BWZ3s.png"
                                 alt="Wellness"
+                                loading="lazy"
                             />
                         </div>
                         <div class="blog-card-content">
@@ -2144,6 +1778,7 @@
                             <img
                                 src="images/blogs/1768641490_J8uLmK7xFH.jpg"
                                 alt="Global"
+                                loading="lazy"
                             />
                         </div>
                     </div>
@@ -2156,6 +1791,7 @@
                             src="images/right-arrow.png"
                             alt=""
                             class="cta-arrow"
+                            loading="lazy"
                         />
                     </a>
                 </div>
@@ -2405,6 +2041,7 @@
                                 src="images/tmu_logo.png"
                                 alt="TMU Logo"
                                 class="footer-logo"
+                                loading="lazy"
                             />
                             <p class="footer-desc">
                                 TMU stands committed to the ideals of Lord
