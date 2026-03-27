@@ -11,10 +11,31 @@
 
         if (!heroSection) return;
 
-        // 0. Single video — just loop it
-        const heroVideos = document.querySelectorAll(".hero-bg-video");
-        if (heroVideos.length === 1) {
-            heroVideos[0].loop = true;
+        // 0. Initialize HLS Video Stream
+        const heroVideo = document.getElementById("hero-bg-video");
+        if (heroVideo) {
+            heroVideo.loop = true;
+            heroVideo.muted = true;
+
+            const videoSrc = "videos/hls/playlist.m3u8";
+            if (typeof Hls !== "undefined" && Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(videoSrc);
+                hls.attachMedia(heroVideo);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    heroVideo
+                        .play()
+                        .catch((e) => console.log("Autoplay prevented:", e));
+                });
+            } else if (heroVideo.canPlayType("application/vnd.apple.mpegurl")) {
+                // Native HLS support (Safari)
+                heroVideo.src = videoSrc;
+                heroVideo.addEventListener("loadedmetadata", function () {
+                    heroVideo
+                        .play()
+                        .catch((e) => console.log("Autoplay prevented:", e));
+                });
+            }
         }
 
         // 1. Initial Reveal via IntersectionObserver
@@ -125,20 +146,7 @@
 
         revealSections.forEach((section) => sectionObserver.observe(section));
 
-        // 3. Force Video Playback
-        if (heroVideos.length > 0) {
-            heroVideos.forEach((video) => {
-                // Ensure muted for autoplay
-                video.muted = true;
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch((error) => {
-                        console.log("Autoplay prevented:", error);
-                        // Fallback: simple interaction listener if needed
-                    });
-                }
-            });
-        }
+        // 3. (Legacy Force Video Playback Removed — now handled by HLS above)
 
         // No scroll parallax — video is cinematic on its own.
         // Parallax was the root cause of the shadow/gradient drift on all devices.
