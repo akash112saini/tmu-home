@@ -326,16 +326,14 @@ body {
 /* ── Section Shell ───────────────────────────── */
 .banner-showcase {
     position: relative;
-    z-index: 1; /* BELOW hero card (z-index 20), ABOVE base flow */
+    z-index: 1; /* BELOW hero card (z-index 10) */
     width: 100%;
-    padding: 70px 0 64px; /* Extra top padding = breathing space above images */
+    padding: 140px 0 64px; /* 120px for card overhang space + 70px breathing space above images */
     /* Flex row: arrows | frame | arrows */
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    /* overflow: hidden removed from section — bsc-bg already handles its own
-       children. Removing it prevents any stacking/clipping edge cases. */
     /* Seamless blending with surrounding sections */
     background: linear-gradient(
         180deg,
@@ -459,7 +457,11 @@ body {
 
 /* ── Prev / Next Arrows ───────────────────────── */
 .bsc-arrow {
-    flex: 0 0 auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    pointer-events: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -478,32 +480,39 @@ body {
     font-size: 0.9rem; /* FA icon size */
     cursor: pointer;
     padding: 0;
-    z-index: 2;
+    z-index: 10;
     transition:
+        opacity 0.3s ease,
         background 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         border-color 0.3s ease,
         box-shadow 0.3s ease,
         color 0.3s ease,
         transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+
+.bsc-frame:hover .bsc-arrow {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .bsc-arrow:hover {
     background: #ff7900;
     border-color: #ff7900;
     color: #ffffff;
-    transform: scale(1.12);
+    transform: translateY(-50%) scale(1.12);
     box-shadow:
         0 10px 28px rgba(255, 121, 0, 0.35),
         0 0 0 3px rgba(255, 121, 0, 0.12);
 }
 .bsc-arrow:active {
-    transform: scale(0.93);
+    transform: translateY(-50%) scale(0.93);
     box-shadow: 0 3px 10px rgba(255, 121, 0, 0.2);
 }
 .bsc-arrow-prev {
-    margin-right: 16px;
+    left: 20px;
 }
 .bsc-arrow-next {
-    margin-left: 16px;
+    right: 20px;
 }
 
 /* Hide arrows when viewport is too narrow to have side space */
@@ -786,7 +795,7 @@ body {
     width: 100%;
     min-height: calc(98vh - 70px);
     max-height: calc(98vh - 70px);
-    background-color: #e5eef5;
+    background-color: #ffffff;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -1955,7 +1964,14 @@ body {
 /* Redesigned YouTube Section */
 .testimonial-video-section {
     padding: 80px 0 100px;
-    background-color: #f8fafc; /* Subtle background difference */
+    background: linear-gradient(
+        180deg,
+        rgba(0, 16, 85, 0.04) 0%,
+        rgba(173, 204, 234, 0.28) 25%,
+        rgba(210, 228, 245, 0.45) 50%,
+        rgba(173, 204, 234, 0.28) 75%,
+        rgba(0, 16, 85, 0.04) 100%
+    );
     text-align: center;
     overflow: hidden;
     position: relative;
@@ -2018,7 +2034,7 @@ body {
     position: relative;
     background: #0f172a;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    
+
     /* Removed Grayscale/Dimming - All cards in original color */
     filter: none;
     opacity: 1;
@@ -2205,7 +2221,7 @@ body {
     background: #000;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     transform: scale(0.9);
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -2230,13 +2246,15 @@ body {
     line-height: 1;
     z-index: 100;
     transition: transform 0.3s ease;
-    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .video-close:hover {
     transform: rotate(90deg) scale(1.1);
 }
-.yt-thumbs-fade { display: none !important; }
+.yt-thumbs-fade {
+    display: none !important;
+}
 
 @media (max-width: 768px) {
     .yt-tray-container {
@@ -2568,7 +2586,14 @@ body {
    ============================================ */
 .blog-section {
     padding: 80px 0;
-    background: #e5eef5;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 16, 85, 0.04) 0%,
+        rgba(173, 204, 234, 0.28) 25%,
+        rgba(210, 228, 245, 0.45) 50%,
+        rgba(173, 204, 234, 0.28) 75%,
+        rgba(0, 16, 85, 0.04) 100%
+    );
     position: relative;
 }
 
@@ -3214,7 +3239,7 @@ body {
    ============================================ */
 .accordion-section {
     padding: 100px 0;
-    background-color: #fcfcfd;
+    background-color: #ffffff;
     margin-bottom: 0;
 }
 
@@ -3818,7 +3843,14 @@ body {
     font-family: "Outfit", sans-serif;
     color: var(--text-prog);
     -webkit-font-smoothing: antialiased;
-    background: var(--bg-color-prog);
+    background: linear-gradient(
+        180deg,
+        rgba(0, 16, 85, 0.04) 0%,
+        rgba(173, 204, 234, 0.28) 25%,
+        rgba(210, 228, 245, 0.45) 50%,
+        rgba(173, 204, 234, 0.28) 75%,
+        rgba(0, 16, 85, 0.04) 100%
+    );
 }
 
 /* ─── Background Effects ─── */
@@ -3908,7 +3940,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
     gap: 1rem;
     flex-shrink: 0;
@@ -5087,6 +5119,7 @@ body {
     display: flex;
     align-items: center;
     isolation: isolate; /* own stacking context, no leakage */
+    z-index: 10; /* Put hero + card ABOVE the banner showcase */
     transform: none !important; /* HARD RESET */
     will-change: auto !important;
 }
@@ -5457,11 +5490,11 @@ body {
 }
 
 /* Gap for card overhang — owned by hero, not next section.
-   Card sits at bottom: -70px → needs at least 70px margin +
-   50px breathing space = 120px total.
-   This pushes the banner section below the card cleanly. */
+   Card sits at bottom: -70px.
+   Margin removed; instead, the banner section below expands its padding 
+   to slide underneath this card seamlessly. */
 #video-hero {
-    margin-bottom: 120px;
+    margin-bottom: 0px;
 }
 
 /* ── Scroll Reveal for Next Section ──────────────── */
@@ -5498,9 +5531,8 @@ body {
 
 @media (max-width: 768px) {
     #video-hero {
-        /* Card uses translateY(50%) — about 65-75px below hero.
-           110px = card clearance + breathing room above banner. */
-        margin-bottom: 110px;
+        /* Banner section handles the clearance */
+        margin-bottom: 0px;
     }
     .video-hero {
         min-height: 800px;

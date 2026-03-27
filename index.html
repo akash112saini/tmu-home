@@ -34,6 +34,7 @@
             <!-- ① VIDEO LAYER — overlays inside, moves as one unit -->
             <div class="hero-video-layer" id="heroVideoLayer">
                 <video
+                    id="hero-bg-video"
                     class="hero-bg-video active"
                     autoplay
                     muted
@@ -41,10 +42,6 @@
                     playsinline
                     poster="images/hero_campus_fallback.png"
                 >
-                    <source
-                        src="videos/WebsiteVideo-2026.mp4"
-                        type="video/mp4"
-                    />
                 </video>
                 <!-- gradient + mask live inside the layer: move together, never misalign -->
                 <div class="hero-gradient-overlay"></div>
@@ -71,7 +68,7 @@
                     <div class="usp-count">
                         <span data-count="100">0</span>%
                     </div>
-                    <div class="usp-label">Placement</div>
+                    <div class="usp-label">Excellence</div>
                 </div>
                 <div class="usp-stat">
                     <i class="fas fa-chart-line usp-icon"></i>
@@ -108,17 +105,17 @@
                 <div class="bsc-wave bsc-wave-2"></div>
             </div>
 
-            <!-- Arrow prev (left of frame) -->
-            <button
-                class="bsc-arrow bsc-arrow-prev"
-                id="bscPrev"
-                aria-label="Previous banner"
-            >
-                <i class="fas fa-chevron-left"></i>
-            </button>
-
             <!-- Banner frame -->
             <div class="bsc-frame">
+                <!-- Arrow prev (inside frame) -->
+                <button
+                    class="bsc-arrow bsc-arrow-prev"
+                    id="bscPrev"
+                    aria-label="Previous banner"
+                >
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
                 <!-- Slide track -->
                 <div class="bsc-track" id="bscTrack">
                     <div class="bsc-slide active" data-index="0">
@@ -173,16 +170,15 @@
                         aria-label="Banner 3"
                     ></button>
                 </div>
+                <!-- Arrow next (inside frame) -->
+                <button
+                    class="bsc-arrow bsc-arrow-next"
+                    id="bscNext"
+                    aria-label="Next banner"
+                >
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
-
-            <!-- Arrow next (right of frame) -->
-            <button
-                class="bsc-arrow bsc-arrow-next"
-                id="bscNext"
-                aria-label="Next banner"
-            >
-                <i class="fas fa-chevron-right"></i>
-            </button>
         </section>
 
         <!-- ============================================
@@ -764,7 +760,10 @@
                     <div class="content-layout">
                         <div class="programme-showcase">
                             <!-- Showing programmes indicator -->
-                            <p id="grid-subtitle" class="grid-subtitle desktop-only">
+                            <p
+                                id="grid-subtitle"
+                                class="grid-subtitle desktop-only"
+                            >
                                 Showing programmes…
                             </p>
                             <div
@@ -1511,9 +1510,15 @@
                         <div class="yt-slider-wrapper" id="ytSlider">
                             <!-- Premium Vertical Testimonials -->
                             <div class="yt-slide">
-                                <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
+                                <div
+                                    class="yt-thumb-card"
+                                    onclick="openVideo('dQw4w9WgXcQ')"
+                                >
                                     <div class="card-bg">
-                                        <img src="images/video-testimonial/student_testimonial_1.png" alt="Student Testimonial" />
+                                        <img
+                                            src="images/video-testimonial/student_testimonial_1.png"
+                                            alt="Student Testimonial"
+                                        />
                                     </div>
                                     <div class="yt-card-overlay">
                                         <div class="play-btn-glass">
@@ -1528,9 +1533,15 @@
                             </div>
 
                             <div class="yt-slide">
-                                <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
+                                <div
+                                    class="yt-thumb-card"
+                                    onclick="openVideo('dQw4w9WgXcQ')"
+                                >
                                     <div class="card-bg">
-                                        <img src="images/video-testimonial/student_testimonial_2.png" alt="Student Testimonial" />
+                                        <img
+                                            src="images/video-testimonial/student_testimonial_2.png"
+                                            alt="Student Testimonial"
+                                        />
                                     </div>
                                     <div class="yt-card-overlay">
                                         <div class="play-btn-glass">
@@ -1545,9 +1556,15 @@
                             </div>
 
                             <div class="yt-slide">
-                                <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
+                                <div
+                                    class="yt-thumb-card"
+                                    onclick="openVideo('dQw4w9WgXcQ')"
+                                >
                                     <div class="card-bg">
-                                        <img src="images/video-testimonial/student_testimonial_3.png" alt="Student Testimonial" />
+                                        <img
+                                            src="images/video-testimonial/student_testimonial_3.png"
+                                            alt="Student Testimonial"
+                                        />
                                     </div>
                                     <div class="yt-card-overlay">
                                         <div class="play-btn-glass">
@@ -1562,9 +1579,15 @@
                             </div>
 
                             <div class="yt-slide">
-                                <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
+                                <div
+                                    class="yt-thumb-card"
+                                    onclick="openVideo('dQw4w9WgXcQ')"
+                                >
                                     <div class="card-bg">
-                                        <img src="images/video-testimonial/student_testimonial_4.png" alt="Student Testimonial" />
+                                        <img
+                                            src="images/video-testimonial/student_testimonial_4.png"
+                                            alt="Student Testimonial"
+                                        />
                                     </div>
                                     <div class="yt-card-overlay">
                                         <div class="play-btn-glass">
@@ -1579,9 +1602,15 @@
                             </div>
 
                             <div class="yt-slide">
-                                <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
+                                <div
+                                    class="yt-thumb-card"
+                                    onclick="openVideo('dQw4w9WgXcQ')"
+                                >
                                     <div class="card-bg">
-                                        <img src="images/video-testimonial/astha_sharma.webp" alt="Astha Sharma" />
+                                        <img
+                                            src="images/video-testimonial/astha_sharma.webp"
+                                            alt="Astha Sharma"
+                                        />
                                     </div>
                                     <div class="yt-card-overlay">
                                         <div class="play-btn-glass">
@@ -1596,9 +1625,15 @@
                             </div>
 
                             <div class="yt-slide">
-                                <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
+                                <div
+                                    class="yt-thumb-card"
+                                    onclick="openVideo('dQw4w9WgXcQ')"
+                                >
                                     <div class="card-bg">
-                                        <img src="images/video-testimonial/shynie.webp" alt="Shynie" />
+                                        <img
+                                            src="images/video-testimonial/shynie.webp"
+                                            alt="Shynie"
+                                        />
                                     </div>
                                     <div class="yt-card-overlay">
                                         <div class="play-btn-glass">
@@ -1618,13 +1653,24 @@
                     <div class="yt-nav-wrapper">
                         <div class="yt-timeline-container">
                             <div class="yt-timeline-base"></div>
-                            <div class="yt-timeline-progress" id="ytProgress"></div>
+                            <div
+                                class="yt-timeline-progress"
+                                id="ytProgress"
+                            ></div>
                         </div>
                         <div class="yt-nav-arrows">
-                            <button id="ytPrev" class="yt-arrow" aria-label="Previous Slide">
+                            <button
+                                id="ytPrev"
+                                class="yt-arrow"
+                                aria-label="Previous Slide"
+                            >
                                 <i class="fas fa-chevron-left"></i>
                             </button>
-                            <button id="ytNext" class="yt-arrow" aria-label="Next Slide">
+                            <button
+                                id="ytNext"
+                                class="yt-arrow"
+                                aria-label="Next Slide"
+                            >
                                 <i class="fas fa-chevron-right"></i>
                             </button>
                         </div>
@@ -1632,14 +1678,14 @@
                 </div>
 
                 <!-- Testimonial Navigation Buttons -->
-                <div class="yt-nav">
+                <!-- <div class="yt-nav">
                     <button class="nav-arrow prev-arrow" onclick="navYt(-1)">
                         <i class="fas fa-chevron-left"></i>
                     </button>
                     <button class="nav-arrow next-arrow" onclick="navYt(1)">
                         <i class="fas fa-chevron-right"></i>
                     </button>
-                </div>
+                </div> -->
             </div>
         </section>
 
@@ -2472,6 +2518,7 @@
             </div>
         </footer>
 
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
         <script src="script.js"></script>
 
         <script src="data.js"></script>
