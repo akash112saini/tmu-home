@@ -352,6 +352,14 @@ body {
     overflow: hidden;
 }
 
+.bsc-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom; /* Shows the bottom part of the image */
+    /* Alternatively, transform: translateY(...) if absolute positioning is preferred, but object-position works best for cover */
+}
+
 /* Vibrant ambient orbs — much higher opacity, less blur */
 .bsc-orb {
     position: absolute;
