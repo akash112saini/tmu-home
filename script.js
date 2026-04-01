@@ -830,19 +830,52 @@ window.closeLightbox = function () {
     var section = document.getElementById("bannerShowcase");
     if (!section) return;
 
-    var slides = Array.from(section.querySelectorAll(".bsc-slide"));
-    var dots = Array.from(section.querySelectorAll(".bsc-dot"));
-    var frame = section.querySelector(".bsc-frame");
+    var slides  = Array.from(section.querySelectorAll(".bsc-slide"));
+    var dots    = Array.from(section.querySelectorAll(".bsc-dot"));
+    var frame   = section.querySelector(".bsc-frame");
+    var track   = section.querySelector(".bsc-track");
 
-    if (!slides.length) return;
+    if (!slides.length || !track) return;
 
-    var current = 0;
-    var total = slides.length;
-    var autoTimer = null;
-    var isHover = false;
-    
-    var timeStart = 0;
+    var current      = 0;
+    var total        = slides.length;
+    var autoTimer    = null;
+    var isHover      = false;
+    var timeStart    = 0;
     var timeRemaining = 5000;
+
+    // ── Dynamic height: set track height to match the current banner image ──
+    function getFrameWidth() {
+        return track.offsetWidth || frame.offsetWidth || window.innerWidth * 0.88;
+    }
+
+    function setHeightForSlide(idx) {
+        var img = slides[idx] && slides[idx].querySelector("img");
+        if (!img) return;
+
+        function applyHeight() {
+            if (img.naturalWidth && img.naturalHeight) {
+                var ratio  = img.naturalHeight / img.naturalWidth;
+                var newH   = Math.round(getFrameWidth() * ratio);
+                track.style.height = newH + "px";
+            }
+        }
+
+        if (img.complete && img.naturalWidth) {
+            applyHeight();
+        } else {
+            img.addEventListener("load", applyHeight, { once: true });
+        }
+    }
+
+    // Recalculate height on viewport resize
+    var resizeTimer;
+    window.addEventListener("resize", function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+            setHeightForSlide(current);
+        }, 150);
+    });
 
     // ── Switch to a specific index ─────────────────────────────────────────
     function goTo(idx) {
@@ -858,12 +891,15 @@ window.closeLightbox = function () {
         slides[current].classList.add("active");
         dots[current].classList.add("active");
         dots[current].setAttribute("aria-selected", "true");
-        
+
+        // Resize track to match the new banner's aspect ratio
+        setHeightForSlide(current);
+
         // Reset remaining time on slide change
         timeRemaining = 5000;
     }
 
-    // ── Auto-advance logic ─────────────────────────────────────────────
+    // ── Auto-advance logic ─────────────────────────────────────────────────
     function startAuto() {
         stopAuto();
         timeStart = Date.now();
@@ -879,16 +915,16 @@ window.closeLightbox = function () {
         }
     }
 
-    // ── Dot clicks ──────────────────────────────────────────────────────────
+    // ── Dot clicks ────────────────────────────────────────────────────────
     dots.forEach(function (dot) {
         dot.addEventListener("click", function () {
             var idx = parseInt(dot.getAttribute("data-index"), 10);
             goTo(idx);
-            startAuto(); // reset timer after manual nav
+            startAuto();
         });
     });
 
-    // ── Arrow buttons ────────────────────────────────────────────────────────
+    // ── Arrow buttons ─────────────────────────────────────────────────────
     var prevBtn = document.getElementById("bscPrev");
     var nextBtn = document.getElementById("bscNext");
     if (prevBtn)
@@ -902,11 +938,10 @@ window.closeLightbox = function () {
             startAuto();
         });
 
-    // ── Hover pause (desktop only) ─────────────────────────────────────────
+    // ── Hover pause (desktop only) ────────────────────────────────────────
     if (frame) {
         frame.addEventListener("mouseenter", function () {
             isHover = true;
-            // Calculate and accurately save remaining time
             var elapsed = Date.now() - timeStart;
             timeRemaining = Math.max(0, timeRemaining - elapsed);
             stopAuto();
@@ -916,28 +951,39 @@ window.closeLightbox = function () {
             isHover = false;
             startAuto();
             section.classList.remove("is-paused");
-            // DO NOT reset the CSS animation, just let it resume from the paused state
         });
     }
 
-    // ── Scroll-reveal with IntersectionObserver ────────────────────────────
+    // ── Scroll-reveal with IntersectionObserver ───────────────────────────
     var revealObserver = new IntersectionObserver(
         function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
                     section.classList.add("bsc-visible");
                     revealObserver.unobserve(section);
-                    // Start autoplay only after section appears
                     if (!isHover) startAuto();
                 }
             });
         },
-        { threshold: 0.15 },
+        { threshold: 0.15 }
     );
     revealObserver.observe(section);
 
-    // ── Initialize first slide as active ──────────────────────────────────
+    // ── Initialize first slide as active ─────────────────────────────────
     slides[0].classList.add("active");
     dots[0].classList.add("active");
     dots[0].setAttribute("aria-selected", "true");
+
+    // Set initial height (handles cached and fresh images)
+    setHeightForSlide(0);
+
+    // Also pre-load the rest so height snaps instantly when they appear
+    slides.forEach(function (slide, i) {
+        if (i === 0) return;
+        var img = slide.querySelector("img");
+        if (img && !img.complete) {
+            img.addEventListener("load", function () {/* pre-cached */}, { once: true });
+        }
+    });
 })();
+
