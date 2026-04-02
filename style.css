@@ -248,67 +248,150 @@ body {
 
 /* ── Keyframes ───────────────────────────────── */
 @keyframes bscOrbDrift1 {
-    0%   { transform: translate(0, 0) scale(1); }
-    33%  { transform: translate(70px, -60px) scale(1.1); }
-    66%  { transform: translate(-50px, 45px) scale(0.92); }
-    100% { transform: translate(0, 0) scale(1); }
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(70px, -60px) scale(1.1);
+    }
+    66% {
+        transform: translate(-50px, 45px) scale(0.92);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
 }
 @keyframes bscOrbDrift2 {
-    0%   { transform: translate(0, 0) scale(1); }
-    40%  { transform: translate(-90px, 70px) scale(1.12); }
-    70%  { transform: translate(60px, -40px) scale(0.9); }
-    100% { transform: translate(0, 0) scale(1); }
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    40% {
+        transform: translate(-90px, 70px) scale(1.12);
+    }
+    70% {
+        transform: translate(60px, -40px) scale(0.9);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
 }
 @keyframes bscOrbGlow {
-    0%, 100% { opacity: 0.55; }
-    50%       { opacity: 0.85; }
+    0%,
+    100% {
+        opacity: 0.55;
+    }
+    50% {
+        opacity: 0.85;
+    }
 }
 @keyframes bscWaveDrift {
-    0%   { transform: translateX(0) scaleY(1); }
-    50%  { transform: translateX(-4%) scaleY(1.04); }
-    100% { transform: translateX(0) scaleY(1); }
+    0% {
+        transform: translateX(0) scaleY(1);
+    }
+    50% {
+        transform: translateX(-4%) scaleY(1.04);
+    }
+    100% {
+        transform: translateX(0) scaleY(1);
+    }
 }
 @keyframes bscKenBurns {
-    0%   { transform: scale(1) translate(0, 0); }
-    100% { transform: scale(1.06) translate(-1%, -1%); }
+    0% {
+        transform: scale(1) translate(0, 0);
+    }
+    100% {
+        transform: scale(1.06) translate(-1%, -1%);
+    }
 }
 @keyframes bscFadeIn {
-    from { opacity: 0; transform: translateY(30px) scale(0.97); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 @keyframes bscDotPulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 121, 0, 0.5); }
-    50%       { box-shadow: 0 0 0 5px rgba(255, 121, 0, 0); }
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 121, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 0 5px rgba(255, 121, 0, 0);
+    }
 }
 /* Floating shape animations */
 @keyframes bscShapeFloat1 {
-    0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
-    25%  { transform: translate(30px, -40px) rotate(45deg) scale(1.08); }
-    50%  { transform: translate(-20px, -70px) rotate(90deg) scale(0.95); }
-    75%  { transform: translate(-50px, -30px) rotate(135deg) scale(1.04); }
-    100% { transform: translate(0, 0) rotate(180deg) scale(1); }
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+    25% {
+        transform: translate(30px, -40px) rotate(45deg) scale(1.08);
+    }
+    50% {
+        transform: translate(-20px, -70px) rotate(90deg) scale(0.95);
+    }
+    75% {
+        transform: translate(-50px, -30px) rotate(135deg) scale(1.04);
+    }
+    100% {
+        transform: translate(0, 0) rotate(180deg) scale(1);
+    }
 }
 @keyframes bscShapeFloat2 {
-    0%   { transform: translate(0, 0) rotate(0deg); }
-    33%  { transform: translate(-40px, 50px) rotate(-60deg); }
-    66%  { transform: translate(60px, 20px) rotate(-120deg); }
-    100% { transform: translate(0, 0) rotate(-180deg); }
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+        transform: translate(-40px, 50px) rotate(-60deg);
+    }
+    66% {
+        transform: translate(60px, 20px) rotate(-120deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(-180deg);
+    }
 }
 @keyframes bscShapeFloat3 {
-    0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
-    50%  { transform: translate(50px, 60px) rotate(90deg) scale(1.15); }
-    100% { transform: translate(0, 0) rotate(180deg) scale(1); }
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+    50% {
+        transform: translate(50px, 60px) rotate(90deg) scale(1.15);
+    }
+    100% {
+        transform: translate(0, 0) rotate(180deg) scale(1);
+    }
 }
 @keyframes bscShapeFloat4 {
-    0%   { transform: translate(0, 0) rotate(0deg); }
-    30%  { transform: translate(-30px, -50px) rotate(40deg); }
-    60%  { transform: translate(40px, -20px) rotate(80deg); }
-    100% { transform: translate(0, 0) rotate(120deg); }
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    30% {
+        transform: translate(-30px, -50px) rotate(40deg);
+    }
+    60% {
+        transform: translate(40px, -20px) rotate(80deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(120deg);
+    }
 }
 @keyframes bscParticleDrift {
-    0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
-    50%  { transform: translateY(-30px) translateX(15px) scale(1.2); opacity: 1; }
-    100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+    0% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-30px) translateX(15px) scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0.7;
+    }
 }
 
 /* ── Section Shell ───────────────────────────── */
@@ -424,76 +507,83 @@ body {
 
 /* Triangle 1 — top-left zone */
 .bsc-shape-1 {
-    width: 0; height: 0;
-    border-left:   28px solid transparent;
-    border-right:  28px solid transparent;
+    width: 0;
+    height: 0;
+    border-left: 28px solid transparent;
+    border-right: 28px solid transparent;
     border-bottom: 48px solid rgba(0, 100, 220, 0.28);
     top: 12%;
     left: 6%;
     animation: bscShapeFloat1 18s ease-in-out infinite;
-    filter: drop-shadow(0 4px 12px rgba(0,80,200,0.3));
+    filter: drop-shadow(0 4px 12px rgba(0, 80, 200, 0.3));
 }
 /* Ring / circle outline 1 — top-right */
 .bsc-shape-2 {
-    width: 56px; height: 56px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     border: 5px solid rgba(255, 121, 0, 0.45);
     top: 8%;
     right: 9%;
     animation: bscShapeFloat2 22s ease-in-out infinite;
-    filter: drop-shadow(0 0 10px rgba(255,121,0,0.4));
+    filter: drop-shadow(0 0 10px rgba(255, 121, 0, 0.4));
 }
 /* Diamond / rotated square — bottom-left */
 .bsc-shape-3 {
-    width: 36px; height: 36px;
+    width: 36px;
+    height: 36px;
     background: rgba(0, 80, 200, 0.25);
     border: 2px solid rgba(0, 100, 255, 0.4);
     bottom: 16%;
     left: 8%;
     transform: rotate(45deg);
     animation: bscShapeFloat3 16s ease-in-out infinite;
-    filter: drop-shadow(0 4px 12px rgba(0,80,200,0.35));
+    filter: drop-shadow(0 4px 12px rgba(0, 80, 200, 0.35));
 }
 /* Small triangle — bottom-right */
 .bsc-shape-4 {
-    width: 0; height: 0;
-    border-left:   18px solid transparent;
-    border-right:  18px solid transparent;
+    width: 0;
+    height: 0;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
     border-bottom: 32px solid rgba(255, 121, 0, 0.35);
     bottom: 12%;
     right: 7%;
     animation: bscShapeFloat4 20s ease-in-out infinite;
-    filter: drop-shadow(0 4px 10px rgba(255,90,0,0.35));
+    filter: drop-shadow(0 4px 10px rgba(255, 90, 0, 0.35));
 }
 /* Glowing dot cluster — mid-left */
 .bsc-shape-5 {
-    width: 14px; height: 14px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: rgba(0, 120, 255, 0.55);
     top: 50%;
     left: 3%;
     animation: bscParticleDrift 9s ease-in-out infinite;
-    box-shadow: 0 0 16px 4px rgba(0,120,255,0.45);
+    box-shadow: 0 0 16px 4px rgba(0, 120, 255, 0.45);
 }
 /* Glowing dot cluster — mid-right */
 .bsc-shape-6 {
-    width: 10px; height: 10px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: rgba(255, 121, 0, 0.65);
     top: 38%;
     right: 4%;
     animation: bscParticleDrift 11s ease-in-out infinite 2s;
-    box-shadow: 0 0 14px 4px rgba(255,121,0,0.5);
+    box-shadow: 0 0 14px 4px rgba(255, 121, 0, 0.5);
 }
 /* Ring outline 2 — bottom-center */
 .bsc-shape-7 {
-    width: 80px; height: 80px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     border: 3px solid rgba(0, 80, 200, 0.22);
     bottom: 5%;
     left: 45%;
     animation: bscShapeFloat2 28s ease-in-out infinite reverse;
-    filter: drop-shadow(0 0 8px rgba(0,80,200,0.3));
+    filter: drop-shadow(0 0 8px rgba(0, 80, 200, 0.3));
 }
 
 /* Wave layers */
@@ -518,7 +608,7 @@ body {
     bottom: -20%;
     background: radial-gradient(
         ellipse at 50% 100%,
-        rgba(0, 60, 160, 0.10) 0%,
+        rgba(0, 60, 160, 0.1) 0%,
         transparent 70%
     );
     animation: bscWaveDrift 22s ease-in-out infinite reverse;
@@ -747,7 +837,9 @@ body {
         width: 240px;
         height: 240px;
     }
-    .bsc-shape-7 { display: none; } /* Keep it tidy on mobile */
+    .bsc-shape-7 {
+        display: none;
+    } /* Keep it tidy on mobile */
 }
 @media (max-width: 480px) {
     .banner-showcase {
@@ -760,7 +852,9 @@ body {
         border-radius: 10px;
     }
     .bsc-shape-1,
-    .bsc-shape-4 { display: none; }
+    .bsc-shape-4 {
+        display: none;
+    }
 }
 
 /* Counter Section */
