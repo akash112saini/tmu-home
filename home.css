@@ -1429,6 +1429,9 @@ body {
     position: relative;
     width: 42px;
     height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex-shrink: 0;
     border-radius: 50%;
     background: #ffffff;
     border: none;
