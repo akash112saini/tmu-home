@@ -1,75 +1,106 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description"
-        content="Teerthanker Mahaveer University - A multi-disciplinary university offering premium education." />
-    <title>Teerthanker Mahaveer University - Alumni Stories</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="home.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
-</head>
-
-<body>
-    <nav class="navbar">
-        <div class="logo-container">
-            <img src="https://www.tmu.ac.in/logo.webp" alt="TMU Logo" />
-        </div>
-    </nav>
-
-    <!-- New Video Hero Section -->
-    <section id="video-hero" class="video-hero text-white">
-        <!-- ① VIDEO LAYER — overlays inside, moves as one unit -->
-        <div class="hero-video-layer" id="heroVideoLayer">
-            <video id="hero-bg-video" class="hero-bg-video active" autoplay muted loop playsinline
-                poster="images/hero_campus_fallback.png"></video>
-        </div>
-
-
-        <!-- ④ USP CARD — direct child of section, hard-pinned, never inherits video transforms -->
-        <div class="hero-usp-card">
-            <div class="usp-stat">
-                <i class="fas fa-user-graduate usp-icon"></i>
-                <div class="usp-count">
-                    <span data-count="16000">0</span>+
-                </div>
-                <div class="usp-label">Students</div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Teerthanker Mahaveer University - A multi-disciplinary university offering premium education."
+        />
+        <title>Teerthanker Mahaveer University - Alumni Stories</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="home.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        />
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="https://www.tmu.ac.in/logo.webp" alt="TMU Logo" />
             </div>
-            <div class="usp-stat">
-                <i class="fas fa-briefcase usp-icon"></i>
-                <div class="usp-count">
-                    <span data-count="25">0</span><span class="usp-suffix">Years</span>
-                </div>
-                <div class="usp-label">of Excellence</div>
-            </div>
-            <div class="usp-stat">
-                <i class="fas fa-chart-line usp-icon"></i>
-                <div class="usp-count">
-                    <span data-count="63">0</span> LPA
-                </div>
-                <div class="usp-label">Highest Package</div>
-            </div>
-            <div class="usp-stat">
-                <i class="fas fa-handshake usp-icon"></i>
-                <div class="usp-count">
-                    <span data-count="100">0</span>+
-                </div>
-                <div class="usp-label">Collaborations</div>
-            </div>
-        </div>
-    </section>
+        </nav>
 
-    <!-- ============================================
+        <!-- New Video Hero Section -->
+        <section id="video-hero" class="video-hero text-white">
+            <!-- ① VIDEO LAYER — overlays inside, moves as one unit -->
+            <div class="hero-video-layer" id="heroVideoLayer">
+                <video
+                    id="hero-bg-video"
+                    class="hero-bg-video active"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    poster="images/hero_campus_fallback.png"
+                ></video>
+                <!-- gradient + mask live inside the layer: move together, never misalign -->
+                <div class="hero-gradient-overlay"></div>
+                <div class="hero-bottom-mask"></div>
+            </div>
+
+            <!-- ② AMBIENT BLOBS — decorative only, static -->
+            <div class="hero-mesh" aria-hidden="true">
+                <div class="hero-blob hero-blob-1"></div>
+                <div class="hero-blob hero-blob-2"></div>
+            </div>
+
+            <!-- ④ USP CARD — direct child of section, hard-pinned, never inherits video transforms -->
+            <div class="hero-usp-card">
+                <div class="usp-stat">
+                    <i class="fas fa-user-graduate usp-icon"></i>
+                    <div class="usp-count">
+                        <span data-count="16000">0</span>+
+                    </div>
+                    <div class="usp-label">Students</div>
+                </div>
+                <div class="usp-stat">
+                    <i class="fas fa-briefcase usp-icon"></i>
+                    <div class="usp-count">
+                        <span data-count="25">0</span
+                        ><span class="usp-suffix">Years</span>
+                    </div>
+                    <div class="usp-label">of Excellence</div>
+                </div>
+                <div class="usp-stat">
+                    <i class="fas fa-chart-line usp-icon"></i>
+                    <div class="usp-count">
+                        <span data-count="63">0</span> LPA
+                    </div>
+                    <div class="usp-label">Highest Package</div>
+                </div>
+                <div class="usp-stat">
+                    <i class="fas fa-handshake usp-icon"></i>
+                    <div class="usp-count">
+                        <span data-count="100">0</span>+
+                    </div>
+                    <div class="usp-label">Collaborations</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
          CINEMATIC BANNER SHOWCASE
          Placement: Below Video Hero | Above Gallery
          ============================================ -->
-    <section class="banner-showcase" id="bannerShowcase" aria-label="Campus visual showcase">
-        <!-- Animated ambient background -->
-        <div class="bsc-bg" aria-hidden="true">
-            <!-- <div class="bsc-orb bsc-orb-1"></div>
+        <section
+            class="banner-showcase"
+            id="bannerShowcase"
+            aria-label="Campus visual showcase"
+        >
+            <!-- Animated ambient background -->
+            <div class="bsc-bg" aria-hidden="true">
+                <!-- <div class="bsc-orb bsc-orb-1"></div>
+
                 <div class="bsc-orb bsc-orb-2"></div>
                 <div class="bsc-orb bsc-orb-3"></div>
                 <div class="bsc-wave bsc-wave-1"></div>
