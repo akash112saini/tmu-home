@@ -70,15 +70,7 @@ const loadMoreBtn = document.getElementById("load-more-btn");
 const searchInput = document.getElementById("search-input");
 
 // Mobile
-const mobileDotNav = document.getElementById("mobile-dot-nav");
-const swipeCue = document.getElementById("swipe-cue");
-const mcdTrigger = document.getElementById("mcd-trigger");
-const mcdLabel = document.getElementById("mcd-label");
-const mcdSheet = document.getElementById("mobile-sheet");
-const mcdBackdrop = document.getElementById("mcd-backdrop");
-const mcdPanel = document.getElementById("mcd-panel");
-const mcdList = document.getElementById("mcd-list");
-const mcdSearch = document.getElementById("mcd-search");
+const mobileAccordionView = document.getElementById("mobile-accordion-view");
 
 // ─── State ───
 let activeCategoryId = "all"; // "all" = All Colleges
@@ -98,7 +90,6 @@ function init() {
     checkMobile();
     renderDesktopDropdown();
     initDesktopDropdownBehavior();
-    initMobileSheetList();
 
     // Select "All Colleges" by default
     selectCollege("all", true);
@@ -147,50 +138,11 @@ function init() {
     // Mobile nav buttons removal logic (prevBtn/nextBtn deleted from HTML)
 
     window.addEventListener("resize", () => {
-        const wasMobile = isNativeScroller;
         checkMobile();
-        if (!isNativeScroller) {
-            applyFiltersAndRender();
-        } else {
-            updateCarousel();
-            renderMobileDots();
-        }
-        if (
-            wasMobile &&
-            !isNativeScroller &&
-            mcdPanel.classList.contains("open")
-        ) {
-            closeMobileSheet();
-        }
+        applyFiltersAndRender();
     });
 
-    // Mobile carousel scroll listener
-    const carousel = document.querySelector(".card-carousel");
-    if (carousel) {
-        carousel.addEventListener(
-            "scroll",
-            () => {
-                if (isNativeScroller) {
-                    const cards = cardTrack.querySelectorAll(".programme-card");
-                    if (!cards.length) return;
-                    const gap =
-                        parseFloat(getComputedStyle(cardTrack).gap) || 12;
-                    const cardW = cards[0].offsetWidth + gap;
-                    const idx = Math.round(carousel.scrollLeft / cardW);
-                    updateMobileDots(idx);
-                    if (!hasScrolledOnce && carousel.scrollLeft > 20) {
-                        hasScrolledOnce = true;
-                        if (swipeCue) swipeCue.classList.add("hidden");
-                    }
-                }
-            },
-            { passive: true },
-        );
-    }
-
-    initDragScroll();
     initParticles();
-    initMobileSheetBehavior();
 }
 
 function checkMobile() {
@@ -341,35 +293,15 @@ function selectCollege(id, immediate = false) {
             desktopDropdownIcon.innerHTML = collegeIcons[cat.id] || "🎓";
     }
 
-    // Update mobile label and icon
-    const triggerIcon = document.querySelector(".mcd-trigger-left .mcd-icon");
-    if (id === "all") {
-        if (mcdLabel) mcdLabel.textContent = "All Colleges";
-        if (triggerIcon) triggerIcon.innerHTML = collegeIcons["all"];
-    } else {
-        const cat = categories.find((c) => c.id === id);
-        if (cat && mcdLabel) mcdLabel.textContent = cat.name;
-        if (cat && triggerIcon)
-            triggerIcon.innerHTML = collegeIcons[cat.id] || "🎓";
-    }
-
-    // Update mobile bottom sheet selection
-    updateMobileSheetSelection();
-
-    // Set mobile carousel programs
-    if (id === "all") {
-        currentPrograms = categories.flatMap((c) => c.programs);
-    } else {
-        const cat = categories.find((c) => c.id === id);
-        currentPrograms = cat ? cat.programs : [];
-    }
-
     updateAvailablePills();
-
     if (immediate) {
         applyFiltersAndRender();
     } else {
-        withFade(() => applyFiltersAndRender());
+        if (!isNativeScroller) {
+            withFade(() => applyFiltersAndRender());
+        } else {
+            applyFiltersAndRender();
+        }
     }
 }
 
@@ -439,9 +371,12 @@ function updateAvailablePills() {
             }),
         );
     } else {
-        (currentPrograms || []).forEach((p) => {
-            available[p.level] = true;
-        });
+        const cat = categories.find((c) => c.id === activeCategoryId);
+        if (cat) {
+            cat.programs.forEach((p) => {
+                available[p.level] = true;
+            });
+        }
     }
 
     let needsReset = false;
@@ -496,8 +431,8 @@ function applyFiltersAndRender() {
     });
 
     if (isNativeScroller) {
-        // Mobile path: render carousel from currentPrograms filtered by activeFilter
-        renderMobileCards();
+        // Mobile path: render accordion of all colleges
+        renderMobileAccordion();
     } else {
         renderGrid(true);
     }
@@ -614,369 +549,126 @@ function escapeHtml(str) {
 //  MOBILE: CAROUSEL RENDERING
 // ═══════════════════════════════════════════════════════════════
 
-function renderMobileCards() {
-    if (!cardTrack) return;
-    cardTrack.innerHTML = "";
+// ═══════════════════════════════════════════════════════════════
+//  MOBILE: ACCORDION RENDERING
+// ═══════════════════════════════════════════════════════════════
 
-    // Mobile uses currentPrograms (current category) filtered only by level
-    let pool = currentPrograms;
-    if (activeFilter !== "All") {
-        pool = pool.filter((p) => p.level === activeFilter);
-    }
+function renderMobileAccordion() {
+    if (!mobileAccordionView) return;
+    mobileAccordionView.innerHTML = "";
 
-    if (programmeCount) {
-        const count = pool.length;
-        const label = `Programme${count !== 1 ? "s" : ""}`;
-        programmeCount.innerHTML = `<span class="count-number">${count}</span><span class="count-label">${label}</span>`;
-    }
+    categories.forEach((cat) => {
+        // Filter programmes within this category
+        let programs = cat.programs;
+        if (activeFilter !== "All") {
+            programs = programs.filter((p) => p.level === activeFilter);
+        }
 
-    if (swipeCue) {
-        swipeCue.style.display = pool.length > 1 ? "flex" : "none";
-        if (pool.length <= 1) hasScrolledOnce = true;
-    }
+        // Only show college if it has programmes matching the filter
+        if (programs.length === 0) return;
 
-    pool.forEach((prog, i) => {
-        const level = prog.level || "UG";
-        const badgeClass =
-            level === "PG"
-                ? "badge-pg"
-                : level === "Doctorate"
-                  ? "badge-doctorate"
-                  : "badge-ug";
+        const accordion = document.createElement("div");
+        accordion.className = "college-accordion";
+        accordion.dataset.id = cat.id;
 
-        let duration = "3 Years";
-        if (level === "PG") duration = "2 Years";
-        if (level === "Doctorate") duration = "3–5 Years";
-        if (prog.title.match(/Tech|BDS|Pharm|BPT/i)) duration = "4 Years";
-        if (prog.title.includes("MBBS")) duration = "5.5 Years";
-
-        const card = document.createElement("article");
-        card.className = "programme-card";
-        card.innerHTML = `
-            <div class="card-image-wrap">
-                <div class="card-bg" style="background-image:url('${prog.image}')"></div>
-                <span class="level-badge ${badgeClass}">${level}</span>
-            </div>
-            <div class="card-text-wrap">
-                <div class="meta-tags">
-                    <span class="meta-tag">${duration}</span>
+        const icon = collegeIcons[cat.id] || collegeIcons["all"];
+        
+        accordion.innerHTML = `
+            <button class="college-accordion-header" aria-expanded="false">
+                <div class="cah-left">
+                    <div class="cah-icon">${icon}</div>
+                    <div class="cah-label-wrap">
+                        <span class="cah-label">${cat.name}</span>
+                        <span class="cah-count">${programs.length} Programme${programs.length !== 1 ? "s" : ""}</span>
+                    </div>
                 </div>
-                <h6 class="card-title">${prog.title}</h6>
-                <div class="card-footer">
-                    <span class="meta-info">
-                        <svg class="pin-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                            <circle cx="12" cy="10" r="3"></circle>
-                        </svg>
-                        Main Campus
-                    </span>
-                    <div class="explore-cta">
+                <svg class="cah-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6"/>
+                </svg>
+            </button>
+            <div class="college-accordion-content">
+                <div class="college-accordion-inner" onscroll="updateMpcProgress(this)">
+                    ${programs.map(p => buildMobileProgCard(p)).join("")}
+                </div>
+                <div class="mpc-progress-bar-wrap" style="${programs.length > 1 ? "" : "display:none"}">
+                    <div class="mpc-progress-bar"></div>
+                </div>
+            </div>
+        `;
+
+        const header = accordion.querySelector(".college-accordion-header");
+        header.addEventListener("click", () => {
+            const isActive = accordion.classList.contains("active");
+            
+            // Optional: Close other accordions
+            // document.querySelectorAll('.college-accordion').forEach(a => a.classList.remove('active'));
+            
+            if (isActive) {
+                accordion.classList.remove("active");
+                header.setAttribute("aria-expanded", "false");
+            } else {
+                accordion.classList.add("active");
+                header.setAttribute("aria-expanded", "true");
+            }
+        });
+
+        mobileAccordionView.appendChild(accordion);
+    });
+
+    if (mobileAccordionView.innerHTML === "") {
+        mobileAccordionView.innerHTML = `
+            <div class="empty-state">
+                <p>No programmes found for this level.</p>
+            </div>
+        `;
+    }
+}
+
+function buildMobileProgCard(prog) {
+    const level = prog.level || "UG";
+    const badgeColor = level === "PG" ? "#002147" : (level === "Doctorate" ? "#722f37" : "#FF7900");
+
+    let duration = "3 Years";
+    if (level === "PG") duration = "2 Years";
+    if (level === "Doctorate") duration = "3–5 Years";
+    if (prog.title.match(/Tech|BDS|Pharm|BPT/i)) duration = "4 Years";
+    if (prog.title.includes("MBBS")) duration = "5.5 Years";
+
+    return `
+        <article class="mobile-prog-card">
+            <div class="mpc-image-wrap">
+                <img class="mpc-image" src="${prog.image}" alt="${prog.title}" loading="lazy">
+                <span class="mpc-level-badge" style="background:${badgeColor}">${level}</span>
+            </div>
+            <div class="mpc-body">
+                <h6 class="mpc-title">${prog.title}</h6>
+                <div class="mpc-footer">
+                    <span class="mpc-duration">${duration}</span>
+                    <div class="mpc-explore">
                         Explore
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </div>
                 </div>
             </div>
-        `;
-        cardTrack.appendChild(card);
-    });
-
-    const carousel = document.querySelector(".card-carousel");
-    if (carousel) carousel.scrollLeft = 0;
-
-    renderMobileDots();
-    updateCarousel();
+        </article>
+    `;
 }
 
-// ─── Carousel Logic (Mobile) ───
-function getVisibleCount() {
-    const w = window.innerWidth;
-    if (w <= 600) return 1;
-    if (w <= 900) return 2;
-    return 3;
+
+function updateMpcProgress(el) {
+    const wrap = el.parentElement.querySelector('.mpc-progress-bar-wrap');
+    const bar = wrap.querySelector('.mpc-progress-bar');
+    if (!bar) return;
+    
+    const scrollLeft = el.scrollLeft;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const progress = (scrollLeft / maxScroll) * 100;
+    
+    bar.style.width = Math.max(10, progress) + '%';
 }
 
-function updateCarousel() {
-    if (isNativeScroller) {
-        if (cardTrack) cardTrack.style.transform = "none";
-        return;
-    }
-}
-
-function updateNavControls() {}
-
-function nextCard() {
-    const visible = getVisibleCount();
-    const pool =
-        activeFilter === "All"
-            ? currentPrograms
-            : currentPrograms.filter((p) => p.level === activeFilter);
-    const maxIdx = Math.max(0, pool.length - visible);
-    if (currentIndex < maxIdx) {
-        currentIndex++;
-        updateCarousel();
-    }
-}
-
-function prevCard() {
-    if (currentIndex > 0) {
-        currentIndex--;
-        updateCarousel();
-    }
-}
-
-// ─── Mobile Dots ───
-function renderMobileDots() {
-    if (!mobileDotNav) return;
-    mobileDotNav.innerHTML = "";
-
-    const pool =
-        activeFilter === "All"
-            ? currentPrograms
-            : currentPrograms.filter((p) => p.level === activeFilter);
-
-    // Hide dots for large number of programmes (threshold: 8)
-    if (pool.length > 8) {
-        mobileDotNav.style.display = "none";
-        return;
-    } else {
-        mobileDotNav.style.display = "flex";
-    }
-    pool.forEach((_, i) => {
-        const dot = document.createElement("button");
-        dot.className = `mobile-dot ${i === 0 ? "active" : ""}`;
-        dot.setAttribute("aria-label", `Programme ${i + 1}`);
-        dot.addEventListener("click", () => {
-            const carousel = document.querySelector(".card-carousel");
-            const cards = cardTrack.querySelectorAll(".programme-card");
-            if (cards[i]) {
-                const gap = parseFloat(getComputedStyle(cardTrack).gap) || 12;
-                carousel.scrollTo({
-                    left: i * (cards[i].offsetWidth + gap),
-                    behavior: "smooth",
-                });
-            }
-        });
-        mobileDotNav.appendChild(dot);
-    });
-}
-
-function updateMobileDots(idx) {
-    document
-        .querySelectorAll(".mobile-dot")
-        .forEach((d, i) => d.classList.toggle("active", i === idx));
-}
-
-// ═══════════════════════════════════════════════════════════════
-//  DESKTOP: DRAG SCROLL
-// ═══════════════════════════════════════════════════════════════
-
-function initDragScroll() {
-    const carousel = document.querySelector(".card-carousel");
-    if (!carousel) return;
-
-    let isDragging = false,
-        startX = 0,
-        startOffset = 0,
-        moved = false;
-
-    carousel.addEventListener("mousedown", (e) => {
-        if (e.button !== 0 || isNativeScroller) return;
-        const cards = cardTrack.querySelectorAll(".programme-card");
-        if (!cards.length) return;
-        isDragging = true;
-        moved = false;
-        startX = e.clientX;
-        const gap = parseFloat(getComputedStyle(cardTrack).gap) || 16;
-        startOffset = currentIndex * (cards[0].offsetWidth + gap);
-        document.body.style.userSelect = "none";
-        e.preventDefault();
-    });
-
-    document.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        const delta = e.clientX - startX;
-        if (Math.abs(delta) > 5) moved = true;
-        if (cardTrack)
-            cardTrack.style.transform = `translateX(-${startOffset - delta}px)`;
-    });
-
-    const stopDrag = (e) => {
-        if (!isDragging) return;
-        isDragging = false;
-        document.body.style.userSelect = "";
-        if (!moved) {
-            updateCarousel();
-            return;
-        }
-        if (e.clientX) {
-            const delta = e.clientX - startX;
-            const cards = cardTrack
-                ? cardTrack.querySelectorAll(".programme-card")
-                : [];
-            if (cards.length) {
-                const gap = parseFloat(getComputedStyle(cardTrack).gap) || 16;
-                const cardW = cards[0].offsetWidth + gap;
-                const pool =
-                    activeFilter === "All"
-                        ? currentPrograms
-                        : currentPrograms.filter(
-                              (p) => p.level === activeFilter,
-                          );
-                const maxIdx = Math.max(0, pool.length - getVisibleCount());
-                const steps = -Math.round(delta / (cardW * 0.3));
-                currentIndex = Math.max(
-                    0,
-                    Math.min(currentIndex + steps, maxIdx),
-                );
-            }
-        }
-        requestAnimationFrame(() => updateCarousel());
-    };
-    document.addEventListener("mouseup", stopDrag);
-    carousel.addEventListener("mouseleave", stopDrag);
-}
-
-// ═══════════════════════════════════════════════════════════════
-//  MOBILE BOTTOM SHEET
-// ═══════════════════════════════════════════════════════════════
-
-function initMobileSheetList() {
-    if (!mcdList) return;
-    mcdList.innerHTML = "";
-
-    // All Colleges item
-    const allItem = document.createElement("div");
-    allItem.className = `mcd-item ${activeCategoryId === "all" ? "active" : ""}`;
-    allItem.dataset.id = "all";
-    const checkSvg = `<svg class="mcd-item-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-    allItem.innerHTML = `<div class="mcd-item-label">${collegeIcons["all"]} <span>All Colleges</span></div>${checkSvg}`;
-    allItem.addEventListener("click", () => {
-        selectCollege("all");
-        closeMobileSheet();
-        if (mcdSearch) {
-            mcdSearch.value = "";
-            filterSheetList("");
-        }
-    });
-    mcdList.appendChild(allItem);
-
-    categories.forEach((cat) => {
-        const item = document.createElement("div");
-        item.className = `mcd-item ${cat.id === activeCategoryId ? "active" : ""}`;
-        item.dataset.id = cat.id;
-        const icon = collegeIcons[cat.id] || "🎓";
-        item.innerHTML = `<div class="mcd-item-label">${icon} <span>${cat.name}</span></div>${checkSvg}`;
-        item.addEventListener("click", () => {
-            selectCollege(cat.id);
-            closeMobileSheet();
-            if (mcdSearch) {
-                mcdSearch.value = "";
-                filterSheetList("");
-            }
-        });
-        mcdList.appendChild(item);
-    });
-}
-
-function updateMobileSheetSelection() {
-    if (!mcdList) return;
-    mcdList.querySelectorAll(".mcd-item").forEach((item) => {
-        item.classList.toggle("active", item.dataset.id === activeCategoryId);
-    });
-}
-
-function openMobileSheet() {
-    if (!mcdSheet) return;
-    mcdSheet.style.display = "block";
-    void mcdSheet.offsetWidth;
-    mcdPanel.classList.add("open");
-    mcdBackdrop.classList.add("open");
-    if (mcdTrigger) mcdTrigger.setAttribute("aria-expanded", "true");
-    document.body.style.overflow = "hidden";
-}
-
-function closeMobileSheet() {
-    if (!mcdPanel) return;
-
-    // Visually initiate close
-    mcdPanel.classList.remove("open");
-    mcdBackdrop.classList.remove("open");
-    if (mcdTrigger) mcdTrigger.setAttribute("aria-expanded", "false");
-    document.body.style.overflow = "";
-    mcdPanel.style.transform = "";
-
-    // Explicitly hide the root container instantly, but preserve animation visibility
-    // The panel and backdrop will fade/slide away.
-    // To prevent any ghost clicks or the sheet remaining, hide it after 400ms.
-    setTimeout(() => {
-        if (!mcdPanel.classList.contains("open") && mcdSheet) {
-            mcdSheet.style.display = "none";
-        }
-    }, 400);
-}
-
-function filterSheetList(query) {
-    const q = query.toLowerCase().trim();
-    mcdList.querySelectorAll(".mcd-item").forEach((item) => {
-        const text = item.querySelector("span").textContent.toLowerCase();
-        item.classList.toggle("hidden", text.indexOf(q) === -1);
-    });
-}
-
-function initMobileSheetBehavior() {
-    if (!mcdTrigger) return;
-    mcdTrigger.addEventListener("click", openMobileSheet);
-    if (mcdBackdrop) mcdBackdrop.addEventListener("click", closeMobileSheet);
-    if (mcdSearch) {
-        mcdSearch.addEventListener("input", (e) =>
-            filterSheetList(e.target.value),
-        );
-    }
-
-    const closeBtn = document.getElementById("mcd-close-btn");
-    if (closeBtn) {
-        closeBtn.addEventListener("click", closeMobileSheet);
-
-        let startY = 0;
-        let currentY = 0;
-        let isDragging = false;
-
-        closeBtn.addEventListener(
-            "touchstart",
-            (e) => {
-                startY = e.touches[0].clientY;
-                isDragging = true;
-                if (mcdPanel) mcdPanel.classList.add("dragging");
-            },
-            { passive: true },
-        );
-
-        closeBtn.addEventListener("touchmove", (e) => {
-            if (!isDragging || !mcdPanel) return;
-            currentY = e.touches[0].clientY;
-            let diff = currentY - startY;
-            if (diff > 0) {
-                mcdPanel.style.transform = `translateY(${diff}px)`;
-            }
-        });
-
-        closeBtn.addEventListener("touchend", () => {
-            if (!isDragging) return;
-            isDragging = false;
-            if (mcdPanel) {
-                mcdPanel.classList.remove("dragging");
-                let diff = currentY - startY;
-                if (diff > 80) {
-                    closeMobileSheet();
-                } else {
-                    mcdPanel.style.transform = "";
-                }
-            }
-        });
-    }
-}
 
 // ═══════════════════════════════════════════════════════════════
 //  PARTICLES

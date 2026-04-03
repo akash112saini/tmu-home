@@ -1098,11 +1098,11 @@ body {
 .alm-selector-container {
     flex: 1; /* Match width of text on left */
     display: flex;
+    align-items: center;
     justify-content: center; /* Center precisely in the available right space! */
+    gap: 16px;
     align-self: flex-end; /* Drops it to the bottom of the header row */
-    transform: translateY(
-        60px
-    ); /* Pushes it down into the margin space above the card */
+    transform: translateY(10px); /* Pushes it down into the margin space above the card */
     margin-top: 0;
     position: relative;
     z-index: 10;
@@ -1423,40 +1423,36 @@ body {
     font-weight: 500;
 }
 
-/* ── Edge Navigation Arrows ─────────────────────────── */
+/* ── Solid Circular Navigation (Match User Image) ───────────────── */
+/* ── Sharp Circular Navigation (Match User Image) ───────────────── */
 .alm-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 52px;
-    height: 52px;
+    position: relative;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     background: #ffffff;
-    border: 1px solid rgba(0, 16, 85, 0.08);
-    color: #001055;
+    border: none;
+    color: #001055; /* Deep Navy from image */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Soft lift as seen in image */
     z-index: 20;
-    font-size: 0.9rem;
+    padding: 0;
 }
-.alm-arrow-prev {
-    left: 0;
-}
-.alm-arrow-next {
-    right: 0;
+.alm-arrow svg {
+    display: block;
+    margin: 0;
 }
 .alm-arrow:hover {
-    background: #ff7900;
-    color: #ffffff;
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 12px 30px rgba(255, 121, 0, 0.3);
+    background: #f8f9fa;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 .alm-arrow:active {
-    transform: translateY(-50%) scale(0.92);
+    transform: scale(0.96);
 }
 
 /* ── Responsive — Tablet ≤1100px ─────────────────── */
@@ -1563,7 +1559,7 @@ body {
     /* Alumni Section — Mobile Optimized (≤768px) */
     .alumni-section {
         min-height: auto;
-        padding: 24px 0;
+        padding: 35px 0;
     }
     .alm-inner {
         padding: 0 5%;
@@ -1588,9 +1584,20 @@ body {
         font-size: clamp(1.7rem, 6.5vw, 2rem);
     }
     .alm-selector-container {
-        max-width: 280px;
-        flex: 0 0 auto;
+        max-width: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
         justify-content: center;
+        gap: 12px;
+        order: 1; /* Avatars AT THE TOP */
+        margin-bottom: 0px; /* Slight overlap image */
+        z-index: 50;
+        position: relative;
+    }
+    .alm-thumbs-wrapper {
+        width: 240px; /* Fit clones properly */
+        flex-shrink: 0;
     }
     .alm-thumb-track {
         gap: 10px;
@@ -1602,17 +1609,22 @@ body {
     }
     .alm-stage {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 8px;
         padding: 0;
+        position: relative;
+        display: flex; /* Ensure order works across platforms better than grid in some cases */
+        flex-direction: column;
     }
     .alm-img-track {
         max-width: 100%;
         aspect-ratio: 16 / 10;
-        order: -1;
+        order: 2; /* Image SECOND */
         border-radius: 15px;
+        margin-top: 0;
     }
     .alm-card-wrap {
         max-width: 100%;
+        order: 3; /* Card LAST */
     }
     .alm-card {
         padding: 18px 16px;
@@ -1630,16 +1642,25 @@ body {
         font-size: 0.78rem;
     }
     .alm-arrow {
-        width: 40px;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        position: relative;
+        width: 42px;
+        height: 42px;
+        background: #ffffff;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        top: 0;
+        transform: none;
+        visibility: visible;
+        display: flex;
+        border: none;
+        color: #001055;
+        padding: 0;
     }
-    .alm-arrow-prev {
-        left: -8px;
+    .alm-arrow svg {
+        display: block;
     }
-    .alm-arrow-next {
-        right: -8px;
+    .alm-arrow-prev, .alm-arrow-next {
+        left: auto;
+        right: auto;
     }
 }
 
@@ -4635,7 +4656,7 @@ body {
 .programme-showcase {
     display: flex;
     flex-direction: column;
-    height: 550px; /* Compact height for 3-card layout with smaller images */
+    height: 580px; /* Compact height for 3-card layout with smaller images */
     background: #ffffff;
     border-radius: var(--radius-lg-prog);
     padding: 30px;
@@ -4913,11 +4934,11 @@ body {
     }
 
     .programmes-section {
-        padding: 1.5rem 0;
-        height: 90vh;
+        padding: 1rem 0;
+        min-height: 92vh;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
+        overflow-y: auto;
         position: relative;
     }
     /* Reset showcase box on mobile */
@@ -5063,6 +5084,225 @@ body {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         cursor: pointer;
         box-sizing: border-box;
+    }
+
+    /* Mobile Accordion Styles */
+    .mobile-accordion-view {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        width: 100%;
+        margin-top: 10px;
+        padding: 0 16px 40px;
+        box-sizing: border-box;
+    }
+
+    .college-accordion {
+        background: #ffffff;
+        border-radius: 18px;
+        border: 1px solid rgba(0, 33, 71, 0.08);
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .college-accordion.active {
+        box-shadow: 0 15px 35px rgba(0, 33, 71, 0.12);
+        border-color: rgba(0, 33, 71, 0.15);
+    }
+
+    .college-accordion-header {
+        width: 100%;
+        padding: 18px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        gap: 12px;
+    }
+
+    .cah-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        overflow: hidden;
+    }
+
+    .cah-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--navy);
+        background: #f8fafc;
+        border-radius: 12px;
+        flex-shrink: 0;
+        border: 1px solid rgba(0, 33, 71, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .college-accordion.active .cah-icon {
+        background: var(--navy);
+        color: #fff;
+    }
+
+    .cah-label-wrap {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .cah-label {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: var(--navy);
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .cah-count {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #888;
+        margin-top: 2px;
+    }
+
+    .cah-chevron {
+        color: var(--navy);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        flex-shrink: 0;
+    }
+
+    .college-accordion.active .cah-chevron {
+        transform: rotate(180deg);
+    }
+
+    .college-accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        background: #fcfcfd;
+    }
+
+    .college-accordion.active .college-accordion-content {
+        max-height: 5000px; /* High enough to contain many cards */
+    }
+
+    .college-accordion-inner {
+        padding: 0 16px 24px;
+        display: flex;
+        overflow-x: auto;
+        gap: 16px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        -webkit-overflow-scrolling: touch;
+    }
+    .college-accordion-inner::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Premium Mobile Card inside Accordion */
+    .mobile-prog-card {
+        flex: 0 0 280px;
+        display: flex;
+        flex-direction: column;
+        background: #ffffff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .mpc-image-wrap {
+        height: 180px;
+        width: 100%;
+        position: relative;
+    }
+
+    .mpc-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .mpc-level-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.65rem;
+        font-weight: 800;
+        color: #fff;
+        backdrop-filter: blur(8px);
+        text-transform: uppercase;
+    }
+
+    .mpc-body {
+        padding: 16px;
+    }
+
+    .mpc-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 12px;
+        line-height: 1.4;
+    }
+
+    .mpc-duration {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--navy);
+        background: #f1f5f9;
+        padding: 4px 10px;
+        border-radius: 6px;
+    }
+
+    .mpc-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 14px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        margin-top: 4px;
+    }
+
+    .mpc-explore {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--orange);
+    }
+
+    /* Scroll progress bar for mobile accordion inner */
+    .mpc-progress-bar-wrap {
+        height: 3px;
+        background: #f1f5f9;
+        margin: 0 20px 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .mpc-progress-bar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 15%; /* Initial state */
+        background: var(--orange);
+        border-radius: 10px;
+        transition: width 0.15s ease-out;
+        box-shadow: 0 0 10px rgba(255, 121, 0, 0.3);
     }
     .mcd-trigger-left {
         display: contents;
