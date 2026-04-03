@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -99,109 +100,67 @@
             <!-- Animated ambient background -->
             <div class="bsc-bg" aria-hidden="true">
                 <!-- <div class="bsc-orb bsc-orb-1"></div>
+
                 <div class="bsc-orb bsc-orb-2"></div>
                 <div class="bsc-orb bsc-orb-3"></div>
                 <div class="bsc-wave bsc-wave-1"></div>
                 <div class="bsc-wave bsc-wave-2"></div> -->
-                <img src="images/banner_bg.webp" alt="banner-section-bg" />
-                <!-- Floating geometric shapes -->
-                <!-- <div class="bsc-shape bsc-shape-1"></div>
+            <img src="images/banner_bg.webp" alt="banner-section-bg" />
+            <!-- Floating geometric shapes -->
+            <!-- <div class="bsc-shape bsc-shape-1"></div>
                 <div class="bsc-shape bsc-shape-2"></div>
                 <div class="bsc-shape bsc-shape-3"></div>
                 <div class="bsc-shape bsc-shape-4"></div>
                 <div class="bsc-shape bsc-shape-5"></div>
                 <div class="bsc-shape bsc-shape-6"></div>
                 <div class="bsc-shape bsc-shape-7"></div> -->
+        </div>
+
+        <!-- Banner frame -->
+        <div class="bsc-frame">
+            <!-- Arrow prev (inside frame) -->
+            <button class="bsc-arrow bsc-arrow-prev" id="bscPrev" aria-label="Previous banner">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <!-- Slide track -->
+            <div class="bsc-track" id="bscTrack">
+                <div class="bsc-slide active" data-index="0">
+                    <img src="images/banners/banner1.jpeg" alt="College of Computer Science and IT — TMU Campus"
+                        loading="lazy" />
+                </div>
+                <div class="bsc-slide" data-index="1">
+                    <img src="images/banners/banner2.jpeg" alt="Clock Tower — TMU Campus" loading="lazy" />
+                </div>
+                <div class="bsc-slide" data-index="2">
+                    <img src="images/banners/banner3.jpeg" alt="Medical College — TMU Campus" loading="lazy" />
+                </div>
             </div>
 
-            <!-- Banner frame -->
-            <div class="bsc-frame">
-                <!-- Arrow prev (inside frame) -->
-                <button
-                    class="bsc-arrow bsc-arrow-prev"
-                    id="bscPrev"
-                    aria-label="Previous banner"
-                >
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-
-                <!-- Slide track -->
-                <div class="bsc-track" id="bscTrack">
-                    <div class="bsc-slide active" data-index="0">
-                        <img
-                            src="images/banners/banner1.jpg"
-                            alt="College of Computer Science and IT — TMU Campus"
-                            loading="lazy"
-                        />
-                    </div>
-                    <div class="bsc-slide" data-index="1">
-                        <img
-                            src="images/banners/banner2.jpeg"
-                            alt="Clock Tower — TMU Campus"
-                            loading="lazy"
-                        />
-                    </div>
-                    <div class="bsc-slide" data-index="2">
-                        <img
-                            src="images/banners/banner3.jpeg"
-                            alt="Medical College — TMU Campus"
-                            loading="lazy"
-                        />
-                    </div>
-                </div>
-
-                <!-- Dot indicators -->
-                <div
-                    class="bsc-dots"
-                    id="bscDots"
-                    role="tablist"
-                    aria-label="Banner navigation"
-                >
-                    <button
-                        class="bsc-dot active"
-                        data-index="0"
-                        role="tab"
-                        aria-selected="true"
-                        aria-label="Banner 1"
-                    ></button>
-                    <button
-                        class="bsc-dot"
-                        data-index="1"
-                        role="tab"
-                        aria-selected="false"
-                        aria-label="Banner 2"
-                    ></button>
-                    <button
-                        class="bsc-dot"
-                        data-index="2"
-                        role="tab"
-                        aria-selected="false"
-                        aria-label="Banner 3"
-                    ></button>
-                </div>
-                <!-- Arrow next (inside frame) -->
-                <button
-                    class="bsc-arrow bsc-arrow-next"
-                    id="bscNext"
-                    aria-label="Next banner"
-                >
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+            <!-- Dot indicators -->
+            <div class="bsc-dots" id="bscDots" role="tablist" aria-label="Banner navigation">
+                <button class="bsc-dot active" data-index="0" role="tab" aria-selected="true"
+                    aria-label="Banner 1"></button>
+                <button class="bsc-dot" data-index="1" role="tab" aria-selected="false" aria-label="Banner 2"></button>
+                <button class="bsc-dot" data-index="2" role="tab" aria-selected="false" aria-label="Banner 3"></button>
             </div>
-        </section>
+            <!-- Arrow next (inside frame) -->
+            <button class="bsc-arrow bsc-arrow-next" id="bscNext" aria-label="Next banner">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
 
-        <!-- ============================================
+    <!-- ============================================
          IMAGE SHOWCASE SECTION (Sliding Gallery)
          ============================================ -->
-        <section class="image-showcase">
-            <h2 class="section-heading-main">TMU a World in Itself</h2>
-            <div class="showcase-outer">
-                <div class="showcase-slider" id="showcaseSlider">
-                    <div class="showcase-track" id="showcaseTrack">
-                        <!-- 11.jpg = Nursing College and Dental College -->
-                        <div
-                            class="showcase-item"
-                            onclick="
+    <section class="image-showcase">
+        <h2 class="section-heading-main">TMU a World in Itself</h2>
+        <div class="showcase-outer">
+            <div class="showcase-slider" id="showcaseSlider">
+                <div class="showcase-track" id="showcaseTrack">
+                    <!-- 11.jpg = Nursing College and Dental College -->
+                    <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/11.jpg', {
                                     title: 'Nursing College & Dental College',
                                     desc: 'State-of-the-art facilities housing the College of Nursing and the College of Dental Sciences at TMU Campus, Moradabad.',
@@ -209,23 +168,16 @@
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
                                 })
-                            "
-                        >
-                            <img
-                                src="images/gallery/11.jpg"
-                                alt="Nursing College and Dental College"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">
-                                    Nursing College &amp; Dental College
-                                </h4>
-                            </div>
+                            ">
+                        <img src="images/gallery/11.jpg" alt="Nursing College and Dental College" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">
+                                Nursing College &amp; Dental College
+                            </h4>
                         </div>
-                        <!-- 3.jpg = Clock Tower -->
-                        <div
-                            class="showcase-item"
-                            onclick="
+                    </div>
+                    <!-- 3.jpg = Clock Tower -->
+                    <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/3.jpg', {
                                     title: 'Clock Tower',
                                     desc: 'The iconic Clock Tower stands at the heart of TMU Campus, serving as a landmark and symbol of timeless academic excellence.',
@@ -233,21 +185,14 @@
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
                                 })
-                            "
-                        >
-                            <img
-                                src="images/gallery/3.jpg"
-                                alt="Clock Tower"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">Clock Tower</h4>
-                            </div>
+                            ">
+                        <img src="images/gallery/3.jpg" alt="Clock Tower" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">Clock Tower</h4>
                         </div>
-                        <!-- 1.jpg = CCSIT -->
-                        <div
-                            class="showcase-item"
-                            onclick="
+                    </div>
+                    <!-- 1.jpg = CCSIT -->
+                    <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/1.jpg', {
                                     title: 'College of Computer Science & IT',
                                     desc: 'The College of Computer Science and Information Technology (CCSIT) at TMU — a hub of innovation, coding, and cutting-edge research.',
@@ -255,23 +200,16 @@
                                     location: 'CCSIT, TMU Campus',
                                     date: '2024',
                                 })
-                            "
-                        >
-                            <img
-                                src="images/gallery/1.jpg"
-                                alt="College of Computer Science and IT"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">
-                                    CCSIT — Computer Science &amp; IT
-                                </h4>
-                            </div>
+                            ">
+                        <img src="images/gallery/1.jpg" alt="College of Computer Science and IT" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">
+                                CCSIT — Computer Science &amp; IT
+                            </h4>
                         </div>
-                        <!-- 2.png = Faculty of Engineering -->
-                        <div
-                            class="showcase-item"
-                            onclick="
+                    </div>
+                    <!-- 2.png = Faculty of Engineering -->
+                    <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/2.jpg', {
                                     title: 'Faculty of Engineering',
                                     desc: 'The Faculty of Engineering (FOE) at TMU offers world-class technical education across mechanical, civil, electrical, and computer engineering disciplines.',
@@ -279,23 +217,16 @@
                                     location: 'FOE, TMU Campus',
                                     date: '2024',
                                 })
-                            "
-                        >
-                            <img
-                                src="images/gallery/2.jpg"
-                                alt="Faculty of Engineering"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">
-                                    FOE — Faculty of Engineering
-                                </h4>
-                            </div>
+                            ">
+                        <img src="images/gallery/2.jpg" alt="Faculty of Engineering" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">
+                                FOE — Faculty of Engineering
+                            </h4>
                         </div>
-                        <!-- 4.jpg = MBBS Hostel Garden -->
-                        <div
-                            class="showcase-item"
-                            onclick="
+                    </div>
+                    <!-- 4.jpg = MBBS Hostel Garden -->
+                    <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/4.jpg', {
                                     title: 'MBBS Hostel Garden',
                                     desc: 'A serene and beautifully landscaped garden adjacent to the MBBS hostel, offering students a peaceful retreat within the campus.',
@@ -303,21 +234,14 @@
                                     location: 'Medical Campus, TMU',
                                     date: '2024',
                                 })
-                            "
-                        >
-                            <img
-                                src="images/gallery/4.jpg"
-                                alt="MBBS Hostel Garden"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">MBBS Hostel Garden</h4>
-                            </div>
+                            ">
+                        <img src="images/gallery/4.jpg" alt="MBBS Hostel Garden" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">MBBS Hostel Garden</h4>
                         </div>
-                        <!-- 5.jpg = Medical College -->
-                        <div
-                            class="showcase-item"
-                            onclick="
+                    </div>
+                    <!-- 5.jpg = Medical College -->
+                    <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/5.jpg', {
                                     title: 'Medical College',
                                     desc: 'TMU Medical College is one of the premier medical institutes in North India, offering MBBS and postgraduate medical programmes with advanced clinical infrastructure.',
@@ -325,21 +249,14 @@
                                     location: 'Medical College, TMU',
                                     date: '2024',
                                 })
-                            "
-                        >
-                            <img
-                                src="images/gallery/5.jpg"
-                                alt="Medical College"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">Medical College</h4>
-                            </div>
+                            ">
+                        <img src="images/gallery/5.jpg" alt="Medical College" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">Medical College</h4>
                         </div>
-                        <!-- 6.jpg = Faculty Apartments -->
-                        <div
-                            class="showcase-item"
-                            onclick="
+                    </div>
+                    <!-- 6.jpg = Faculty Apartments -->
+                    <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/6.jpg', {
                                     title: 'Faculty Apartments',
                                     desc: 'Modern and well-maintained residential apartments for TMU faculty and staff, nestled within the lush green campus environment.',
@@ -347,21 +264,14 @@
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
                                 })
-                            "
-                        >
-                            <img
-                                src="images/gallery/6.jpg"
-                                alt="Faculty Apartments"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">Faculty Apartments</h4>
-                            </div>
+                            ">
+                        <img src="images/gallery/6.jpg" alt="Faculty Apartments" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">Faculty Apartments</h4>
                         </div>
-                        <!-- 7.jpg = Admin Block -->
-                        <div
-                            class="showcase-item"
-                            onclick="
+                    </div>
+                    <!-- 7.jpg = Admin Block -->
+                    <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/7.jpg', {
                                     title: 'Admin Block',
                                     desc: 'The Administrative Block of TMU serves as the central hub for all administrative functions, housing key offices and university governance bodies.',
@@ -369,21 +279,14 @@
                                     location: 'Admin Block, TMU Campus',
                                     date: '2024',
                                 })
-                            "
-                        >
-                            <img
-                                src="images/gallery/7.jpg"
-                                alt="Admin Block"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">Admin Block</h4>
-                            </div>
+                            ">
+                        <img src="images/gallery/7.jpg" alt="Admin Block" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">Admin Block</h4>
                         </div>
-                        <!-- 8.jpg = Pavilion -->
-                        <div
-                            class="showcase-item"
-                            onclick="
+                    </div>
+                    <!-- 8.jpg = Pavilion -->
+                    <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/8.jpg', {
                                     title: 'Pavilion',
                                     desc: 'The grand Pavilion at TMU Campus is used for major ceremonies, cultural events, and convocation gatherings, accommodating thousands of students and guests.',
@@ -391,21 +294,14 @@
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
                                 })
-                            "
-                        >
-                            <img
-                                src="images/gallery/8.jpg"
-                                alt="Pavilion"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">Pavilion</h4>
-                            </div>
+                            ">
+                        <img src="images/gallery/8.jpg" alt="Pavilion" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">Pavilion</h4>
                         </div>
-                        <!-- 9.jpg = Cricket Ground -->
-                        <div
-                            class="showcase-item"
-                            onclick="
+                    </div>
+                    <!-- 9.jpg = Cricket Ground -->
+                    <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/9.jpg', {
                                     title: 'Cricket Ground',
                                     desc: 'A full-sized cricket ground at TMU Campus offering students a professional sporting facility to nurture athletic talent and sportsmanship.',
@@ -413,21 +309,14 @@
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
                                 })
-                            "
-                        >
-                            <img
-                                src="images/gallery/9.jpg"
-                                alt="Cricket Ground"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">Cricket Ground</h4>
-                            </div>
+                            ">
+                        <img src="images/gallery/9.jpg" alt="Cricket Ground" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">Cricket Ground</h4>
                         </div>
-                        <!-- 10.jpg = College of Computer Science and IT -->
-                        <div
-                            class="showcase-item"
-                            onclick="
+                    </div>
+                    <!-- 10.jpg = College of Computer Science and IT -->
+                    <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/10.jpg', {
                                     title: 'College of Computer Science & IT',
                                     desc: 'Another view of the College of Computer Science and Information Technology (CCSIT) — a state-of-the-art academic block designed for the next generation of tech leaders.',
@@ -435,21 +324,16 @@
                                     location: 'CCSIT, TMU Campus',
                                     date: '2024',
                                 })
-                            "
-                        >
-                            <img
-                                src="images/gallery/10.jpg"
-                                alt="College of Computer Science and IT"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">
-                                    CCSIT — Computer Science &amp; IT
-                                </h4>
-                            </div>
+                            ">
+                        <img src="images/gallery/10.jpg" alt="College of Computer Science and IT" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">
+                                CCSIT — Computer Science &amp; IT
+                            </h4>
                         </div>
-                        <!-- 12.jpg = Bird Eye View of Admin and Medical College -->
-                        <!-- <div
+                    </div>
+                    <!-- 12.jpg = Bird Eye View of Admin and Medical College -->
+                    <!-- <div
                             class="showcase-item"
                             onclick="
                                 openLightbox('images/gallery/12.jpg', {
@@ -472,53 +356,103 @@
                                 </h4>
                             </div>
                         </div> -->
-                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Programmes Section -->
-        <section class="programmes-section section-reveal" id="programmes">
-            <!-- Background Layer -->
-            <div class="bg-image-layer" aria-hidden="true"></div>
+    <!-- Programmes Section -->
+    <section class="programmes-section section-reveal" id="programmes">
+        <!-- Background Layer -->
+        <div class="bg-image-layer" aria-hidden="true"></div>
 
-            <!-- Animated Mesh Blobs -->
-            <div class="bg-mesh" aria-hidden="true">
-                <div class="bg-blob bg-blob--1"></div>
-                <div class="bg-blob bg-blob--2"></div>
-                <div class="bg-blob bg-blob--3"></div>
-            </div>
+        <!-- Animated Mesh Blobs -->
+        <div class="bg-mesh" aria-hidden="true">
+            <div class="bg-blob bg-blob--1"></div>
+            <div class="bg-blob bg-blob--2"></div>
+            <div class="bg-blob bg-blob--3"></div>
+        </div>
 
-            <!-- Particle Layer -->
-            <canvas
-                id="particle-canvas"
-                class="particle-canvas"
-                aria-hidden="true"
-            ></canvas>
+        <!-- Particle Layer -->
+        <canvas id="particle-canvas" class="particle-canvas" aria-hidden="true"></canvas>
 
-            <div class="glass-shell">
-                <!-- ═══════════════════════════════════════════
+        <div class="glass-shell">
+            <!-- ═══════════════════════════════════════════
                  DESKTOP HEADER: Eyebrow + Title | Pills + Search
                  ═══════════════════════════════════════════ -->
-                <header class="section-header">
-                    <div class="header-titles">
-                        <p class="section-eyebrow">
-                            Explore Academic Excellence
-                        </p>
-                        <h1 class="section-title">
-                            Programmes <span class="accent">Offered</span>
-                        </h1>
-                    </div>
+            <header class="section-header">
+                <div class="header-titles">
+                    <p class="section-eyebrow">
+                        Explore Academic Excellence
+                    </p>
+                    <h1 class="section-title">
+                        Programmes <span class="accent">Offered</span>
+                    </h1>
+                </div>
 
-                    <!-- Filter Row (Mobile Only) -->
-                    <div class="header-filters mobile-only">
-                        <p id="programme-count-mobile" class="programme-count">
-                            0 Programmes
-                        </p>
-                        <div
-                            class="level-filter level-filter-multi"
-                            data-target="mobile"
-                        >
+                <!-- Filter Row (Mobile Only) -->
+                <div class="header-filters mobile-only">
+                    <p id="programme-count-mobile" class="programme-count">
+                        0 Programmes
+                    </p>
+                    <div class="level-filter level-filter-multi" data-target="mobile">
+                        <button class="filter-pill active" data-level="All">
+                            All
+                        </button>
+                        <button class="filter-pill" data-level="UG">
+                            UG
+                        </button>
+                        <button class="filter-pill" data-level="PG">
+                            PG
+                        </button>
+                        <button class="filter-pill" data-level="Doctorate">
+                            Doctorate
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ═══════════════════════════════════════════
+                 DESKTOP: Action Area (Dropdown + Filters/Search)
+                 ═══════════════════════════════════════════ -->
+            <div class="programme-wrapper">
+                <div class="programme-header desktop-only">
+                    <div class="programme-controls">
+                        <div class="desktop-college-dropdown">
+                            <button class="dcd-trigger" id="dcd-trigger" aria-expanded="false" aria-haspopup="listbox">
+                                <div class="dcd-trigger-left">
+                                    <span class="dcd-icon" id="dcd-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="1.75" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path d="M2 20h20" />
+                                            <path d="M12 3L3 8h18L12 3z" />
+                                            <line x1="5" y1="8" x2="5" y2="20" />
+                                            <line x1="9" y1="8" x2="9" y2="20" />
+                                            <line x1="15" y1="8" x2="15" y2="20" />
+                                            <line x1="19" y1="8" x2="19" y2="20" />
+                                        </svg>
+                                    </span>
+                                    <div class="dcd-trigger-text">
+                                        <span class="dcd-sublabel">Browse by College</span>
+                                        <span class="dcd-label" id="dcd-label">All Colleges</span>
+                                    </div>
+                                </div>
+                                <svg class="dcd-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M6 9l6 6 6-6" />
+                                </svg>
+                            </button>
+                            <div class="dcd-backdrop" id="dcd-backdrop"></div>
+                            <div class="dcd-panel" id="dcd-panel" role="listbox" aria-label="Select College">
+                                <div class="dcd-list-wrap">
+                                    <div class="dcd-card-grid" id="dcd-list"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="level-filter level-filter-multi" data-target="desktop">
                             <button class="filter-pill active" data-level="All">
                                 All
                             </button>
@@ -533,595 +467,278 @@
                             </button>
                         </div>
                     </div>
-                </header>
+
+                    <div class="programme-search" aria-label="Search programmes">
+                        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                        <input type="text" id="search-input" class="search-input" placeholder="Search programmes…"
+                            autocomplete="off" aria-label="Search programmes" />
+                    </div>
+                </div>
 
                 <!-- ═══════════════════════════════════════════
-                 DESKTOP: Action Area (Dropdown + Filters/Search)
-                 ═══════════════════════════════════════════ -->
-                <div class="programme-wrapper">
-                    <div class="programme-header desktop-only">
-                        <div class="programme-controls">
-                            <div class="desktop-college-dropdown">
-                                <button
-                                    class="dcd-trigger"
-                                    id="dcd-trigger"
-                                    aria-expanded="false"
-                                    aria-haspopup="listbox"
-                                >
-                                    <div class="dcd-trigger-left">
-                                        <span class="dcd-icon" id="dcd-icon">
-                                            <svg
-                                                width="24"
-                                                height="24"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="1.75"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                            >
-                                                <path d="M2 20h20" />
-                                                <path d="M12 3L3 8h18L12 3z" />
-                                                <line
-                                                    x1="5"
-                                                    y1="8"
-                                                    x2="5"
-                                                    y2="20"
-                                                />
-                                                <line
-                                                    x1="9"
-                                                    y1="8"
-                                                    x2="9"
-                                                    y2="20"
-                                                />
-                                                <line
-                                                    x1="15"
-                                                    y1="8"
-                                                    x2="15"
-                                                    y2="20"
-                                                />
-                                                <line
-                                                    x1="19"
-                                                    y1="8"
-                                                    x2="19"
-                                                    y2="20"
-                                                />
-                                            </svg>
-                                        </span>
-                                        <div class="dcd-trigger-text">
-                                            <span class="dcd-sublabel"
-                                                >Browse by College</span
-                                            >
-                                            <span
-                                                class="dcd-label"
-                                                id="dcd-label"
-                                                >All Colleges</span
-                                            >
-                                        </div>
-                                    </div>
-                                    <svg
-                                        class="dcd-chevron"
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2.5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    >
-                                        <path d="M6 9l6 6 6-6" />
-                                    </svg>
-                                </button>
-                                <div
-                                    class="dcd-backdrop"
-                                    id="dcd-backdrop"
-                                ></div>
-                                <div
-                                    class="dcd-panel"
-                                    id="dcd-panel"
-                                    role="listbox"
-                                    aria-label="Select College"
-                                >
-                                    <div class="dcd-list-wrap">
-                                        <div
-                                            class="dcd-card-grid"
-                                            id="dcd-list"
-                                        ></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div
-                                class="level-filter level-filter-multi"
-                                data-target="desktop"
-                            >
-                                <button
-                                    class="filter-pill active"
-                                    data-level="All"
-                                >
-                                    All
-                                </button>
-                                <button class="filter-pill" data-level="UG">
-                                    UG
-                                </button>
-                                <button class="filter-pill" data-level="PG">
-                                    PG
-                                </button>
-                                <button
-                                    class="filter-pill"
-                                    data-level="Doctorate"
-                                >
-                                    Doctorate
-                                </button>
-                            </div>
-                        </div>
-
-                        <div
-                            class="programme-search"
-                            aria-label="Search programmes"
-                        >
-                            <svg
-                                class="search-icon"
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <circle cx="11" cy="11" r="8" />
-                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                            </svg>
-                            <input
-                                type="text"
-                                id="search-input"
-                                class="search-input"
-                                placeholder="Search programmes…"
-                                autocomplete="off"
-                                aria-label="Search programmes"
-                            />
-                        </div>
-                    </div>
-
-                    <!-- ═══════════════════════════════════════════
                      MOBILE: Trigger Button (Hidden on Desktop)
                      ═══════════════════════════════════════════ -->
-                    <div class="mobile-college-trigger mobile-only">
-                        <button
-                            class="mcd-trigger"
-                            id="mcd-trigger"
-                            aria-expanded="false"
-                            aria-haspopup="listbox"
-                        >
-                            <div class="mcd-trigger-left">
-                                <span class="mcd-icon">
-                                    <svg
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="1.75"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    >
-                                        <path d="M2 20h20" />
-                                        <path d="M12 3L3 8h18L12 3z" />
-                                        <line x1="5" y1="8" x2="5" y2="20" />
-                                        <line x1="9" y1="8" x2="9" y2="20" />
-                                        <line x1="15" y1="8" x2="15" y2="20" />
-                                        <line x1="19" y1="8" x2="19" y2="20" />
-                                    </svg>
-                                </span>
-                                <div class="mcd-trigger-text">
-                                    <span class="mcd-sublabel"
-                                        >Browse by College</span
-                                    >
-                                    <span class="mcd-label" id="mcd-label"
-                                        >Select College</span
-                                    >
-                                </div>
+                <div class="mobile-college-trigger mobile-only">
+                    <button class="mcd-trigger" id="mcd-trigger" aria-expanded="false" aria-haspopup="listbox">
+                        <div class="mcd-trigger-left">
+                            <span class="mcd-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2 20h20" />
+                                    <path d="M12 3L3 8h18L12 3z" />
+                                    <line x1="5" y1="8" x2="5" y2="20" />
+                                    <line x1="9" y1="8" x2="9" y2="20" />
+                                    <line x1="15" y1="8" x2="15" y2="20" />
+                                    <line x1="19" y1="8" x2="19" y2="20" />
+                                </svg>
+                            </span>
+                            <div class="mcd-trigger-text">
+                                <span class="mcd-sublabel">Browse by College</span>
+                                <span class="mcd-label" id="mcd-label">Select College</span>
                             </div>
-                            <svg
-                                class="mcd-chevron"
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path d="M6 9l6 6 6-6" />
-                            </svg>
-                        </button>
-                    </div>
+                        </div>
+                        <svg class="mcd-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </button>
+                </div>
 
-                    <!-- ═══════════════════════════════════════════
+                <!-- ═══════════════════════════════════════════
                      MOBILE: Bottom Sheet Panel (Hidden on Desktop)
                      ═══════════════════════════════════════════ -->
-                    <div
-                        class="mobile-bottom-sheet mobile-only"
-                        id="mobile-sheet"
-                    >
-                        <div class="mcd-backdrop" id="mcd-backdrop"></div>
-                        <div
-                            class="mcd-panel"
-                            id="mcd-panel"
-                            role="listbox"
-                            aria-label="Select College"
-                        >
-                            <div class="mcd-panel-header">
-                                <div
-                                    class="mcd-panel-handle-area"
-                                    id="mcd-close-btn"
-                                    role="button"
-                                    aria-label="Close"
-                                >
-                                    <svg
-                                        width="32"
-                                        height="32"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2.5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    >
-                                        <polyline
-                                            points="6 9 12 15 18 9"
-                                        ></polyline>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="mcd-list-wrap">
-                                <div class="mcd-list" id="mcd-list"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ═══════════════════════════════════════════
-                     DESKTOP: Grid Content Area
-                     ═══════════════════════════════════════════ -->
-                    <div class="content-layout">
-                        <div class="programme-showcase">
-                            <!-- Showing programmes indicator -->
-                            <p
-                                id="grid-subtitle"
-                                class="grid-subtitle desktop-only"
-                            >
-                                Showing programmes…
-                            </p>
-                            <div
-                                class="programme-scroll-container desktop-only"
-                            >
-                                <div
-                                    id="programme-grid"
-                                    class="programme-grid"
-                                ></div>
-
-                                <!-- Desktop Load More (Moved Inside Scroll Container) -->
-                                <div class="load-more-wrap desktop-only">
-                                    <button
-                                        id="load-more-btn"
-                                        class="load-more-btn"
-                                        aria-label="Load more programmes"
-                                    >
-                                        Load More
-                                        <svg
-                                            width="16"
-                                            height="16"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2.5"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        >
-                                            <path d="M12 5v14M5 12l7 7 7-7" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Mobile: Carousel (Hidden on Desktop) -->
-                            <div class="card-carousel mobile-only">
-                                <div id="card-track" class="card-track"></div>
-                            </div>
-
-                            <!-- Swipe Cue (Mobile) -->
-                            <div class="swipe-cue mobile-only" id="swipe-cue">
-                                Swipe to explore
-                                <svg
-                                    width="14"
-                                    height="14"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2.5"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                >
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                <div class="mobile-bottom-sheet mobile-only" id="mobile-sheet">
+                    <div class="mcd-backdrop" id="mcd-backdrop"></div>
+                    <div class="mcd-panel" id="mcd-panel" role="listbox" aria-label="Select College">
+                        <div class="mcd-panel-header">
+                            <div class="mcd-panel-handle-area" id="mcd-close-btn" role="button" aria-label="Close">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
                                 </svg>
                             </div>
-
-                            <!-- Mobile: Dot Pagination -->
-                            <div
-                                class="mobile-dot-nav mobile-only"
-                                id="mobile-dot-nav"
-                                role="tablist"
-                            ></div>
                         </div>
+                        <div class="mcd-list-wrap">
+                            <div class="mcd-list" id="mcd-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══════════════════════════════════════════
+                     DESKTOP: Grid Content Area
+                     ═══════════════════════════════════════════ -->
+                <div class="content-layout">
+                    <div class="programme-showcase">
+                        <!-- Showing programmes indicator -->
+                        <p id="grid-subtitle" class="grid-subtitle desktop-only">
+                            Showing programmes…
+                        </p>
+                        <div class="programme-scroll-container desktop-only">
+                            <div id="programme-grid" class="programme-grid"></div>
+
+                            <!-- Desktop Load More (Moved Inside Scroll Container) -->
+                            <div class="load-more-wrap desktop-only">
+                                <button id="load-more-btn" class="load-more-btn" aria-label="Load more programmes">
+                                    Load More
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 5v14M5 12l7 7 7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Mobile: Carousel (Hidden on Desktop) -->
+                        <div class="card-carousel mobile-only">
+                            <div id="card-track" class="card-track"></div>
+                        </div>
+
+                        <!-- Swipe Cue (Mobile) -->
+                        <div class="swipe-cue mobile-only" id="swipe-cue">
+                            Swipe to explore
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </div>
+
+                        <!-- Mobile: Dot Pagination -->
+                        <div class="mobile-dot-nav mobile-only" id="mobile-dot-nav" role="tablist"></div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
-            <div class="lightbox-content" onclick="event.stopPropagation()">
-                <button class="lightbox-close" onclick="closeLightbox()">
-                    <i class="fas fa-times"></i>
-                </button>
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="lightbox-close" onclick="closeLightbox()">
+                <i class="fas fa-times"></i>
+            </button>
 
-                <div class="lightbox-image-panel">
-                    <img
-                        id="lightboxImg"
-                        src=""
-                        alt="Full View"
-                        loading="lazy"
-                    />
-                    <div class="lightbox-img-overlay">
-                        <span
-                            id="lightboxCategory"
-                            class="lightbox-category-badge"
-                        ></span>
+            <div class="lightbox-image-panel">
+                <img id="lightboxImg" src="" alt="Full View" loading="lazy" />
+                <div class="lightbox-img-overlay">
+                    <span id="lightboxCategory" class="lightbox-category-badge"></span>
+                </div>
+            </div>
+
+            <div class="lightbox-info-panel">
+                <!-- Header -->
+                <div class="lbx-header">
+                    <div class="lbx-logo-badge">
+                        <i class="fas fa-university"></i>
                     </div>
+                    <div class="lbx-label">TMU Campus</div>
                 </div>
 
-                <div class="lightbox-info-panel">
-                    <!-- Header -->
-                    <div class="lbx-header">
-                        <div class="lbx-logo-badge">
-                            <i class="fas fa-university"></i>
+                <h2 class="lbx-title" id="lightboxTitle">Campus Life</h2>
+                <p class="lbx-desc" id="lightboxDesc">
+                    A glimpse into the vibrant and inspiring campus
+                    environment at Teerthanker Mahaveer University.
+                </p>
+
+                <div class="lbx-details-grid">
+                    <div class="lbx-detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <span class="lbx-detail-label">Location</span>
+                            <span class="lbx-detail-val" id="lightboxLocation">Moradabad, UP</span>
                         </div>
-                        <div class="lbx-label">TMU Campus</div>
                     </div>
-
-                    <h2 class="lbx-title" id="lightboxTitle">Campus Life</h2>
-                    <p class="lbx-desc" id="lightboxDesc">
-                        A glimpse into the vibrant and inspiring campus
-                        environment at Teerthanker Mahaveer University.
-                    </p>
-
-                    <div class="lbx-details-grid">
-                        <div class="lbx-detail-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <span class="lbx-detail-label">Location</span>
-                                <span
-                                    class="lbx-detail-val"
-                                    id="lightboxLocation"
-                                    >Moradabad, UP</span
-                                >
-                            </div>
+                    <div class="lbx-detail-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div>
+                            <span class="lbx-detail-label">Captured</span>
+                            <span class="lbx-detail-val" id="lightboxDate">2024</span>
                         </div>
-                        <div class="lbx-detail-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <div>
-                                <span class="lbx-detail-label">Captured</span>
-                                <span class="lbx-detail-val" id="lightboxDate"
-                                    >2024</span
-                                >
-                            </div>
-                        </div>
-                        <div class="lbx-detail-item">
-                            <i class="fas fa-camera"></i>
-                            <div>
-                                <span class="lbx-detail-label">Category</span>
-                                <span
-                                    class="lbx-detail-val"
-                                    id="lightboxCatDetail"
-                                    >Photography</span
-                                >
-                            </div>
+                    </div>
+                    <div class="lbx-detail-item">
+                        <i class="fas fa-camera"></i>
+                        <div>
+                            <span class="lbx-detail-label">Category</span>
+                            <span class="lbx-detail-val" id="lightboxCatDetail">Photography</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Alumni Section — Advanced 3-Zone Redesign -->
-        <section class="alumni-section" id="alumni-voices">
-            <!-- Ambient Background Layer (Floating Blobs) -->
-            <div class="alm-bg" aria-hidden="true">
-                <div class="alm-orb alm-orb-1"></div>
-                <div class="alm-orb alm-orb-2"></div>
-                <div class="alm-orb alm-orb-3"></div>
-                <div class="alm-orb alm-orb-4"></div>
+    <!-- Alumni Section — Advanced 3-Zone Redesign -->
+    <section class="alumni-section" id="alumni-voices">
+        <!-- Ambient Background Layer (Floating Blobs) -->
+        <div class="alm-bg" aria-hidden="true">
+            <div class="alm-orb alm-orb-1"></div>
+            <div class="alm-orb alm-orb-2"></div>
+            <div class="alm-orb alm-orb-3"></div>
+            <div class="alm-orb alm-orb-4"></div>
+        </div>
+
+        <div class="alm-inner">
+            <!-- Zone 1: Header Row (Heading LEFT + Selector RIGHT) -->
+            <div class="alm-header-row">
+                <div class="alm-hero-text">
+                    <div class="alm-pill">
+                        <i class="fas fa-quote-left"></i>
+                        <span>Voices of Impact</span>
+                    </div>
+                    <h2 class="alm-heading">
+                        <span class="alm-h-line">Pioneering New Horizons</span>
+                        <!-- <span class="alm-h-line"></span> -->
+                    </h2>
+                </div>
+
+                <!-- Center-Locked Orbital Selector -->
+                <div class="alm-selector-container">
+                    <div class="alm-thumbs-wrapper" id="almThumbsWrapper">
+                        <div class="alm-thumb-track" id="almThumbTrack">
+                            <div class="alm-thumb-item" data-idx="0" data-pos="0" onclick="jumpToAlumni(0)">
+                                <img src="images/alumni-1.png" alt="Rahul Sharma" loading="lazy" />
+                            </div>
+                            <div class="alm-thumb-item" data-idx="1" data-pos="1" onclick="jumpToAlumni(1)">
+                                <img src="images/alumni-2.png" alt="Priya Gupta" loading="lazy" />
+                            </div>
+                            <div class="alm-thumb-item" data-idx="2" data-pos="2" onclick="jumpToAlumni(2)">
+                                <img src="images/alumni-3.png" alt="Aman Verma" loading="lazy" />
+                            </div>
+                            <div class="alm-thumb-item" data-idx="3" data-pos="-2" onclick="jumpToAlumni(3)">
+                                <img src="images/alumni-1.png" alt="Sneha Reddy" loading="lazy" />
+                            </div>
+                            <div class="alm-thumb-item" data-idx="4" data-pos="-1" onclick="jumpToAlumni(4)">
+                                <img src="images/alumni-2.png" alt="Vikram Singh" loading="lazy" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="alm-inner">
-                <!-- Zone 1: Header Row (Heading LEFT + Selector RIGHT) -->
-                <div class="alm-header-row">
-                    <div class="alm-hero-text">
-                        <div class="alm-pill">
+            <div class="alm-stage">
+                <!-- Navigation Arrows (Edge Positioned) -->
+                <button class="alm-arrow alm-arrow-prev" id="almPrev" aria-label="Previous">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="alm-arrow alm-arrow-next" id="almNext" aria-label="Next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- Left: Animated Image Container -->
+                <div class="alm-img-track" id="almImgTrack">
+                    <div class="alm-img-wrap">
+                        <div class="alm-img-item active" data-idx="0">
+                            <img src="images/alumni-1.png" alt="Rahul Sharma" loading="lazy" />
+                        </div>
+                        <div class="alm-img-item" data-idx="1">
+                            <img src="images/alumni-2.png" alt="Priya Gupta" loading="lazy" />
+                        </div>
+                        <div class="alm-img-item" data-idx="2">
+                            <img src="images/alumni-3.png" alt="Aman Verma" loading="lazy" />
+                        </div>
+                        <div class="alm-img-item" data-idx="3">
+                            <img src="images/alumni-1.png" alt="Sneha Reddy" loading="lazy" />
+                        </div>
+                        <div class="alm-img-item" data-idx="4">
+                            <img src="images/alumni-2.png" alt="Vikram Singh" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Testimonial Card -->
+                <div class="alm-card-wrap" id="almCardWrap">
+                    <div class="alm-card alm-card-enter" id="almCard">
+                        <div class="alm-quote-icon">
                             <i class="fas fa-quote-left"></i>
-                            <span>Voices of Impact</span>
                         </div>
-                        <h2 class="alm-heading">
-                            <span class="alm-h-line"
-                                >Pioneering New Horizons</span
-                            >
-                            <!-- <span class="alm-h-line"></span> -->
-                        </h2>
-                    </div>
-
-                    <!-- Center-Locked Orbital Selector -->
-                    <div class="alm-selector-container">
-                        <div class="alm-thumbs-wrapper" id="almThumbsWrapper">
-                            <div class="alm-thumb-track" id="almThumbTrack">
-                                <div
-                                    class="alm-thumb-item"
-                                    data-idx="0"
-                                    data-pos="0"
-                                    onclick="jumpToAlumni(0)"
-                                >
-                                    <img
-                                        src="images/alumni-1.png"
-                                        alt="Rahul Sharma"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div
-                                    class="alm-thumb-item"
-                                    data-idx="1"
-                                    data-pos="1"
-                                    onclick="jumpToAlumni(1)"
-                                >
-                                    <img
-                                        src="images/alumni-2.png"
-                                        alt="Priya Gupta"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div
-                                    class="alm-thumb-item"
-                                    data-idx="2"
-                                    data-pos="2"
-                                    onclick="jumpToAlumni(2)"
-                                >
-                                    <img
-                                        src="images/alumni-3.png"
-                                        alt="Aman Verma"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div
-                                    class="alm-thumb-item"
-                                    data-idx="3"
-                                    data-pos="-2"
-                                    onclick="jumpToAlumni(3)"
-                                >
-                                    <img
-                                        src="images/alumni-1.png"
-                                        alt="Sneha Reddy"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div
-                                    class="alm-thumb-item"
-                                    data-idx="4"
-                                    data-pos="-1"
-                                    onclick="jumpToAlumni(4)"
-                                >
-                                    <img
-                                        src="images/alumni-2.png"
-                                        alt="Vikram Singh"
-                                        loading="lazy"
-                                    />
-                                </div>
-                            </div>
+                        <p class="alm-quote" id="almQuote">
+                            "TMU didn't just give me a degree; it gave me
+                            the wings to fly in the global tech landscape.
+                            The innovation-first culture is what sets this
+                            university apart."
+                        </p>
+                        <div class="alm-name" id="almName">
+                            Rahul Sharma
                         </div>
-                    </div>
-                </div>
-
-                <div class="alm-stage">
-                    <!-- Navigation Arrows (Edge Positioned) -->
-                    <button
-                        class="alm-arrow alm-arrow-prev"
-                        id="almPrev"
-                        aria-label="Previous"
-                    >
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button
-                        class="alm-arrow alm-arrow-next"
-                        id="almNext"
-                        aria-label="Next"
-                    >
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-
-                    <!-- Left: Animated Image Container -->
-                    <div class="alm-img-track" id="almImgTrack">
-                        <div class="alm-img-wrap">
-                            <div class="alm-img-item active" data-idx="0">
-                                <img
-                                    src="images/alumni-1.png"
-                                    alt="Rahul Sharma"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="alm-img-item" data-idx="1">
-                                <img
-                                    src="images/alumni-2.png"
-                                    alt="Priya Gupta"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="alm-img-item" data-idx="2">
-                                <img
-                                    src="images/alumni-3.png"
-                                    alt="Aman Verma"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="alm-img-item" data-idx="3">
-                                <img
-                                    src="images/alumni-1.png"
-                                    alt="Sneha Reddy"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <div class="alm-img-item" data-idx="4">
-                                <img
-                                    src="images/alumni-2.png"
-                                    alt="Vikram Singh"
-                                    loading="lazy"
-                                />
-                            </div>
+                        <div class="alm-role" id="almRole">
+                            Senior Software Engineer &mdash; Google
                         </div>
-                    </div>
-
-                    <!-- Right: Testimonial Card -->
-                    <div class="alm-card-wrap" id="almCardWrap">
-                        <div class="alm-card alm-card-enter" id="almCard">
-                            <div class="alm-quote-icon">
-                                <i class="fas fa-quote-left"></i>
-                            </div>
-                            <p class="alm-quote" id="almQuote">
-                                "TMU didn't just give me a degree; it gave me
-                                the wings to fly in the global tech landscape.
-                                The innovation-first culture is what sets this
-                                university apart."
-                            </p>
-                            <div class="alm-name" id="almName">
-                                Rahul Sharma
-                            </div>
-                            <div class="alm-role" id="almRole">
-                                Senior Software Engineer &mdash; Google
-                            </div>
-                            <div class="alm-meta" id="almMeta">
-                                B.Tech CSE &nbsp;·&nbsp; Class of 2018
-                            </div>
+                        <div class="alm-meta" id="almMeta">
+                            B.Tech CSE &nbsp;·&nbsp; Class of 2018
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Video Testimonial Section -->
-        <section class="testimonial-video-section">
-            <div class="testimonial-video-container">
-                <div class="testimonial-header">
-                    <div
-                        class="badge-new"
-                        style="
+    <!-- Video Testimonial Section -->
+    <section class="testimonial-video-section">
+        <div class="testimonial-video-container">
+            <div class="testimonial-header">
+                <div class="badge-new" style="
                             display: inline-flex;
                             align-items: center;
                             gap: 8px;
@@ -1133,525 +750,435 @@
                             letter-spacing: 1px;
                             margin-bottom: 25px;
                             color: #111;
-                        "
-                    >
-                        <i class="fab fa-youtube"></i> VIDEO TESTIMONIALS
-                    </div>
-                    <h2 class="section-heading-main">Video Testimonials</h2>
+                        ">
+                    <i class="fab fa-youtube"></i> VIDEO TESTIMONIALS
                 </div>
-
-                <div class="yt-tray-container">
-                    <div class="yt-thumbs-outer">
-                        <div class="yt-slider-wrapper" id="ytSlider">
-                            <!-- Premium Vertical Testimonials -->
-                            <div class="yt-slide">
-                                <div
-                                    class="yt-thumb-card"
-                                    onclick="openVideo('dQw4w9WgXcQ')"
-                                >
-                                    <div class="card-bg">
-                                        <img
-                                            src="images/video-testimonial/shubhangitest.jpeg"
-                                            alt="Student Testimonial"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                    <div class="yt-card-overlay">
-                                        <div class="play-btn-glass">
-                                            <i class="fas fa-play"></i>
-                                        </div>
-                                        <div class="student-info">
-                                            <h4>Subhangi Singh</h4>
-                                            <p>College of Fine Arts</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="yt-slide">
-                                <div
-                                    class="yt-thumb-card"
-                                    onclick="openVideo('dQw4w9WgXcQ')"
-                                >
-                                    <div class="card-bg">
-                                        <img
-                                            src="images/video-testimonial/12.jpeg"
-                                            alt="Student Testimonial"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                    <div class="yt-card-overlay">
-                                        <div class="play-btn-glass">
-                                            <i class="fas fa-play"></i>
-                                        </div>
-                                        <div class="student-info">
-                                            <h4>Rahul Sharma</h4>
-                                            <p>B.Tech CSE</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="yt-slide">
-                                <div
-                                    class="yt-thumb-card"
-                                    onclick="openVideo('dQw4w9WgXcQ')"
-                                >
-                                    <div class="card-bg">
-                                        <img
-                                            src="images/video-testimonial/13.jpeg"
-                                            alt="Student Testimonial"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                    <div class="yt-card-overlay">
-                                        <div class="play-btn-glass">
-                                            <i class="fas fa-play"></i>
-                                        </div>
-                                        <div class="student-info">
-                                            <h4>Tayyaba Siraj</h4>
-                                            <p>College of Law</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="yt-slide">
-                                <div
-                                    class="yt-thumb-card"
-                                    onclick="openVideo('dQw4w9WgXcQ')"
-                                >
-                                    <div class="card-bg">
-                                        <img
-                                            src="images/video-testimonial/14.jpeg"
-                                            alt="Student Testimonial"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                    <div class="yt-card-overlay">
-                                        <div class="play-btn-glass">
-                                            <i class="fas fa-play"></i>
-                                        </div>
-                                        <div class="student-info">
-                                            <h4>Aman Verma</h4>
-                                            <p>MCA Program</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="yt-slide">
-                                <div
-                                    class="yt-thumb-card"
-                                    onclick="openVideo('dQw4w9WgXcQ')"
-                                >
-                                    <div class="card-bg">
-                                        <img
-                                            src="images/video-testimonial/15.jpeg"
-                                            alt="Astha Sharma"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                    <div class="yt-card-overlay">
-                                        <div class="play-btn-glass">
-                                            <i class="fas fa-play"></i>
-                                        </div>
-                                        <div class="student-info">
-                                            <h4>Astha Sharma</h4>
-                                            <p>Dental College</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="yt-slide">
-                                <div
-                                    class="yt-thumb-card"
-                                    onclick="openVideo('dQw4w9WgXcQ')"
-                                >
-                                    <div class="card-bg">
-                                        <img
-                                            src="images/video-testimonial/16.jpeg"
-                                            alt="Shubhangi"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                    <div class="yt-card-overlay">
-                                        <div class="play-btn-glass">
-                                            <i class="fas fa-play"></i>
-                                        </div>
-                                        <div class="student-info">
-                                            <h4>Shynie</h4>
-                                            <p>College of Nursing</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Timeline Navigation -->
-                    <div class="yt-nav-wrapper">
-                        <div class="yt-timeline-container">
-                            <div class="yt-timeline-base"></div>
-                            <div
-                                class="yt-timeline-progress"
-                                id="ytProgress"
-                            ></div>
-                        </div>
-                        <div class="yt-nav-arrows">
-                            <button
-                                id="ytPrev"
-                                class="yt-arrow"
-                                aria-label="Previous Slide"
-                            >
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button
-                                id="ytNext"
-                                class="yt-arrow"
-                                aria-label="Next Slide"
-                            >
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="section-heading-main">Video Testimonials</h2>
             </div>
-        </section>
 
-        <!-- Video Popup Modal -->
-        <div id="videoModal" class="video-modal" onclick="closeVideo()">
-            <div class="video-modal-content" onclick="event.stopPropagation()">
-                <span class="video-close" onclick="closeVideo()">&times;</span>
-                <iframe
-                    id="ytPlayer"
-                    src=""
-                    allow="autoplay; encrypted-media"
-                    allowfullscreen
-                ></iframe>
+            <div class="yt-tray-container">
+                <div class="yt-thumbs-outer">
+                    <div class="yt-slider-wrapper" id="ytSlider">
+                        <!-- Premium Vertical Testimonials -->
+                        <div class="yt-slide">
+                            <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
+                                <div class="card-bg">
+                                    <img src="images/video-testimonial/shubhangitest.jpeg" alt="Student Testimonial"
+                                        loading="lazy" />
+                                </div>
+                                <div class="yt-card-overlay">
+                                    <div class="play-btn-glass">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4>Subhangi Singh</h4>
+                                        <p>College of Fine Arts</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yt-slide">
+                            <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
+                                <div class="card-bg">
+                                    <img src="images/video-testimonial/12.jpeg" alt="Student Testimonial"
+                                        loading="lazy" />
+                                </div>
+                                <div class="yt-card-overlay">
+                                    <div class="play-btn-glass">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4>Rahul Sharma</h4>
+                                        <p>B.Tech CSE</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yt-slide">
+                            <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
+                                <div class="card-bg">
+                                    <img src="images/video-testimonial/13.jpeg" alt="Student Testimonial"
+                                        loading="lazy" />
+                                </div>
+                                <div class="yt-card-overlay">
+                                    <div class="play-btn-glass">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4>Tayyaba Siraj</h4>
+                                        <p>College of Law</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yt-slide">
+                            <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
+                                <div class="card-bg">
+                                    <img src="images/video-testimonial/14.jpeg" alt="Student Testimonial"
+                                        loading="lazy" />
+                                </div>
+                                <div class="yt-card-overlay">
+                                    <div class="play-btn-glass">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4>Aman Verma</h4>
+                                        <p>MCA Program</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yt-slide">
+                            <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
+                                <div class="card-bg">
+                                    <img src="images/video-testimonial/15.jpeg" alt="Astha Sharma" loading="lazy" />
+                                </div>
+                                <div class="yt-card-overlay">
+                                    <div class="play-btn-glass">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4>Astha Sharma</h4>
+                                        <p>Dental College</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yt-slide">
+                            <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
+                                <div class="card-bg">
+                                    <img src="images/video-testimonial/16.jpeg" alt="Shubhangi" loading="lazy" />
+                                </div>
+                                <div class="yt-card-overlay">
+                                    <div class="play-btn-glass">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4>Shynie</h4>
+                                        <p>College of Nursing</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Navigation -->
+                <div class="yt-nav-wrapper">
+                    <div class="yt-timeline-container">
+                        <div class="yt-timeline-base"></div>
+                        <div class="yt-timeline-progress" id="ytProgress"></div>
+                    </div>
+                    <div class="yt-nav-arrows">
+                        <button id="ytPrev" class="yt-arrow" aria-label="Previous Slide">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button id="ytNext" class="yt-arrow" aria-label="Next Slide">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- ============================================
+    <!-- Video Popup Modal -->
+    <div id="videoModal" class="video-modal" onclick="closeVideo()">
+        <div class="video-modal-content" onclick="event.stopPropagation()">
+            <span class="video-close" onclick="closeVideo()">&times;</span>
+            <iframe id="ytPlayer" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- ============================================
          NEWS & NOTICE BOARD SECTION
          ============================================ -->
-        <section class="news-notice-section" id="news-notices">
-            <div class="container">
-                <div class="row">
-                    <!-- Recent News (Left - 2/3 width) -->
-                    <div class="col-lg-8">
-                        <h2 class="section-title-v2">Recent News</h2>
-                        <div class="news-row-v2">
-                            <!-- News Card 1 -->
-                            <div class="news-card-v2">
-                                <div class="news-image-wrap-v2">
-                                    <img
-                                        src="images/news/1772452291_jQO544ffXc.jpeg"
-                                        class="card-image"
-                                        alt="Culture"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div class="card-content-v2">
-                                    <div class="card-meta-v2">
-                                        <span class="card-category-v2"
-                                            >Culture</span
-                                        >
-                                        <span>•</span>
-                                        <span>31 Dec 2025</span>
-                                    </div>
-                                    <h3>
-                                        Celebrating Cultural Diversity: TMU’s
-                                        Annual Fest – ‘Rock-On’ 2026
-                                    </h3>
-                                </div>
+    <section class="news-notice-section" id="news-notices">
+        <div class="container">
+            <div class="row">
+                <!-- Recent News (Left - 2/3 width) -->
+                <div class="col-lg-8">
+                    <h2 class="section-title-v2">Recent News</h2>
+                    <div class="news-row-v2">
+                        <!-- News Card 1 -->
+                        <div class="news-card-v2">
+                            <div class="news-image-wrap-v2">
+                                <img src="images/news/1772452291_jQO544ffXc.jpeg" class="card-image" alt="Culture"
+                                    loading="lazy" />
                             </div>
-
-                            <!-- News Card 2 -->
-                            <div class="news-card-v2">
-                                <div class="news-image-wrap-v2">
-                                    <img
-                                        src="images/news/1768641490_J8uLmK7xFH.jpg"
-                                        class="card-image"
-                                        alt="Travel"
-                                        loading="lazy"
-                                    />
+                            <div class="card-content-v2">
+                                <div class="card-meta-v2">
+                                    <span class="card-category-v2">Culture</span>
+                                    <span>•</span>
+                                    <span>31 Dec 2025</span>
                                 </div>
-                                <div class="card-content-v2">
-                                    <div class="card-meta-v2">
-                                        <span class="card-category-v2"
-                                            >Travel</span
-                                        >
-                                        <span>•</span>
-                                        <span>15 Jan 2026</span>
-                                    </div>
-                                    <h3>
-                                        Global Immersion: TMU Students Explore
-                                        European Innovation Hubs
-                                    </h3>
-                                </div>
+                                <h3>
+                                    Celebrating Cultural Diversity: TMU’s
+                                    Annual Fest – ‘Rock-On’ 2026
+                                </h3>
                             </div>
+                        </div>
 
-                            <!-- News Card 3 -->
-                            <div class="news-card-v2">
-                                <div class="news-image-wrap-v2">
-                                    <img
-                                        src="images/news/1771330652_PJpQ6BWZ3s.png"
-                                        class="card-image"
-                                        alt="Life Style"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div class="card-content-v2">
-                                    <div class="card-meta-v2">
-                                        <span class="card-category-v2"
-                                            >Life Style</span
-                                        >
-                                        <span>•</span>
-                                        <span>20 Jan 2026</span>
-                                    </div>
-                                    <h3>
-                                        Mindfulness & Well-being: TMU Launches
-                                        Campus Wellness Drive
-                                    </h3>
-                                </div>
+                        <!-- News Card 2 -->
+                        <div class="news-card-v2">
+                            <div class="news-image-wrap-v2">
+                                <img src="images/news/1768641490_J8uLmK7xFH.jpg" class="card-image" alt="Travel"
+                                    loading="lazy" />
                             </div>
+                            <div class="card-content-v2">
+                                <div class="card-meta-v2">
+                                    <span class="card-category-v2">Travel</span>
+                                    <span>•</span>
+                                    <span>15 Jan 2026</span>
+                                </div>
+                                <h3>
+                                    Global Immersion: TMU Students Explore
+                                    European Innovation Hubs
+                                </h3>
+                            </div>
+                        </div>
 
-                            <!-- News Card 4 -->
-                            <div class="news-card-v2">
-                                <div class="news-image-wrap-v2">
-                                    <img
-                                        src="images/news/1772534975_6Ed46dKADO.png"
-                                        class="card-image"
-                                        alt="Education"
-                                        loading="lazy"
-                                    />
+                        <!-- News Card 3 -->
+                        <div class="news-card-v2">
+                            <div class="news-image-wrap-v2">
+                                <img src="images/news/1771330652_PJpQ6BWZ3s.png" class="card-image" alt="Life Style"
+                                    loading="lazy" />
+                            </div>
+                            <div class="card-content-v2">
+                                <div class="card-meta-v2">
+                                    <span class="card-category-v2">Life Style</span>
+                                    <span>•</span>
+                                    <span>20 Jan 2026</span>
                                 </div>
-                                <div class="card-content-v2">
-                                    <div class="card-meta-v2">
-                                        <span class="card-category-v2"
-                                            >Academic</span
-                                        >
-                                        <span>•</span>
-                                        <span>25 Jan 2026</span>
-                                    </div>
-                                    <h3>
-                                        Nurturing Innovation: TMU Hosts National
-                                        AI Conference
-                                    </h3>
+                                <h3>
+                                    Mindfulness & Well-being: TMU Launches
+                                    Campus Wellness Drive
+                                </h3>
+                            </div>
+                        </div>
+
+                        <!-- News Card 4 -->
+                        <div class="news-card-v2">
+                            <div class="news-image-wrap-v2">
+                                <img src="images/news/1772534975_6Ed46dKADO.png" class="card-image" alt="Education"
+                                    loading="lazy" />
+                            </div>
+                            <div class="card-content-v2">
+                                <div class="card-meta-v2">
+                                    <span class="card-category-v2">Academic</span>
+                                    <span>•</span>
+                                    <span>25 Jan 2026</span>
                                 </div>
+                                <h3>
+                                    Nurturing Innovation: TMU Hosts National
+                                    AI Conference
+                                </h3>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Notice Board (Right - 1/3 width) -->
-                    <div class="col-lg-4">
-                        <div class="notice-board-container">
-                            <h2 class="section-title-v2">Notice Board</h2>
+                <!-- Notice Board (Right - 1/3 width) -->
+                <div class="col-lg-4">
+                    <div class="notice-board-container">
+                        <h2 class="section-title-v2">Notice Board</h2>
 
-                            <!-- Notice Search & View All -->
-                            <div class="notice-search-wrapper">
-                                <i class="bi bi-search" style="left: 12px"></i>
-                                <input
-                                    type="text"
-                                    id="noticeSearch"
-                                    class="notice-search-input"
-                                    placeholder="Search notices..."
-                                />
-                                <a
-                                    href="notices.html"
-                                    class="btn-view-all-notices"
-                                    >View All</a
-                                >
+                        <!-- Notice Search & View All -->
+                        <div class="notice-search-wrapper">
+                            <i class="bi bi-search" style="left: 12px"></i>
+                            <input type="text" id="noticeSearch" class="notice-search-input"
+                                placeholder="Search notices..." />
+                            <a href="notices.html" class="btn-view-all-notices">View All</a>
+                        </div>
+
+                        <div class="notice-list" id="noticeList">
+                            <!-- Notice Item 1 -->
+                            <div class="notice-item">
+                                <div class="notice-date-v2">
+                                    <span class="day-v2">Feb 15</span>
+                                    <span class="year-v2">2026</span>
+                                </div>
+                                <div class="notice-content-v2">
+                                    <h4>Spring 2026 Admissions Now Open</h4>
+                                    <p>
+                                        Applications for the Spring 2026
+                                        semester are now being accepted.
+                                        Early bird scholarship available.
+                                    </p>
+                                    <div class="notice-footer-v2">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <span>Admissions Dept, Block A</span>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="notice-list" id="noticeList">
-                                <!-- Notice Item 1 -->
-                                <div class="notice-item">
-                                    <div class="notice-date-v2">
-                                        <span class="day-v2">Feb 15</span>
-                                        <span class="year-v2">2026</span>
-                                    </div>
-                                    <div class="notice-content-v2">
-                                        <h4>Spring 2026 Admissions Now Open</h4>
-                                        <p>
-                                            Applications for the Spring 2026
-                                            semester are now being accepted.
-                                            Early bird scholarship available.
-                                        </p>
-                                        <div class="notice-footer-v2">
-                                            <i class="bi bi-geo-alt"></i>
-                                            <span
-                                                >Admissions Dept, Block A</span
-                                            >
-                                        </div>
+                            <!-- Notice Item 2 -->
+                            <div class="notice-item">
+                                <div class="notice-date-v2">
+                                    <span class="day-v2">Feb 12</span>
+                                    <span class="year-v2">2026</span>
+                                </div>
+                                <div class="notice-content-v2">
+                                    <h4>
+                                        Tech Summit 2026: AI & The Future
+                                    </h4>
+                                    <p>
+                                        Join industry leaders from Google
+                                        and Microsoft for a two-day summit
+                                        on AI.
+                                    </p>
+                                    <div class="notice-footer-v2">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <span>CSE Dept, Auditorium</span>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Notice Item 2 -->
-                                <div class="notice-item">
-                                    <div class="notice-date-v2">
-                                        <span class="day-v2">Feb 12</span>
-                                        <span class="year-v2">2026</span>
-                                    </div>
-                                    <div class="notice-content-v2">
-                                        <h4>
-                                            Tech Summit 2026: AI & The Future
-                                        </h4>
-                                        <p>
-                                            Join industry leaders from Google
-                                            and Microsoft for a two-day summit
-                                            on AI.
-                                        </p>
-                                        <div class="notice-footer-v2">
-                                            <i class="bi bi-geo-alt"></i>
-                                            <span>CSE Dept, Auditorium</span>
-                                        </div>
+                            <!-- Notice Item 3 -->
+                            <div class="notice-item">
+                                <div class="notice-date-v2">
+                                    <span class="day-v2">Feb 08</span>
+                                    <span class="year-v2">2026</span>
+                                </div>
+                                <div class="notice-content-v2">
+                                    <h4>
+                                        Annual Sports Festival Registration
+                                    </h4>
+                                    <p>
+                                        Register now for inter-college
+                                        competitions in basketball,
+                                        football, and tennis.
+                                    </p>
+                                    <div class="notice-footer-v2">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <span>Sports Complex</span>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Notice Item 3 -->
-                                <div class="notice-item">
-                                    <div class="notice-date-v2">
-                                        <span class="day-v2">Feb 08</span>
-                                        <span class="year-v2">2026</span>
-                                    </div>
-                                    <div class="notice-content-v2">
-                                        <h4>
-                                            Annual Sports Festival Registration
-                                        </h4>
-                                        <p>
-                                            Register now for inter-college
-                                            competitions in basketball,
-                                            football, and tennis.
-                                        </p>
-                                        <div class="notice-footer-v2">
-                                            <i class="bi bi-geo-alt"></i>
-                                            <span>Sports Complex</span>
-                                        </div>
+                            <!-- Notice Item 4 -->
+                            <div class="notice-item">
+                                <div class="notice-date-v2">
+                                    <span class="day-v2">Feb 05</span>
+                                    <span class="year-v2">2026</span>
+                                </div>
+                                <div class="notice-content-v2">
+                                    <h4>MOU with NASA for Research</h4>
+                                    <p>
+                                        Groundbreaking partnership for
+                                        research on sustainable aviation and
+                                        space tech.
+                                    </p>
+                                    <div class="notice-footer-v2">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <span>Research Cell, Block C</span>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Notice Item 4 -->
-                                <div class="notice-item">
-                                    <div class="notice-date-v2">
-                                        <span class="day-v2">Feb 05</span>
-                                        <span class="year-v2">2026</span>
-                                    </div>
-                                    <div class="notice-content-v2">
-                                        <h4>MOU with NASA for Research</h4>
-                                        <p>
-                                            Groundbreaking partnership for
-                                            research on sustainable aviation and
-                                            space tech.
-                                        </p>
-                                        <div class="notice-footer-v2">
-                                            <i class="bi bi-geo-alt"></i>
-                                            <span>Research Cell, Block C</span>
-                                        </div>
+                            <!-- Notice Item 5 -->
+                            <div class="notice-item">
+                                <div class="notice-date-v2">
+                                    <span class="day-v2">Feb 03</span>
+                                    <span class="year-v2">2026</span>
+                                </div>
+                                <div class="notice-content-v2">
+                                    <h4>Faculty Recruitment 2026</h4>
+                                    <p>
+                                        Opportunities in Engineering and
+                                        Management. Join our world-class
+                                        faculty team.
+                                    </p>
+                                    <div class="notice-footer-v2">
+                                        <i class="bi bi-person-plus"></i>
+                                        <span>HR Dept, Block B</span>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Notice Item 5 -->
-                                <div class="notice-item">
-                                    <div class="notice-date-v2">
-                                        <span class="day-v2">Feb 03</span>
-                                        <span class="year-v2">2026</span>
-                                    </div>
-                                    <div class="notice-content-v2">
-                                        <h4>Faculty Recruitment 2026</h4>
-                                        <p>
-                                            Opportunities in Engineering and
-                                            Management. Join our world-class
-                                            faculty team.
-                                        </p>
-                                        <div class="notice-footer-v2">
-                                            <i class="bi bi-person-plus"></i>
-                                            <span>HR Dept, Block B</span>
-                                        </div>
+                            <!-- Notice Item 6 -->
+                            <div class="notice-item">
+                                <div class="notice-date-v2">
+                                    <span class="day-v2">Feb 01</span>
+                                    <span class="year-v2">2026</span>
+                                </div>
+                                <div class="notice-content-v2">
+                                    <h4>
+                                        Semester End Examination Schedule
+                                    </h4>
+                                    <p>
+                                        Detailed examination schedule
+                                        available on the student portal for
+                                        all departments.
+                                    </p>
+                                    <div class="notice-footer-v2">
+                                        <i class="bi bi-calendar-event"></i>
+                                        <span>Exam Cell</span>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Notice Item 6 -->
-                                <div class="notice-item">
-                                    <div class="notice-date-v2">
-                                        <span class="day-v2">Feb 01</span>
-                                        <span class="year-v2">2026</span>
-                                    </div>
-                                    <div class="notice-content-v2">
-                                        <h4>
-                                            Semester End Examination Schedule
-                                        </h4>
-                                        <p>
-                                            Detailed examination schedule
-                                            available on the student portal for
-                                            all departments.
-                                        </p>
-                                        <div class="notice-footer-v2">
-                                            <i class="bi bi-calendar-event"></i>
-                                            <span>Exam Cell</span>
-                                        </div>
+                            <!-- Notice Item 7 -->
+                            <div class="notice-item">
+                                <div class="notice-date-v2">
+                                    <span class="day-v2">Jan 28</span>
+                                    <span class="year-v2">2026</span>
+                                </div>
+                                <div class="notice-content-v2">
+                                    <h4>Workshop on Cyber Security</h4>
+                                    <p>
+                                        Free workshop for all final year
+                                        students focusing on ethical hacking
+                                        and network security.
+                                    </p>
+                                    <div class="notice-footer-v2">
+                                        <i class="bi bi-shield-lock"></i>
+                                        <span>Lab 4, IT Dept</span>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Notice Item 7 -->
-                                <div class="notice-item">
-                                    <div class="notice-date-v2">
-                                        <span class="day-v2">Jan 28</span>
-                                        <span class="year-v2">2026</span>
-                                    </div>
-                                    <div class="notice-content-v2">
-                                        <h4>Workshop on Cyber Security</h4>
-                                        <p>
-                                            Free workshop for all final year
-                                            students focusing on ethical hacking
-                                            and network security.
-                                        </p>
-                                        <div class="notice-footer-v2">
-                                            <i class="bi bi-shield-lock"></i>
-                                            <span>Lab 4, IT Dept</span>
-                                        </div>
+                            <!-- Notice Item 8 -->
+                            <div class="notice-item">
+                                <div class="notice-date-v2">
+                                    <span class="day-v2">Jan 25</span>
+                                    <span class="year-v2">2026</span>
+                                </div>
+                                <div class="notice-content-v2">
+                                    <h4>Republic Day Celebration</h4>
+                                    <p>
+                                        Flag hoisting ceremony at 8:30 AM in
+                                        the main ground followed by cultural
+                                        events.
+                                    </p>
+                                    <div class="notice-footer-v2">
+                                        <i class="bi bi-flag"></i>
+                                        <span>Main Ground</span>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Notice Item 8 -->
-                                <div class="notice-item">
-                                    <div class="notice-date-v2">
-                                        <span class="day-v2">Jan 25</span>
-                                        <span class="year-v2">2026</span>
-                                    </div>
-                                    <div class="notice-content-v2">
-                                        <h4>Republic Day Celebration</h4>
-                                        <p>
-                                            Flag hoisting ceremony at 8:30 AM in
-                                            the main ground followed by cultural
-                                            events.
-                                        </p>
-                                        <div class="notice-footer-v2">
-                                            <i class="bi bi-flag"></i>
-                                            <span>Main Ground</span>
-                                        </div>
-                                    </div>
+                            <!-- Notice Item 9 -->
+                            <div class="notice-item">
+                                <div class="notice-date-v2">
+                                    <span class="day-v2">Jan 20</span>
+                                    <span class="year-v2">2026</span>
                                 </div>
-
-                                <!-- Notice Item 9 -->
-                                <div class="notice-item">
-                                    <div class="notice-date-v2">
-                                        <span class="day-v2">Jan 20</span>
-                                        <span class="year-v2">2026</span>
-                                    </div>
-                                    <div class="notice-content-v2">
-                                        <h4>Winter Placement Drive</h4>
-                                        <p>
-                                            Top recruiting partners visiting
-                                            this month. Registration mandatory
-                                            for eligible students.
-                                        </p>
-                                        <div class="notice-footer-v2">
-                                            <i class="bi bi-briefcase"></i>
-                                            <span>Placement Cell</span>
-                                        </div>
+                                <div class="notice-content-v2">
+                                    <h4>Winter Placement Drive</h4>
+                                    <p>
+                                        Top recruiting partners visiting
+                                        this month. Registration mandatory
+                                        for eligible students.
+                                    </p>
+                                    <div class="notice-footer-v2">
+                                        <i class="bi bi-briefcase"></i>
+                                        <span>Placement Cell</span>
                                     </div>
                                 </div>
                             </div>
@@ -1659,516 +1186,470 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ============================================
+    <!-- ============================================
          BLOG SECTION (Latest Stories)
          ============================================ -->
-        <section class="blog-section" id="blog">
-            <div class="container blog-nav-container">
-                <div class="blog-header">
-                    <h2>Our Latest Blogs</h2>
-                    <p>
-                        Stay updated with the latest insights, stories, and
-                        academic breakthroughs from Teerthanker Mahaveer
-                        University.
-                    </p>
-                </div>
+    <section class="blog-section" id="blog">
+        <div class="container blog-nav-container">
+            <div class="blog-header">
+                <h2>Our Latest Blogs</h2>
+                <p>
+                    Stay updated with the latest insights, stories, and
+                    academic breakthroughs from Teerthanker Mahaveer
+                    University.
+                </p>
+            </div>
 
-                <!-- Navigation Buttons -->
-                <button class="blog-nav-btn prev-btn" id="blogPrev">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="blog-nav-btn next-btn" id="blogNext">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+            <!-- Navigation Buttons -->
+            <button class="blog-nav-btn prev-btn" id="blogPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="blog-nav-btn next-btn" id="blogNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
 
-                <div class="blog-grid">
-                    <!-- Card 1 -->
-                    <div class="blog-card image-top">
-                        <div class="blog-card-image">
-                            <img
-                                src="images/blogs/91.jpg"
-                                alt="Productivity"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="blog-card-content">
-                            <h3>Digital Empowerment at TMU</h3>
-                            <p>
-                                How our smart campus technology enhances student
-                                productivity and engagement.
-                            </p>
-                        </div>
+            <div class="blog-grid">
+                <!-- Card 1 -->
+                <div class="blog-card image-top">
+                    <div class="blog-card-image">
+                        <img src="images/blogs/91.jpg" alt="Productivity" loading="lazy" />
                     </div>
-
-                    <!-- Card 2 -->
-                    <div class="blog-card text-top">
-                        <div class="blog-card-content">
-                            <h3>Balanced Routines for Success</h3>
-                            <p>
-                                Integrating mental wellness and rest into a
-                                academic schedule for peak performance.
-                            </p>
-                        </div>
-                        <div class="blog-card-image">
-                            <img
-                                src="images/blogs/1748348108_9dlheJxByS.jpg"
-                                alt="Sleep"
-                                loading="lazy"
-                            />
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="blog-card image-top">
-                        <div class="blog-card-image">
-                            <img
-                                src="images/blogs/1764220791_l1YMRL9V.jpg"
-                                alt="Fitness"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="blog-card-content">
-                            <h3>Beyond the Classroom: Sports</h3>
-                            <p>
-                                Fueling student success through world-class
-                                physical education and sports infrastructure.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div class="blog-card text-top">
-                        <div class="blog-card-content">
-                            <h3>AI in Modern Education</h3>
-                            <p>
-                                Exploring how artificial intelligence is
-                                reshaping the learning landscape at TMU.
-                            </p>
-                        </div>
-                        <div class="blog-card-image">
-                            <img
-                                src="images/blogs/1772534975_6Ed46dKADO.png"
-                                alt="AI"
-                                loading="lazy"
-                            />
-                        </div>
-                    </div>
-
-                    <!-- Card 5 -->
-                    <div class="blog-card image-top">
-                        <div class="blog-card-image">
-                            <img
-                                src="images/blogs/1771330652_PJpQ6BWZ3s.png"
-                                alt="Wellness"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="blog-card-content">
-                            <h3>Mental Health Awareness</h3>
-                            <p>
-                                Our ongoing commitment to creating a supportive
-                                environment for all students.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Card 6 -->
-                    <div class="blog-card text-top">
-                        <div class="blog-card-content">
-                            <h3>Global Research Hub</h3>
-                            <p>
-                                Collaborating with international partners for
-                                breakthrough research in sustainability.
-                            </p>
-                        </div>
-                        <div class="blog-card-image">
-                            <img
-                                src="images/blogs/1768641490_J8uLmK7xFH.jpg"
-                                alt="Global"
-                                loading="lazy"
-                            />
-                        </div>
+                    <div class="blog-card-content">
+                        <h3>Digital Empowerment at TMU</h3>
+                        <p>
+                            How our smart campus technology enhances student
+                            productivity and engagement.
+                        </p>
                     </div>
                 </div>
 
-                <div class="blog-cta">
-                    <a href="#" class="blog-cta-btn">
-                        View all blogs
-                        <img
-                            src="images/right-arrow.png"
-                            alt=""
-                            class="cta-arrow"
-                            loading="lazy"
-                        />
-                    </a>
+                <!-- Card 2 -->
+                <div class="blog-card text-top">
+                    <div class="blog-card-content">
+                        <h3>Balanced Routines for Success</h3>
+                        <p>
+                            Integrating mental wellness and rest into a
+                            academic schedule for peak performance.
+                        </p>
+                    </div>
+                    <div class="blog-card-image">
+                        <img src="images/blogs/1748348108_9dlheJxByS.jpg" alt="Sleep" loading="lazy" />
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="blog-card image-top">
+                    <div class="blog-card-image">
+                        <img src="images/blogs/1764220791_l1YMRL9V.jpg" alt="Fitness" loading="lazy" />
+                    </div>
+                    <div class="blog-card-content">
+                        <h3>Beyond the Classroom: Sports</h3>
+                        <p>
+                            Fueling student success through world-class
+                            physical education and sports infrastructure.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="blog-card text-top">
+                    <div class="blog-card-content">
+                        <h3>AI in Modern Education</h3>
+                        <p>
+                            Exploring how artificial intelligence is
+                            reshaping the learning landscape at TMU.
+                        </p>
+                    </div>
+                    <div class="blog-card-image">
+                        <img src="images/blogs/1772534975_6Ed46dKADO.png" alt="AI" loading="lazy" />
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="blog-card image-top">
+                    <div class="blog-card-image">
+                        <img src="images/blogs/1771330652_PJpQ6BWZ3s.png" alt="Wellness" loading="lazy" />
+                    </div>
+                    <div class="blog-card-content">
+                        <h3>Mental Health Awareness</h3>
+                        <p>
+                            Our ongoing commitment to creating a supportive
+                            environment for all students.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="blog-card text-top">
+                    <div class="blog-card-content">
+                        <h3>Global Research Hub</h3>
+                        <p>
+                            Collaborating with international partners for
+                            breakthrough research in sustainability.
+                        </p>
+                    </div>
+                    <div class="blog-card-image">
+                        <img src="images/blogs/1768641490_J8uLmK7xFH.jpg" alt="Global" loading="lazy" />
+                    </div>
                 </div>
             </div>
-        </section>
 
-        <!-- ============================================
+            <div class="blog-cta">
+                <a href="#" class="blog-cta-btn">
+                    View all blogs
+                    <img src="images/right-arrow.png" alt="" class="cta-arrow" loading="lazy" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
          ACCORDION SECTION (Why TMU)
          ============================================ -->
-        <section class="accordion-section" id="about-tmu">
-            <div class="container">
-                <div class="accordion-header-group">
-                    <h2 class="section-title">Frequently Asked Questions</h2>
+    <section class="accordion-section" id="about-tmu">
+        <div class="container">
+            <div class="accordion-header-group">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="accordion-container">
+                <!-- Item 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger">
+                        <h3>TMU’s Impressive Placement Records</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner-text">
+                            <p>
+                                <strong>85% Outstanding Placement Rate</strong>
+                                One of the key indicators of a university's
+                                success is its placement records. TMU boasts
+                                an outstanding placement rate of 82% in the
+                                academic year 2022-23.
+                            </p>
+                            <p>
+                                <strong>Highest Package Offered - 60
+                                    LPA</strong>
+                                The university's commitment to providing
+                                quality education is evident in the
+                                remarkable achievement of a 60 LPA package
+                                offered to TMU students, showcasing the
+                                recognition and demand for graduates from
+                                the university.
+                            </p>
+                            <p>
+                                <strong>National and International
+                                    Collaborations</strong>
+                                With over 100 collaborations with national
+                                and international organizations, TMU ensures
+                                that its students have access to diverse and
+                                enriching opportunities.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="accordion-container">
-                    <!-- Item 1 -->
-                    <div class="accordion-item">
-                        <button class="accordion-trigger">
-                            <h3>TMU’s Impressive Placement Records</h3>
-                            <div class="accordion-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-inner-text">
-                                <p>
-                                    <strong
-                                        >85% Outstanding Placement Rate</strong
-                                    >
-                                    One of the key indicators of a university's
-                                    success is its placement records. TMU boasts
-                                    an outstanding placement rate of 82% in the
-                                    academic year 2022-23.
-                                </p>
-                                <p>
-                                    <strong
-                                        >Highest Package Offered - 60
-                                        LPA</strong
-                                    >
-                                    The university's commitment to providing
-                                    quality education is evident in the
-                                    remarkable achievement of a 60 LPA package
-                                    offered to TMU students, showcasing the
-                                    recognition and demand for graduates from
-                                    the university.
-                                </p>
-                                <p>
-                                    <strong
-                                        >National and International
-                                        Collaborations</strong
-                                    >
-                                    With over 100 collaborations with national
-                                    and international organizations, TMU ensures
-                                    that its students have access to diverse and
-                                    enriching opportunities.
-                                </p>
-                            </div>
+                <!-- Item 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger">
+                        <h3>
+                            Awards and Recognitions of Teerthanker Mahaveer
+                            University
+                        </h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner-text">
+                            <p>
+                                <strong>NIRF Innovation Category</strong>
+                                TMU secured a position in the 51-100 rank
+                                band in the NIRF innovation category,
+                                highlighting its commitment to fostering
+                                innovation in education.
+                            </p>
+                            <p>
+                                <strong>Excellence in Skills
+                                    Development</strong>
+                                Acknowledgement from Observe Now and
+                                LinkedIn Talent Solutions for Excellence in
+                                Skills Development further solidifies TMU's
+                                standing.
+                            </p>
+                            <p>
+                                <strong>Outlook India Ranking</strong> TMU
+                                holds the 45th rank among the Top 50 State
+                                Private Universities by Outlook India, a
+                                testament to its overall excellence.
+                            </p>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Item 2 -->
-                    <div class="accordion-item">
-                        <button class="accordion-trigger">
-                            <h3>
-                                Awards and Recognitions of Teerthanker Mahaveer
-                                University
-                            </h3>
-                            <div class="accordion-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-inner-text">
-                                <p>
-                                    <strong>NIRF Innovation Category</strong>
-                                    TMU secured a position in the 51-100 rank
-                                    band in the NIRF innovation category,
-                                    highlighting its commitment to fostering
-                                    innovation in education.
-                                </p>
-                                <p>
-                                    <strong
-                                        >Excellence in Skills
-                                        Development</strong
-                                    >
-                                    Acknowledgement from Observe Now and
-                                    LinkedIn Talent Solutions for Excellence in
-                                    Skills Development further solidifies TMU's
-                                    standing.
-                                </p>
-                                <p>
-                                    <strong>Outlook India Ranking</strong> TMU
-                                    holds the 45th rank among the Top 50 State
-                                    Private Universities by Outlook India, a
-                                    testament to its overall excellence.
-                                </p>
-                            </div>
+                <!-- Item 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger">
+                        <h3>Notable Alumni Network</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner-text">
+                            <p>
+                                With over 28,000 alumni, TMU has created a
+                                robust network of successful individuals
+                                contributing to various fields globally.
+                            </p>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Item 3 -->
-                    <div class="accordion-item">
-                        <button class="accordion-trigger">
-                            <h3>Notable Alumni Network</h3>
-                            <div class="accordion-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-inner-text">
-                                <p>
-                                    With over 28,000 alumni, TMU has created a
-                                    robust network of successful individuals
-                                    contributing to various fields globally.
-                                </p>
-                            </div>
+                <!-- Item 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger">
+                        <h3>Diverse Academic Programmes</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner-text">
+                            <p>
+                                TMU offers over 150+ career-oriented
+                                programmes globally.
+                            </p>
+                            <p>
+                                14 on-campus colleges and independent
+                                departments for diverse learning.
+                            </p>
+                            <p>
+                                Specialized courses in Medical, Dental,
+                                Engineering, and Management.
+                            </p>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Item 4 -->
-                    <div class="accordion-item">
-                        <button class="accordion-trigger">
-                            <h3>Diverse Academic Programmes</h3>
-                            <div class="accordion-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-inner-text">
-                                <p>
-                                    TMU offers over 150+ career-oriented
-                                    programmes globally.
-                                </p>
-                                <p>
-                                    14 on-campus colleges and independent
-                                    departments for diverse learning.
-                                </p>
-                                <p>
-                                    Specialized courses in Medical, Dental,
-                                    Engineering, and Management.
-                                </p>
-                            </div>
+                <!-- Item 5 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger">
+                        <h3>Cutting-Edge Infrastructure</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner-text">
+                            <p>
+                                The university's lush green campus spanning
+                                over 130 acres provides a conducive
+                                environment for learning. State-of-the-art
+                                facilities, including sports complexes and
+                                libraries, contribute to a holistic
+                                educational experience.
+                            </p>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Item 5 -->
-                    <div class="accordion-item">
-                        <button class="accordion-trigger">
-                            <h3>Cutting-Edge Infrastructure</h3>
-                            <div class="accordion-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-inner-text">
-                                <p>
-                                    The university's lush green campus spanning
-                                    over 130 acres provides a conducive
-                                    environment for learning. State-of-the-art
-                                    facilities, including sports complexes and
-                                    libraries, contribute to a holistic
-                                    educational experience.
-                                </p>
-                            </div>
+                <!-- Item 6 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger">
+                        <h3>Innovation and Research Achievements at TMU</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner-text">
+                            <p>
+                                <strong>Incubation Success and
+                                    Recognition</strong>
+                                TMU's Business Incubation Centre's
+                                recognition by the UP state government
+                                further emphasizes TMU's success in
+                                fostering innovation & research.
+                            </p>
+                            <p>
+                                <strong>Industry Collaborations</strong> TMU
+                                has established strong ties with leading
+                                industries, providing students with valuable
+                                insights and opportunities. Collaborations
+                                with IBM, AutoCAD, TCS-iON, and others
+                                enhance the practical exposure students
+                                receive.
+                            </p>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Item 6 -->
-                    <div class="accordion-item">
-                        <button class="accordion-trigger">
-                            <h3>Innovation and Research Achievements at TMU</h3>
-                            <div class="accordion-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-inner-text">
-                                <p>
-                                    <strong
-                                        >Incubation Success and
-                                        Recognition</strong
-                                    >
-                                    TMU's Business Incubation Centre's
-                                    recognition by the UP state government
-                                    further emphasizes TMU's success in
-                                    fostering innovation & research.
-                                </p>
-                                <p>
-                                    <strong>Industry Collaborations</strong> TMU
-                                    has established strong ties with leading
-                                    industries, providing students with valuable
-                                    insights and opportunities. Collaborations
-                                    with IBM, AutoCAD, TCS-iON, and others
-                                    enhance the practical exposure students
-                                    receive.
-                                </p>
-                            </div>
+                <!-- Item 7 -->
+                <div class="accordion-item">
+                    <button class="accordion-trigger">
+                        <h3>TMU’s Commitment to Quality Education</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
                         </div>
-                    </div>
-
-                    <!-- Item 7 -->
-                    <div class="accordion-item">
-                        <button class="accordion-trigger">
-                            <h3>TMU’s Commitment to Quality Education</h3>
-                            <div class="accordion-icon">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-inner-text">
-                                <p>
-                                    <strong
-                                        >Adherence to National Education Policy
-                                        (NEP) 2020</strong
-                                    >
-                                    TMU is strategically aligning with the
-                                    future of education by implementing NEP
-                                    2020, adopting a national credit framework
-                                    and redesigning the curriculum.
-                                </p>
-                                <p>
-                                    <strong
-                                        >Outcome-Based Education (OBE)</strong
-                                    >
-                                    TMU's focus on OBE enhances the overall
-                                    quality of learning, preparing students for
-                                    the challenges of the future.
-                                </p>
-                            </div>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner-text">
+                            <p>
+                                <strong>Adherence to National Education Policy
+                                    (NEP) 2020</strong>
+                                TMU is strategically aligning with the
+                                future of education by implementing NEP
+                                2020, adopting a national credit framework
+                                and redesigning the curriculum.
+                            </p>
+                            <p>
+                                <strong>Outcome-Based Education (OBE)</strong>
+                                TMU's focus on OBE enhances the overall
+                                quality of learning, preparing students for
+                                the challenges of the future.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ============================================
+    <!-- ============================================
          FOOTER SECTION
          ============================================ -->
-        <footer class="main-footer">
-            <div class="footer-top">
-                <div class="container">
-                    <div class="footer-grid">
-                        <!-- Column 1: Info -->
-                        <div class="footer-col info-col">
-                            <img
-                                src="images/tmu_logo.png"
-                                alt="TMU Logo"
-                                class="footer-logo"
-                                loading="lazy"
-                            />
-                            <p class="footer-desc">
-                                TMU stands committed to the ideals of Lord
-                                Mahaveer - Right Philosophy, Right Knowledge and
-                                Right Conduct in all spheres of activity and
-                                aspires to be the ultimate destination for
-                                world-class education.
+    <footer class="main-footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <!-- Column 1: Info -->
+                    <div class="footer-col info-col">
+                        <img src="images/tmu_logo.png" alt="TMU Logo" class="footer-logo" loading="lazy" />
+                        <p class="footer-desc">
+                            TMU stands committed to the ideals of Lord
+                            Mahaveer - Right Philosophy, Right Knowledge and
+                            Right Conduct in all spheres of activity and
+                            aspires to be the ultimate destination for
+                            world-class education.
+                        </p>
+                        <div class="contact-info">
+                            <p>
+                                <span>Address:</span> N.H.-9, Delhi Road,
+                                Moradabad - 244001, Uttar Pradesh
                             </p>
-                            <div class="contact-info">
-                                <p>
-                                    <span>Address:</span> N.H.-9, Delhi Road,
-                                    Moradabad - 244001, Uttar Pradesh
-                                </p>
-                                <p><span>Email:</span> university@tmu.ac.in</p>
-                                <p>
-                                    <span>Admissions Contact Number:</span>
-                                    1800-270-1490
-                                </p>
-                                <p>
-                                    <span>Admissions Email:</span>
-                                    admissions@tmu.ac.in
-                                </p>
-                            </div>
+                            <p><span>Email:</span> university@tmu.ac.in</p>
+                            <p>
+                                <span>Admissions Contact Number:</span>
+                                1800-270-1490
+                            </p>
+                            <p>
+                                <span>Admissions Email:</span>
+                                admissions@tmu.ac.in
+                            </p>
                         </div>
-                        <!-- Column 2: Useful Links -->
-                        <div class="footer-col links-col">
-                            <h3>Useful Links</h3>
-                            <ul>
-                                <li><a href="#">Convocation</a></li>
-                                <li><a href="#">News</a></li>
-                                <li><a href="#">Media Coverage</a></li>
-                                <li><a href="#">Join TMU</a></li>
-                                <li><a href="#">IQAC</a></li>
-                                <li>
-                                    <a href="#">Business Incubation Centre</a>
-                                </li>
-                                <li><a href="#">ERP Login</a></li>
-                                <li><a href="#">Blogs</a></li>
-                                <li><a href="#">Teaching Facility</a></li>
-                                <li><a href="#">Feedback</a></li>
-                            </ul>
-                        </div>
-                        <!-- Column 3: Quick Links -->
-                        <div class="footer-col links-col">
-                            <h3>Quick Links</h3>
-                            <ul>
-                                <li><a href="#">Application Form</a></li>
-                                <li><a href="#">Education Loan</a></li>
-                                <li><a href="#">Scholarships</a></li>
-                                <li><a href="#">How to Apply</a></li>
-                                <li><a href="#">Campus View</a></li>
-                                <li><a href="#">Campus Gallery</a></li>
-                                <li><a href="#">FAQs</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Student Club</a></li>
-                                <li><a href="#">Programmes</a></li>
-                                <li><a href="#">UGC e-Samadhaan</a></li>
-                            </ul>
-                        </div>
-                        <!-- Column 4: Campus Facilities -->
-                        <div class="footer-col links-col">
-                            <h3>Campus Facilities</h3>
-                            <ul>
-                                <li><a href="#">Faculty Accommodation</a></li>
-                                <li><a href="#">Guest House</a></li>
-                                <li><a href="#">Banking Facility</a></li>
-                                <li><a href="#">Hospital</a></li>
-                                <li><a href="#">Auditorium</a></li>
-                                <li><a href="#">Hostel</a></li>
-                            </ul>
-                        </div>
-                        <!-- Column 5: Student Life -->
-                        <div class="footer-col links-col">
-                            <h3>Student Life</h3>
-                            <ul>
-                                <li><a href="#">Mahaveer Ji Jinalaya</a></li>
-                                <li><a href="#">Yoga & Meditation</a></li>
-                                <li><a href="#">Sports</a></li>
-                                <li><a href="#">Library</a></li>
-                                <li><a href="#">Music & Dance</a></li>
-                                <li><a href="#">Transport</a></li>
-                                <li><a href="#">GYM</a></li>
-                            </ul>
-                        </div>
+                    </div>
+                    <!-- Column 2: Useful Links -->
+                    <div class="footer-col links-col">
+                        <h3>Useful Links</h3>
+                        <ul>
+                            <li><a href="#">Convocation</a></li>
+                            <li><a href="#">News</a></li>
+                            <li><a href="#">Media Coverage</a></li>
+                            <li><a href="#">Join TMU</a></li>
+                            <li><a href="#">IQAC</a></li>
+                            <li>
+                                <a href="#">Business Incubation Centre</a>
+                            </li>
+                            <li><a href="#">ERP Login</a></li>
+                            <li><a href="#">Blogs</a></li>
+                            <li><a href="#">Teaching Facility</a></li>
+                            <li><a href="#">Feedback</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 3: Quick Links -->
+                    <div class="footer-col links-col">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#">Application Form</a></li>
+                            <li><a href="#">Education Loan</a></li>
+                            <li><a href="#">Scholarships</a></li>
+                            <li><a href="#">How to Apply</a></li>
+                            <li><a href="#">Campus View</a></li>
+                            <li><a href="#">Campus Gallery</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Student Club</a></li>
+                            <li><a href="#">Programmes</a></li>
+                            <li><a href="#">UGC e-Samadhaan</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 4: Campus Facilities -->
+                    <div class="footer-col links-col">
+                        <h3>Campus Facilities</h3>
+                        <ul>
+                            <li><a href="#">Faculty Accommodation</a></li>
+                            <li><a href="#">Guest House</a></li>
+                            <li><a href="#">Banking Facility</a></li>
+                            <li><a href="#">Hospital</a></li>
+                            <li><a href="#">Auditorium</a></li>
+                            <li><a href="#">Hostel</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 5: Student Life -->
+                    <div class="footer-col links-col">
+                        <h3>Student Life</h3>
+                        <ul>
+                            <li><a href="#">Mahaveer Ji Jinalaya</a></li>
+                            <li><a href="#">Yoga & Meditation</a></li>
+                            <li><a href="#">Sports</a></li>
+                            <li><a href="#">Library</a></li>
+                            <li><a href="#">Music & Dance</a></li>
+                            <li><a href="#">Transport</a></li>
+                            <li><a href="#">GYM</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="bottom-flex">
-                        <div class="legal-links">
-                            <a href="#">Anti Ragging</a> /
-                            <a href="#">NIRF</a> / <a href="#">NAAC</a> /
-                            <a href="#">CTLD</a> / <a href="#">Placement</a> /
-                            <a href="#">IQAC</a> /
-                            <a href="#">Disclaimer</a>
-                        </div>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-youtube"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="bottom-flex">
+                    <div class="legal-links">
+                        <a href="#">Anti Ragging</a> /
+                        <a href="#">NIRF</a> / <a href="#">NAAC</a> /
+                        <a href="#">CTLD</a> / <a href="#">Placement</a> /
+                        <a href="#">IQAC</a> /
+                        <a href="#">Disclaimer</a>
                     </div>
-                    <p class="copyright">
-                        Copyrights © 2025 All Rights Reserved by Teerthanker
-                        Mahaveer University, Moradabad.
-                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
+                <p class="copyright">
+                    Copyrights © 2025 All Rights Reserved by Teerthanker
+                    Mahaveer University, Moradabad.
+                </p>
             </div>
-        </footer>
+        </div>
+    </footer>
 
-        <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
-        <script src="home.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+    <script src="home.js"></script>
 
-        <script src="data.js"></script>
-        <script src="programmes.js"></script>
-        <!-- <script src="hero.js"></script> -->
-    </body>
+    <script src="data.js"></script>
+    <script src="programmes.js"></script>
+    <!-- <script src="hero.js"></script> -->
+</body>
+
 </html>
