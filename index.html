@@ -374,7 +374,7 @@
         </div>
 
         <!-- Particle Layer -->
-        <canvas id="particle-canvas" class="particle-canvas" aria-hidden="true"></canvas>
+        <!-- <canvas id="particle-canvas" class="particle-canvas" aria-hidden="true"></canvas> -->
 
         <div class="glass-shell">
             <!-- ═══════════════════════════════════════════
@@ -479,54 +479,7 @@
                     </div>
                 </div>
 
-                <!-- ═══════════════════════════════════════════
-                     MOBILE: Trigger Button (Hidden on Desktop)
-                     ═══════════════════════════════════════════ -->
-                <div class="mobile-college-trigger mobile-only">
-                    <button class="mcd-trigger" id="mcd-trigger" aria-expanded="false" aria-haspopup="listbox">
-                        <div class="mcd-trigger-left">
-                            <span class="mcd-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M2 20h20" />
-                                    <path d="M12 3L3 8h18L12 3z" />
-                                    <line x1="5" y1="8" x2="5" y2="20" />
-                                    <line x1="9" y1="8" x2="9" y2="20" />
-                                    <line x1="15" y1="8" x2="15" y2="20" />
-                                    <line x1="19" y1="8" x2="19" y2="20" />
-                                </svg>
-                            </span>
-                            <div class="mcd-trigger-text">
-                                <span class="mcd-sublabel">Browse by College</span>
-                                <span class="mcd-label" id="mcd-label">Select College</span>
-                            </div>
-                        </div>
-                        <svg class="mcd-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M6 9l6 6 6-6" />
-                        </svg>
-                    </button>
-                </div>
 
-                <!-- ═══════════════════════════════════════════
-                     MOBILE: Bottom Sheet Panel (Hidden on Desktop)
-                     ═══════════════════════════════════════════ -->
-                <div class="mobile-bottom-sheet mobile-only" id="mobile-sheet">
-                    <div class="mcd-backdrop" id="mcd-backdrop"></div>
-                    <div class="mcd-panel" id="mcd-panel" role="listbox" aria-label="Select College">
-                        <div class="mcd-panel-header">
-                            <div class="mcd-panel-handle-area" id="mcd-close-btn" role="button" aria-label="Close">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="mcd-list-wrap">
-                            <div class="mcd-list" id="mcd-list"></div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- ═══════════════════════════════════════════
                      DESKTOP: Grid Content Area
@@ -552,22 +505,8 @@
                             </div>
                         </div>
 
-                        <!-- Mobile: Carousel (Hidden on Desktop) -->
-                        <div class="card-carousel mobile-only">
-                            <div id="card-track" class="card-track"></div>
-                        </div>
-
-                        <!-- Swipe Cue (Mobile) -->
-                        <div class="swipe-cue mobile-only" id="swipe-cue">
-                            Swipe to explore
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </div>
-
-                        <!-- Mobile: Dot Pagination -->
-                        <div class="mobile-dot-nav mobile-only" id="mobile-dot-nav" role="tablist"></div>
+                        <!-- Mobile: Accordion (Replaces Carousel) -->
+                        <div id="mobile-accordion-view" class="mobile-accordion-view mobile-only"></div>
                     </div>
                 </div>
             </div>
@@ -629,6 +568,8 @@
         </div>
     </div>
 
+
+
     <!-- Alumni Section — Advanced 3-Zone Redesign -->
     <section class="alumni-section" id="alumni-voices">
         <!-- Ambient Background Layer (Floating Blobs) -->
@@ -655,6 +596,12 @@
 
                 <!-- Center-Locked Orbital Selector -->
                 <div class="alm-selector-container">
+                    <button class="alm-nav-mobile" id="almPrev" aria-label="Previous">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="14 6 8 12 14 18"></polyline>
+                        </svg>
+                    </button>
+
                     <div class="alm-thumbs-wrapper" id="almThumbsWrapper">
                         <div class="alm-thumb-track" id="almThumbTrack">
                             <div class="alm-thumb-item" data-idx="0" data-pos="0" onclick="jumpToAlumni(0)">
@@ -674,18 +621,16 @@
                             </div>
                         </div>
                     </div>
+
+                    <button class="alm-nav-mobile" id="almNext" aria-label="Next">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="10 6 16 12 10 18"></polyline>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
             <div class="alm-stage">
-                <!-- Navigation Arrows (Edge Positioned) -->
-                <button class="alm-arrow alm-arrow-prev" id="almPrev" aria-label="Previous">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="alm-arrow alm-arrow-next" id="almNext" aria-label="Next">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-
                 <!-- Left: Animated Image Container -->
                 <div class="alm-img-track" id="almImgTrack">
                     <div class="alm-img-wrap">
