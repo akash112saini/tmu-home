@@ -899,18 +899,23 @@ window.closeLightbox = function () {
         timeRemaining = 5000;
     }
 
-    // ── Auto-advance logic ─────────────────────────────────────────────────
+    // ── Auto-advance logic (Tick-based) ────────────────────────────────────
     function startAuto() {
         stopAuto();
-        timeStart = Date.now();
-        autoTimer = setTimeout(function () {
-            goTo(current + 1);
-            if (!isHover) startAuto();
-        }, timeRemaining);
+        autoTimer = setInterval(function () {
+            // Do not decrement if hovered
+            if (isHover) return;
+
+            timeRemaining -= 50;
+            if (timeRemaining <= 0) {
+                goTo(current + 1);
+                // timeRemaining is reset to 5000 inside goTo()
+            }
+        }, 50);
     }
     function stopAuto() {
         if (autoTimer) {
-            clearTimeout(autoTimer);
+            clearInterval(autoTimer);
             autoTimer = null;
         }
     }
@@ -920,7 +925,6 @@ window.closeLightbox = function () {
         dot.addEventListener("click", function () {
             var idx = parseInt(dot.getAttribute("data-index"), 10);
             goTo(idx);
-            startAuto();
         });
     });
 
@@ -930,27 +934,23 @@ window.closeLightbox = function () {
     if (prevBtn)
         prevBtn.addEventListener("click", function () {
             goTo(current - 1);
-            startAuto();
         });
     if (nextBtn)
         nextBtn.addEventListener("click", function () {
             goTo(current + 1);
-            startAuto();
         });
 
-    // ── Hover pause (desktop only) ────────────────────────────────────────
+    // ── Hover pause ───────────────────────────────────────────────────────
     if (frame) {
         frame.addEventListener("mouseenter", function () {
             isHover = true;
-            var elapsed = Date.now() - timeStart;
-            timeRemaining = Math.max(0, timeRemaining - elapsed);
-            stopAuto();
             section.classList.add("is-paused");
         });
         frame.addEventListener("mouseleave", function () {
             isHover = false;
-            startAuto();
             section.classList.remove("is-paused");
+            // Force a reflow to wake up Webkit/Safari pseudo-element animations
+            void section.offsetWidth; 
         });
     }
 
