@@ -1,3 +1,158 @@
+// Hero Section Logic
+(function () {
+    document.addEventListener("DOMContentLoaded", () => {
+        const heroSection = document.getElementById("video-hero");
+        // ① Only this element is allowed to animate on scroll
+        const videoLayer = document.getElementById("heroVideoLayer");
+        const uspCounters = document.querySelectorAll(
+            ".usp-count [data-count]",
+        );
+        let hasCounted = false; // Moved to top to avoid hoisting issues
+
+        if (!heroSection) return;
+
+        // 0. Initialize HLS Video Stream
+        const heroVideo = document.getElementById("hero-bg-video");
+        if (heroVideo) {
+            heroVideo.loop = true;
+            heroVideo.muted = true;
+
+            const videoSrc = "videos/hls/playlist.m3u8";
+            if (typeof Hls !== "undefined" && Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(videoSrc);
+                hls.attachMedia(heroVideo);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    heroVideo
+                        .play()
+                        .catch((e) => console.log("Autoplay prevented:", e));
+                });
+            } else if (heroVideo.canPlayType("application/vnd.apple.mpegurl")) {
+                // Native HLS support (Safari)
+                heroVideo.src = videoSrc;
+                heroVideo.addEventListener("loadedmetadata", function () {
+                    heroVideo
+                        .play()
+                        .catch((e) => console.log("Autoplay prevented:", e));
+                });
+            }
+        }
+
+        // 1. Initial Reveal via IntersectionObserver
+        const revealObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        // Add visible class to trigger CSS transitions
+                        entry.target.classList.add("video-hero-visible");
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.1 },
+        ); // Trigger when 10% visible
+
+        revealObserver.observe(heroSection);
+
+        // 1.5 USP Card Reveal — REVERSIBLE
+        const uspCard = document.querySelector(".hero-usp-card");
+        if (uspCard) {
+            let lastScrollY = window.scrollY;
+            let ticking = false;
+
+            const updateCardVisibility = () => {
+                const scrollY = window.scrollY;
+                if (scrollY > 20) {
+                    if (!uspCard.classList.contains("usp-card-visible")) {
+                        uspCard.classList.add("usp-card-visible");
+                        triggerCountUp(uspCounters);
+                    }
+                } else {
+                    if (uspCard.classList.contains("usp-card-visible")) {
+                        uspCard.classList.remove("usp-card-visible");
+                        // Reset counters for re-animation
+                        hasCounted = false;
+                        uspCounters.forEach((counter) => {
+                            counter.innerText = "0";
+                        });
+                    }
+                }
+                ticking = false;
+            };
+
+            window.addEventListener(
+                "scroll",
+                () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(updateCardVisibility);
+                        ticking = true;
+                    }
+                },
+                { passive: true },
+            );
+
+            // Initial check
+            updateCardVisibility();
+        }
+
+        // 2. Count-Up Animation
+        function triggerCountUp(counters) {
+            if (hasCounted) return;
+            hasCounted = true;
+
+            counters.forEach((counter) => {
+                const target = parseInt(counter.getAttribute("data-count"), 10);
+                const duration = 2000; // ms
+                const start = 0;
+                let startTime = null;
+
+                const easeOutQuad = (t) => t * (2 - t);
+
+                const step = (timestamp) => {
+                    if (!startTime) startTime = timestamp;
+                    const progress = Math.min(
+                        (timestamp - startTime) / duration,
+                        1,
+                    );
+                    const easedProgress = easeOutQuad(progress);
+
+                    const current = Math.floor(easedProgress * target);
+                    counter.innerText = current.toLocaleString();
+
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        counter.innerText = target.toLocaleString();
+                    }
+                };
+
+                requestAnimationFrame(step);
+            });
+        }
+
+        // 2.5 Section Reveal Observer for "TMU a World in Itself"
+        const revealSections = document.querySelectorAll(".section-reveal");
+        const sectionObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("reveal-visible");
+                        sectionObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15 },
+        );
+
+        revealSections.forEach((section) => sectionObserver.observe(section));
+
+        // 3. (Legacy Force Video Playback Removed — now handled by HLS above)
+
+        // No scroll parallax — video is cinematic on its own.
+        // Parallax was the root cause of the shadow/gradient drift on all devices.
+    });
+})();
+
 // Banner Slider Logic
 (function () {
     const sliderWrapper = document.getElementById("sliderWrapper");
@@ -101,7 +256,7 @@
 
     // Duplicate nodes to create an off-screen buffer for seamless infinite sliding
     const originalChildren = Array.from(track.children);
-    originalChildren.forEach(child => {
+    originalChildren.forEach((child) => {
         track.appendChild(child.cloneNode(true));
     });
 
@@ -160,12 +315,14 @@
         // PRE-ANIMATION: Update active classes!
         // The element currently at index 3 will slide into the center position (index 2)
         Array.from(track.children).forEach((el, i) => {
-            if (i === 3) el.classList.add('active'); // Scales up
-            else el.classList.remove('active');      // Scales down
+            if (i === 3)
+                el.classList.add("active"); // Scales up
+            else el.classList.remove("active"); // Scales down
         });
 
         // Transition track to the left
-        track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        track.style.transition =
+            "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
         track.style.transform = `translateX(-${itemWidth}px)`;
 
         // Update visuals based on the up-and-coming avatar
@@ -173,11 +330,11 @@
         const nextIdx = parseInt(nextActiveEl.getAttribute("data-idx"), 10);
         updateVisuals(nextIdx);
 
-        setTimeout(function() {
+        setTimeout(function () {
             // Instantly rearrange DOM and remove transform
-            track.style.transition = 'none';
+            track.style.transition = "none";
             track.appendChild(first);
-            track.style.transform = 'translateX(0)';
+            track.style.transform = "translateX(0)";
             moving = false;
         }, 400);
     }
@@ -191,15 +348,15 @@
         const itemWidth = last.offsetWidth + gap;
 
         // Move DOM item first, translate left to hide it instantly
-        track.style.transition = 'none';
+        track.style.transition = "none";
         track.insertBefore(last, track.firstElementChild);
         track.style.transform = `translateX(-${itemWidth}px)`;
 
         // PRE-ANIMATION: Update active classes on new DOM layout
         // The element now at index 2 is the new active one
         Array.from(track.children).forEach((el, i) => {
-            if (i === 2) el.classList.add('active');
-            else el.classList.remove('active');
+            if (i === 2) el.classList.add("active");
+            else el.classList.remove("active");
         });
 
         // Update visuals based on the new front avatar
@@ -208,11 +365,12 @@
         updateVisuals(prevIdx);
 
         // Force reflow and animate smoothly into place
-        void track.offsetWidth; 
-        track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        track.style.transform = 'translateX(0)';
+        void track.offsetWidth;
+        track.style.transition =
+            "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+        track.style.transform = "translateX(0)";
 
-        setTimeout(function() {
+        setTimeout(function () {
             moving = false;
         }, 400);
     }
@@ -222,21 +380,25 @@
 
         // Rotate the DOM until the element at index 2 matches our targetIdx
         let targetLoops = 0;
-        while (parseInt(track.children[2].getAttribute("data-idx"), 10) !== targetIdx && targetLoops < 15) {
+        while (
+            parseInt(track.children[2].getAttribute("data-idx"), 10) !==
+                targetIdx &&
+            targetLoops < 15
+        ) {
             track.appendChild(track.firstElementChild);
             targetLoops++;
         }
 
         Array.from(track.children).forEach((el, i) => {
-            if (i === 2) el.classList.add('active');
-            else el.classList.remove('active');
+            if (i === 2) el.classList.add("active");
+            else el.classList.remove("active");
         });
 
         updateVisuals(targetIdx);
     }
 
     // Delegate click events since there are cloned nodes
-    track.addEventListener("click", function(e) {
+    track.addEventListener("click", function (e) {
         const item = e.target.closest(".alm-thumb-item");
         if (item) {
             const idx = parseInt(item.getAttribute("data-idx"), 10);
@@ -310,28 +472,27 @@
     observer.observe(section);
 
     // ── Initialization ────────────────────────────────────────────
-    setTimeout(function() {
+    setTimeout(function () {
         jumpTo(0);
     }, 50);
     startAuto();
 })();
 
-
 /* YouTube Slider Logic (Infinite, Drag & Timeline) */
-(function() {
-    const slider = document.getElementById('ytSlider');
-    const progressBar = document.getElementById('ytProgress');
-    const prevBtn = document.getElementById('ytPrev');
-    const nextBtn = document.getElementById('ytNext');
+(function () {
+    const slider = document.getElementById("ytSlider");
+    const progressBar = document.getElementById("ytProgress");
+    const prevBtn = document.getElementById("ytPrev");
+    const nextBtn = document.getElementById("ytNext");
     if (!slider || !progressBar) return;
 
     // 1. Infinite Clone Setup
-    const originalSlides = Array.from(slider.querySelectorAll('.yt-slide'));
+    const originalSlides = Array.from(slider.querySelectorAll(".yt-slide"));
     const slideCount = originalSlides.length;
     if (slideCount === 0) return;
 
     // Clone all slides and append/prepend for infinite loop
-    originalSlides.forEach(slide => {
+    originalSlides.forEach((slide) => {
         const cloneBefore = slide.cloneNode(true);
         const cloneAfter = slide.cloneNode(true);
         slider.insertBefore(cloneBefore, slider.firstChild);
@@ -347,7 +508,7 @@
         const total = slider.scrollWidth;
         const current = slider.scrollLeft;
         const contentWidth = slideCount * slideWidth;
-        
+
         // Loop Logic
         if (current <= 0) {
             slider.scrollLeft = contentWidth;
@@ -356,27 +517,27 @@
         }
 
         // Timeline: Map the position of the "original" set to 0-100%
-        let relativeScroll = (slider.scrollLeft - contentWidth);
+        let relativeScroll = slider.scrollLeft - contentWidth;
         const progress = (relativeScroll / contentWidth) * 100;
-        progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        progressBar.style.width = Math.min(100, Math.max(0, progress)) + "%";
     }
 
     // Drag Functionality
-    slider.addEventListener('mousedown', (e) => {
+    slider.addEventListener("mousedown", (e) => {
         isDown = true;
-        slider.style.cursor = 'grabbing';
-        slider.style.scrollSnapType = 'none';
+        slider.style.cursor = "grabbing";
+        slider.style.scrollSnapType = "none";
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
     });
 
-    window.addEventListener('mouseup', () => {
+    window.addEventListener("mouseup", () => {
         isDown = false;
-        slider.style.cursor = 'grab';
-        slider.style.scrollSnapType = 'x mandatory';
+        slider.style.cursor = "grab";
+        slider.style.scrollSnapType = "x mandatory";
     });
 
-    window.addEventListener('mousemove', (e) => {
+    window.addEventListener("mousemove", (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
@@ -386,18 +547,20 @@
 
     // Arrow Nav Controls
     if (prevBtn) {
-        prevBtn.onclick = () => slider.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+        prevBtn.onclick = () =>
+            slider.scrollBy({ left: -slideWidth, behavior: "smooth" });
     }
     if (nextBtn) {
-        nextBtn.onclick = () => slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
+        nextBtn.onclick = () =>
+            slider.scrollBy({ left: slideWidth, behavior: "smooth" });
     }
 
     // Initialize position to the "middle" (original) set
     const initPos = slideCount * slideWidth;
     slider.scrollLeft = initPos;
 
-    slider.addEventListener('scroll', updateProgress);
-    window.addEventListener('resize', updateProgress);
+    slider.addEventListener("scroll", updateProgress);
+    window.addEventListener("resize", updateProgress);
     setTimeout(updateProgress, 200);
 })();
 
@@ -830,23 +993,25 @@ window.closeLightbox = function () {
     var section = document.getElementById("bannerShowcase");
     if (!section) return;
 
-    var slides  = Array.from(section.querySelectorAll(".bsc-slide"));
-    var dots    = Array.from(section.querySelectorAll(".bsc-dot"));
-    var frame   = section.querySelector(".bsc-frame");
-    var track   = section.querySelector(".bsc-track");
+    var slides = Array.from(section.querySelectorAll(".bsc-slide"));
+    var dots = Array.from(section.querySelectorAll(".bsc-dot"));
+    var frame = section.querySelector(".bsc-frame");
+    var track = section.querySelector(".bsc-track");
 
     if (!slides.length || !track) return;
 
-    var current      = 0;
-    var total        = slides.length;
-    var autoTimer    = null;
-    var isHover      = false;
-    var timeStart    = 0;
+    var current = 0;
+    var total = slides.length;
+    var autoTimer = null;
+    var isHover = false;
+    var timeStart = 0;
     var timeRemaining = 5000;
 
     // ── Dynamic height: set track height to match the current banner image ──
     function getFrameWidth() {
-        return track.offsetWidth || frame.offsetWidth || window.innerWidth * 0.88;
+        return (
+            track.offsetWidth || frame.offsetWidth || window.innerWidth * 0.88
+        );
     }
 
     function setHeightForSlide(idx) {
@@ -855,8 +1020,8 @@ window.closeLightbox = function () {
 
         function applyHeight() {
             if (img.naturalWidth && img.naturalHeight) {
-                var ratio  = img.naturalHeight / img.naturalWidth;
-                var newH   = Math.round(getFrameWidth() * ratio);
+                var ratio = img.naturalHeight / img.naturalWidth;
+                var newH = Math.round(getFrameWidth() * ratio);
                 track.style.height = newH + "px";
             }
         }
@@ -950,7 +1115,7 @@ window.closeLightbox = function () {
             isHover = false;
             section.classList.remove("is-paused");
             // Force a reflow to wake up Webkit/Safari pseudo-element animations
-            void section.offsetWidth; 
+            void section.offsetWidth;
         });
     }
 
@@ -965,7 +1130,7 @@ window.closeLightbox = function () {
                 }
             });
         },
-        { threshold: 0.15 }
+        { threshold: 0.15 },
     );
     revealObserver.observe(section);
 
@@ -982,8 +1147,13 @@ window.closeLightbox = function () {
         if (i === 0) return;
         var img = slide.querySelector("img");
         if (img && !img.complete) {
-            img.addEventListener("load", function () {/* pre-cached */}, { once: true });
+            img.addEventListener(
+                "load",
+                function () {
+                    /* pre-cached */
+                },
+                { once: true },
+            );
         }
     });
 })();
-
