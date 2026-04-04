@@ -245,6 +245,7 @@
 
     // ── Elements ──────────────────────────────────────────────────
     const track = section.querySelector("#almThumbTrack");
+    if (!track) return;
     const imgItems = section.querySelectorAll(".alm-img-item");
     const card = section.querySelector("#almCard");
     const quoteEl = section.querySelector("#almQuote");
