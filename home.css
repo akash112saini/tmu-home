@@ -4681,7 +4681,7 @@ body {
 .programme-showcase {
     display: flex;
     flex-direction: column;
-    height: 580px; /* Compact height for 3-card layout with smaller images */
+    /* height: 580px; Compact height for 3-card layout with smaller images */
     background: #ffffff;
     border-radius: var(--radius-lg-prog);
     padding: 30px;
