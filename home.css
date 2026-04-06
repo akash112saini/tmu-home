@@ -134,11 +134,13 @@ body {
     left: 0;
     width: 50%;
     height: 100%;
-    background: linear-gradient(to right,
-            var(--primary-color) 0%,
-            rgba(0, 16, 85, 0.7) 40%,
-            rgba(0, 16, 85, 0.4) 70%,
-            transparent 100%);
+    background: linear-gradient(
+        to right,
+        var(--primary-color) 0%,
+        rgba(0, 16, 85, 0.7) 40%,
+        rgba(0, 16, 85, 0.4) 70%,
+        transparent 100%
+    );
     z-index: 3;
     display: flex;
     align-items: center;
@@ -285,7 +287,6 @@ body {
 }
 
 @keyframes bscOrbGlow {
-
     0%,
     100% {
         opacity: 0.55;
@@ -333,7 +334,6 @@ body {
 }
 
 @keyframes bscDotPulse {
-
     0%,
     100% {
         box-shadow: 0 0 0 0 rgba(255, 121, 0, 0.5);
@@ -448,12 +448,14 @@ body {
     align-items: center;
     justify-content: center;
     /* Seamless blending with surrounding sections */
-    background: linear-gradient(180deg,
-            rgba(0, 16, 85, 0.04) 0%,
-            rgba(173, 204, 234, 0.28) 25%,
-            rgba(210, 228, 245, 0.45) 50%,
-            rgba(173, 204, 234, 0.28) 75%,
-            rgba(0, 16, 85, 0.04) 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(0, 16, 85, 0.04) 0%,
+        rgba(173, 204, 234, 0.28) 25%,
+        rgba(210, 228, 245, 0.45) 50%,
+        rgba(173, 204, 234, 0.28) 75%,
+        rgba(0, 16, 85, 0.04) 100%
+    );
     /* Scroll-reveal: starts invisible */
     opacity: 0;
     transform: translateY(20px);
@@ -495,10 +497,12 @@ body {
 .bsc-orb-1 {
     width: 480px;
     height: 480px;
-    background: radial-gradient(circle,
-            rgba(0, 80, 200, 0.42) 0%,
-            rgba(0, 50, 150, 0.18) 55%,
-            transparent 80%);
+    background: radial-gradient(
+        circle,
+        rgba(0, 80, 200, 0.42) 0%,
+        rgba(0, 50, 150, 0.18) 55%,
+        transparent 80%
+    );
     top: -80px;
     left: -60px;
     animation:
@@ -509,10 +513,12 @@ body {
 .bsc-orb-2 {
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle,
-            rgba(0, 80, 200, 0.35) 0%,
-            rgba(0, 40, 130, 0.15) 55%,
-            transparent 80%);
+    background: radial-gradient(
+        circle,
+        rgba(0, 80, 200, 0.35) 0%,
+        rgba(0, 40, 130, 0.15) 55%,
+        transparent 80%
+    );
     bottom: -60px;
     right: -40px;
     animation:
@@ -523,10 +529,12 @@ body {
 .bsc-orb-3 {
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle,
-            rgba(255, 121, 0, 0.32) 0%,
-            rgba(255, 90, 0, 0.14) 55%,
-            transparent 80%);
+    background: radial-gradient(
+        circle,
+        rgba(255, 121, 0, 0.32) 0%,
+        rgba(255, 90, 0, 0.14) 55%,
+        transparent 80%
+    );
     top: 25%;
     right: 14%;
     filter: blur(45px);
@@ -644,17 +652,21 @@ body {
 
 .bsc-wave-1 {
     top: -20%;
-    background: radial-gradient(ellipse at 50% 0%,
-            rgba(0, 60, 160, 0.12) 0%,
-            transparent 70%);
+    background: radial-gradient(
+        ellipse at 50% 0%,
+        rgba(0, 60, 160, 0.12) 0%,
+        transparent 70%
+    );
     animation: bscWaveDrift 18s ease-in-out infinite;
 }
 
 .bsc-wave-2 {
     bottom: -20%;
-    background: radial-gradient(ellipse at 50% 100%,
-            rgba(0, 60, 160, 0.1) 0%,
-            transparent 70%);
+    background: radial-gradient(
+        ellipse at 50% 100%,
+        rgba(0, 60, 160, 0.1) 0%,
+        transparent 70%
+    );
     animation: bscWaveDrift 22s ease-in-out infinite reverse;
 }
 
@@ -944,9 +956,11 @@ body {
 }
 
 .counter-container {
-    background: linear-gradient(135deg,
-            var(--primary-color) 0%,
-            var(--navy-blue-dark) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--primary-color) 0%,
+        var(--navy-blue-dark) 100%
+    );
     width: 100%;
     max-width: 1000px;
     padding: 30px 40px;
@@ -993,7 +1007,6 @@ body {
 
 /* ── Keyframes ───────────────────────────────────── */
 @keyframes orbFloat1 {
-
     0%,
     100% {
         transform: translate(0, 0) scale(1);
@@ -1009,7 +1022,6 @@ body {
 }
 
 @keyframes orbFloat2 {
-
     0%,
     100% {
         transform: translate(0, 0) scale(1);
@@ -1025,7 +1037,6 @@ body {
 }
 
 @keyframes orbFloat3 {
-
     0%,
     100% {
         transform: translate(0, 0) scale(1);
@@ -1037,7 +1048,6 @@ body {
 }
 
 @keyframes thumbPulse {
-
     0%,
     100% {
         box-shadow: 0 0 0 0 rgba(255, 121, 0, 0.5);
@@ -1232,16 +1242,20 @@ body {
     /* Exactly fit 5 items (36*5 + 16*4 = 244) */
     overflow: hidden;
     padding: 10px 0;
-    mask-image: linear-gradient(to right,
-            transparent 0%,
-            black 10%,
-            black 90%,
-            transparent 100%);
-    -webkit-mask-image: linear-gradient(to right,
-            transparent 0%,
-            black 10%,
-            black 90%,
-            transparent 100%);
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+    );
 }
 
 .alm-thumbs-wrapper::-webkit-scrollbar {
@@ -1365,9 +1379,11 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.12) 0%,
-            transparent 50%);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        transparent 50%
+    );
     z-index: 3;
     pointer-events: none;
     border-radius: inherit;
@@ -1428,9 +1444,11 @@ body {
     /* Asymmetric geometry: rounded top-left & bottom-right, sharp top-right & bottom-left */
     border-radius: 40px 6px 40px 6px;
     /* Layered glass gradient */
-    background: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.65) 0%,
-            rgba(255, 255, 255, 0.35) 100%);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.65) 0%,
+        rgba(255, 255, 255, 0.35) 100%
+    );
     backdrop-filter: blur(30px) saturate(1.6);
     -webkit-backdrop-filter: blur(30px) saturate(1.6);
     /* Thin glowing top-left border */
@@ -1439,8 +1457,7 @@ body {
     /* Layered depth shadows */
     box-shadow:
         0 4px 0 rgba(255, 121, 0, 0.6),
-        /* orange accent bottom line */
-        0 20px 50px rgba(0, 0, 0, 0.06),
+        /* orange accent bottom line */ 0 20px 50px rgba(0, 0, 0, 0.06),
         inset 0 1px 0 rgba(255, 255, 255, 0.8);
     padding: 26px 36px;
     display: flex;
@@ -1461,9 +1478,11 @@ body {
     left: 0;
     width: 120px;
     height: 120px;
-    background: radial-gradient(circle at 0% 0%,
-            rgba(255, 121, 0, 0.1),
-            transparent 70%);
+    background: radial-gradient(
+        circle at 0% 0%,
+        rgba(255, 121, 0, 0.1),
+        transparent 70%
+    );
     pointer-events: none;
 }
 
@@ -1636,7 +1655,6 @@ body {
 
 /* ── Responsive — Mobile ≤768px ──────────────────── */
 @media (max-width: 768px) {
-
     /* Navbar Mobile Fix */
     .navbar {
         height: 70px;
@@ -1658,10 +1676,12 @@ body {
 
     .overlay {
         width: 100%;
-        background: linear-gradient(to bottom,
-                rgba(0, 16, 85, 0.9) 0%,
-                rgba(0, 16, 85, 0.6) 50%,
-                transparent 100%);
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 16, 85, 0.9) 0%,
+            rgba(0, 16, 85, 0.6) 50%,
+            transparent 100%
+        );
         align-items: flex-start;
         padding-top: 60px;
         padding-left: 5%;
@@ -2207,7 +2227,7 @@ body {
     gap: 10px;
 }
 
-.lbx-detail-item>i {
+.lbx-detail-item > i {
     font-size: 0.85rem;
     color: #5c45fd;
     margin-top: 3px;
@@ -2381,12 +2401,14 @@ body {
 /* Redesigned YouTube Section */
 .testimonial-video-section {
     padding: 80px 0 100px;
-    background: linear-gradient(180deg,
-            rgba(0, 16, 85, 0.04) 0%,
-            rgba(173, 204, 234, 0.28) 25%,
-            rgba(210, 228, 245, 0.45) 50%,
-            rgba(173, 204, 234, 0.28) 75%,
-            rgba(0, 16, 85, 0.04) 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(0, 16, 85, 0.04) 0%,
+        rgba(173, 204, 234, 0.28) 25%,
+        rgba(210, 228, 245, 0.45) 50%,
+        rgba(173, 204, 234, 0.28) 75%,
+        rgba(0, 16, 85, 0.04) 100%
+    );
     text-align: center;
     overflow: hidden;
     position: relative;
@@ -2488,10 +2510,12 @@ body {
 .yt-card-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top,
-            rgba(0, 33, 71, 0.95) 0%,
-            rgba(0, 33, 71, 0.4) 40%,
-            transparent 100%);
+    background: linear-gradient(
+        to top,
+        rgba(0, 33, 71, 0.95) 0%,
+        rgba(0, 33, 71, 0.4) 40%,
+        transparent 100%
+    );
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -3022,12 +3046,14 @@ body {
    ============================================ */
 .blog-section {
     padding: 80px 0;
-    background: linear-gradient(180deg,
-            rgba(0, 16, 85, 0.04) 0%,
-            rgba(173, 204, 234, 0.28) 25%,
-            rgba(210, 228, 245, 0.45) 50%,
-            rgba(173, 204, 234, 0.28) 75%,
-            rgba(0, 16, 85, 0.04) 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(0, 16, 85, 0.04) 0%,
+        rgba(173, 204, 234, 0.28) 25%,
+        rgba(210, 228, 245, 0.45) 50%,
+        rgba(173, 204, 234, 0.28) 75%,
+        rgba(0, 16, 85, 0.04) 100%
+    );
     position: relative;
 }
 
@@ -3240,7 +3266,6 @@ body {
    RESPONSIVE ADJUSTMENTS
    ============================================ */
 @media (max-width: 991px) {
-
     .news-notice-section .col-lg-8,
     .news-notice-section .col-lg-4 {
         flex: 0 0 100%;
@@ -3258,7 +3283,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
     .news-notice-section .col-lg-8,
     .news-notice-section .col-lg-4 {
         flex: 0 0 100%;
@@ -4190,10 +4214,12 @@ body {
     left: 0;
     right: 0;
     padding: 60px 18px 22px;
-    background: linear-gradient(to top,
-            rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.2) 70%,
-            transparent 100%);
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.2) 70%,
+        transparent 100%
+    );
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -4282,8 +4308,7 @@ body {
     display: none !important;
 }
 
-@media (max-width: 600px),
-(max-height: 600px) {
+@media (max-width: 600px), (max-height: 600px) {
     .programmes-section .desktop-only {
         display: none !important;
     }
@@ -4308,12 +4333,14 @@ body {
     font-family: "Outfit", sans-serif;
     color: var(--text-prog);
     -webkit-font-smoothing: antialiased;
-    background: linear-gradient(180deg,
-            rgba(0, 16, 85, 0.04) 0%,
-            rgba(173, 204, 234, 0.28) 25%,
-            rgba(210, 228, 245, 0.45) 50%,
-            rgba(173, 204, 234, 0.28) 75%,
-            rgba(0, 16, 85, 0.04) 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(0, 16, 85, 0.04) 0%,
+        rgba(173, 204, 234, 0.28) 25%,
+        rgba(210, 228, 245, 0.45) 50%,
+        rgba(173, 204, 234, 0.28) 75%,
+        rgba(0, 16, 85, 0.04) 100%
+    );
 }
 
 /* ─── Background Effects ─── */
@@ -4353,9 +4380,11 @@ body {
 .bg-blob--2 {
     width: 38vw;
     height: 38vw;
-    background: radial-gradient(circle,
-            rgba(240, 90, 40, 0.08),
-            transparent 70%);
+    background: radial-gradient(
+        circle,
+        rgba(240, 90, 40, 0.08),
+        transparent 70%
+    );
     bottom: -10%;
     right: -5%;
     animation: drift 28s infinite alternate-reverse ease-in-out;
@@ -4364,9 +4393,11 @@ body {
 .bg-blob--3 {
     width: 28vw;
     height: 28vw;
-    background: radial-gradient(circle,
-            rgba(91, 33, 182, 0.06),
-            transparent 70%);
+    background: radial-gradient(
+        circle,
+        rgba(91, 33, 182, 0.06),
+        transparent 70%
+    );
     top: 40%;
     left: 55%;
     animation: drift 18s 5s infinite alternate ease-in-out;
@@ -5255,8 +5286,7 @@ body {
 /* ═══════════════════════════════════════════════════
    MOBILE CAROUSEL & NAV
    ═══════════════════════════════════════════════════ */
-@media (max-width: 768px),
-(max-height: 600px) {
+@media (max-width: 768px), (max-height: 600px) {
     .programmes-section .desktop-only {
         display: none !important;
     }
@@ -5996,9 +6026,11 @@ body {
 .hero-blob-1 {
     width: 40vw;
     height: 40vw;
-    background: radial-gradient(circle,
-            rgba(255, 121, 0, 0.15),
-            transparent 70%);
+    background: radial-gradient(
+        circle,
+        rgba(255, 121, 0, 0.15),
+        transparent 70%
+    );
     top: -10%;
     left: 20%;
     animation: blobFloat1 20s infinite alternate ease-in-out;
@@ -6007,9 +6039,11 @@ body {
 .hero-blob-2 {
     width: 30vw;
     height: 30vw;
-    background: radial-gradient(circle,
-            rgba(100, 150, 255, 0.1),
-            transparent 70%);
+    background: radial-gradient(
+        circle,
+        rgba(100, 150, 255, 0.1),
+        transparent 70%
+    );
     bottom: -10%;
     right: 10%;
     animation: blobFloat2 25s infinite alternate ease-in-out;
@@ -6062,7 +6096,7 @@ body {
 }
 
 /* Scroll Reveal Initial States */
-.hero-text-wrap>* {
+.hero-text-wrap > * {
     opacity: 0;
     transform: translateY(30px);
     transition:
@@ -6237,10 +6271,12 @@ body {
     left: -100%;
     width: 60%;
     height: 100%;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.08),
-            transparent);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.08),
+        transparent
+    );
     transform: skewX(-20deg);
     animation: shimmerSlide 7s infinite;
     pointer-events: none;
@@ -6379,13 +6415,9 @@ body {
     .hero-subtext {
         font-size: 1rem;
     }
-<<<<<<< Updated upstream
-
-=======
     .hero-layout-wrapper {
         display: grid;
     }
->>>>>>> Stashed changes
     .hero-usp-card {
         grid-row: 1;
         grid-column: 1;
@@ -6397,25 +6429,13 @@ body {
         max-width: 400px;
         padding: 5px 0;
         gap: 0;
-<<<<<<< Updated upstream
-        bottom: 0;
-        transform: translateY(50%) scale(0.95);
-        /* Y-only entrance */
-=======
         bottom: -50px;
         margin: 0 auto;
         transform: translateY(30px) scale(0.95); /* Y-only entrance */
->>>>>>> Stashed changes
         box-shadow:
             0 8px 25px rgba(0, 0, 0, 0.4),
             0 0 10px rgba(100, 150, 255, 0.1);
     }
-<<<<<<< Updated upstream
-
-    .usp-card-visible {
-        transform: translateY(50%);
-        /* Y-only, locked — no X drift */
-=======
     .banner-showcase {
         grid-row: 2;
         grid-column: 1;
@@ -6423,7 +6443,6 @@ body {
     }
     .usp-card-visible {
         transform: translateY(0); /* Normal flow */
->>>>>>> Stashed changes
     }
 
     .usp-card-visible:hover {
@@ -6446,10 +6465,12 @@ body {
         width: 90%;
         height: 1px;
         transform: translate(-50%, -50%);
-        background: linear-gradient(90deg,
-                transparent,
-                rgba(255, 255, 255, 0.8) 50%,
-                transparent);
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.8) 50%,
+            transparent
+        );
         box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
     }
 
@@ -6457,10 +6478,12 @@ body {
         width: 1px;
         height: 90%;
         transform: translate(-50%, -50%);
-        background: linear-gradient(180deg,
-                transparent,
-                rgba(255, 255, 255, 0.8) 50%,
-                transparent);
+        background: linear-gradient(
+            180deg,
+            transparent,
+            rgba(255, 255, 255, 0.8) 50%,
+            transparent
+        );
         box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
     }
 
