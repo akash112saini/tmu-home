@@ -1118,6 +1118,31 @@ window.closeLightbox = function () {
             // Force a reflow to wake up Webkit/Safari pseudo-element animations
             void section.offsetWidth;
         });
+
+        // ── Touch functionality for mobile swipe ────────────────────────────
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        frame.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        frame.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            var threshold = 50; // minimum distance to be considered a swipe
+            if (touchEndX < touchStartX - threshold) {
+                // Swipe left -> Next slide
+                goTo(current + 1);
+            }
+            if (touchEndX > touchStartX + threshold) {
+                // Swipe right -> Prev slide
+                goTo(current - 1);
+            }
+        }
     }
 
     // ── Scroll-reveal with IntersectionObserver ───────────────────────────

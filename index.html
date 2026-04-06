@@ -73,6 +73,7 @@
     <!-- ============================================
          CINEMATIC BANNER SHOWCASE
          Placement: Below Video Hero | Above Gallery
+         Mobile: 360x300
          ============================================ -->
     <section class="banner-showcase" id="bannerShowcase" aria-label="Campus visual showcase">
         <!-- Animated ambient background -->
@@ -104,14 +105,22 @@
             <!-- Slide track -->
             <div class="bsc-track" id="bscTrack">
                 <div class="bsc-slide active" data-index="0">
-                    <img src="images/banners/banner1.jpg" alt="College of Computer Science and IT — TMU Campus"
-                        loading="lazy" />
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="images/banners/banner1mobile.jpg">
+                        <img src="images/banners/banner1.jpg" alt="Banner1" loading="lazy" />
+                    </picture>
                 </div>
                 <div class="bsc-slide" data-index="1">
-                    <img src="images/banners/banner2.jpeg" alt="Clock Tower — TMU Campus" loading="lazy" />
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="images/banners/banner2mobile.jpg">
+                        <img src="images/banners/banner2.jpeg" alt="Banner2" loading="lazy" />
+                    </picture>
                 </div>
                 <div class="bsc-slide" data-index="2">
-                    <img src="images/banners/banner3.jpeg" alt="Medical College — TMU Campus" loading="lazy" />
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="images/banners/banner3mobile.jpg">
+                        <img src="images/banners/banner3.jpg" alt="Banner3" loading="lazy" />
+                    </picture>
                 </div>
             </div>
 
@@ -137,100 +146,117 @@
         <div class="showcase-outer">
             <div class="showcase-slider" id="showcaseSlider">
                 <div class="showcase-track" id="showcaseTrack">
-                    <!-- 11.jpg = Nursing College and Dental College -->
+                    <!-- 1.jpg = Admin Block -->
+                    <div class="showcase-item" onclick="
+                                openLightbox('images/gallery/1.jpg', {
+                                    title: 'Admin Block',
+                                    desc: 'Serving as the central hub of leadership and management, the Admin Block reflects TMU’s commitment to transparency, efficiency, and academic integrity. ',
+                                    category: 'Administration',
+                                    location: 'Admin Block, TMU Campus',
+                                    date: '2024',
+                                })
+                            ">
+                        <img src="images/gallery/1.jpg" alt="Admin Block" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">Admin Block</h4>
+                        </div>
+                    </div>
+                    <!--11.jpg = Nursing College and Dental College -->
                     <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/11.jpg', {
-                                    title: 'Nursing College & Dental College',
-                                    desc: 'State-of-the-art facilities housing the College of Nursing and the College of Dental Sciences at TMU Campus, Moradabad.',
+                                    title: 'Clock Tower',
+                                    desc: 'A timeless symbol at the heart of the university.',
                                     category: 'Infrastructure',
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
                                 })
                             ">
-                        <img src="images/gallery/11.jpg" alt="Nursing College and Dental College" loading="lazy" />
+                        <img src="images/gallery/11.jpg" alt="Clock Tower" loading="lazy" />
                         <div class="showcase-hover-label">
                             <h4 class="shc-name">
-                                Nursing College &amp; Dental College
+                                Clock Tower
                             </h4>
                         </div>
                     </div>
-                    <!-- 3.jpg = Clock Tower -->
+                    <!--13.jpg = Nursing College and Dental College -->
+                    <div class="showcase-item" onclick="
+                                openLightbox('images/gallery/13.jpg', {
+                                    title: 'Business Incubation Centre',
+                                    desc: 'Empowering ideas into startups with mentorship, resources, and innovation-driven support.',
+                                    category: 'Infrastructure',
+                                    location: 'TMU Campus, Moradabad',
+                                    date: '2024',
+                                })
+                            ">
+                        <img src="images/gallery/13.jpg" alt="Business Incubation Centre" loading="lazy" />
+                        <div class="showcase-hover-label">
+                            <h4 class="shc-name">
+                                Business Incubation Centre
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- 3.jpg = College of Computing Sciences & IT (CCSIT) -->
                     <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/3.jpg', {
-                                    title: 'Clock Tower',
-                                    desc: ' A timeless symbol at the heart of the university.',
+                                    title: 'College of Computing Sciences & IT (CCSIT)',
+                                    desc: 'Premier hub for industry-aligned computer science education.',
                                     category: 'Landmark',
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
                                 })
                             ">
-                        <img src="images/gallery/3.jpg" alt="Clock Tower" loading="lazy" />
+                        <img src="images/gallery/3.jpg" alt="College of Computing Sciences & IT (CCSIT)" loading="lazy" />
                         <div class="showcase-hover-label">
-                            <h4 class="shc-name">Clock Tower</h4>
+                            <h4 class="shc-name">College of Computing Sciences & IT</h4>
                         </div>
                     </div>
-                    <!-- 1.jpg = CCSIT -->
+                    <!-- 7.jpg = Medical College -->
                     <div class="showcase-item" onclick="
-                                openLightbox('images/gallery/1.jpg', {
-                                    title: 'College of Computer Science & IT',
-                                    desc: 'The College of Computer Science and Information Technology (CCSIT) at TMU — a hub of innovation, coding, and cutting-edge research.',
+                                openLightbox('images/gallery/7.jpg', {
+                                    title: 'Medical College',
+                                    desc: 'A centre of excellence in medical education, training future healthcare professionals with strong clinical exposure.',
                                     category: 'Academic Block',
                                     location: 'CCSIT, TMU Campus',
                                     date: '2024',
                                 })
                             ">
-                        <img src="images/gallery/1.jpg" alt="College of Computer Science and IT" loading="lazy" />
+                        <img src="images/gallery/7.jpg" alt="Medical College" loading="lazy" />
                         <div class="showcase-hover-label">
                             <h4 class="shc-name">
-                                CCSIT — Computer Science &amp; IT
+                                Medical College
                             </h4>
                         </div>
                     </div>
-                    <!-- 2.png = Faculty of Engineering -->
+                    <!-- 5.png = College of Nursing & Dental Sciences -->
                     <div class="showcase-item" onclick="
-                                openLightbox('images/gallery/2.jpg', {
-                                    title: 'Faculty of Engineering',
-                                    desc: 'The Faculty of Engineering (FOE) at TMU offers world-class technical education across mechanical, civil, electrical, and computer engineering disciplines.',
+                                openLightbox('images/gallery/5.jpg', {
+                                    title: 'College of Nursing & Dental Sciences',
+                                    desc: 'Empowering the next generation of healthcare leaders.',
                                     category: 'Academic Block',
                                     location: 'FOE, TMU Campus',
                                     date: '2024',
                                 })
                             ">
-                        <img src="images/gallery/2.jpg" alt="Faculty of Engineering" loading="lazy" />
+                        <img src="images/gallery/5.jpg" alt="Faculty of Engineering" loading="lazy" />
                         <div class="showcase-hover-label">
                             <h4 class="shc-name">
-                                FOE — Faculty of Engineering
+                                College of Nursing & Dental Sciences
                             </h4>
                         </div>
                     </div>
-                    <!-- 4.jpg = MBBS Hostel Garden -->
+                    <!-- 4.jpg = Cricket Pavilion -->
                     <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/4.jpg', {
-                                    title: 'MBBS Hostel Garden',
-                                    desc: 'A serene and beautifully landscaped garden adjacent to the MBBS hostel, offering students a peaceful retreat within the campus.',
+                                    title: 'Cricket Pavilion',
+                                    desc: 'A vast field where students gather, compete, and celebrate campus sports.',
                                     category: 'Campus Life',
                                     location: 'Medical Campus, TMU',
                                     date: '2024',
                                 })
                             ">
-                        <img src="images/gallery/4.jpg" alt="MBBS Hostel Garden" loading="lazy" />
+                        <img src="images/gallery/4.jpg" alt="Cricket Pavilion" loading="lazy" />
                         <div class="showcase-hover-label">
-                            <h4 class="shc-name">MBBS Hostel Garden</h4>
-                        </div>
-                    </div>
-                    <!-- 5.jpg = Medical College -->
-                    <div class="showcase-item" onclick="
-                                openLightbox('images/gallery/5.jpg', {
-                                    title: 'Medical College',
-                                    desc: 'A centre of excellence in medical education, training future healthcare professionals with strong clinical exposure.',
-                                    category: 'Campus Life',
-                                    location: 'Medical College, TMU',
-                                    date: '2024',
-                                })
-                            ">
-                        <img src="images/gallery/5.jpg" alt="Medical College" loading="lazy" />
-                        <div class="showcase-hover-label">
-                            <h4 class="shc-name">Medical College</h4>
+                            <h4 class="shc-name">Cricket Pavilion</h4>
                         </div>
                     </div>
                     <!-- 6.jpg = Faculty Apartments -->
@@ -248,37 +274,23 @@
                             <h4 class="shc-name">Faculty Apartments</h4>
                         </div>
                     </div>
-                    <!-- 7.jpg = Admin Block -->
-                    <div class="showcase-item" onclick="
-                                openLightbox('images/gallery/7.jpg', {
-                                    title: 'Admin Block',
-                                    desc: 'The Administrative Block of TMU serves as the central hub for all administrative functions, housing key offices and university governance bodies.',
-                                    category: 'Administration',
-                                    location: 'Admin Block, TMU Campus',
-                                    date: '2024',
-                                })
-                            ">
-                        <img src="images/gallery/7.jpg" alt="Admin Block" loading="lazy" />
-                        <div class="showcase-hover-label">
-                            <h4 class="shc-name">Admin Block</h4>
-                        </div>
-                    </div>
-                    <!-- 8.jpg = Pavilion -->
+                    
+                    <!-- 8.jpg = College of Engineering -->
                     <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/8.jpg', {
-                                    title: 'Pavilion',
-                                    desc: 'The grand Pavilion at TMU Campus is used for major ceremonies, cultural events, and convocation gatherings, accommodating thousands of students and guests.',
-                                    category: 'Event Venue',
+                                    title: 'College of Engineering',
+                                    desc: 'The grand College of Engineering at TMU Campus is used for academic and administrative purposes.',
+                                    category: 'Academic Block',
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
                                 })
                             ">
-                        <img src="images/gallery/8.jpg" alt="Pavilion" loading="lazy" />
+                        <img src="images/gallery/8.jpg" alt="College of Engineering" loading="lazy" />
                         <div class="showcase-hover-label">
-                            <h4 class="shc-name">Pavilion</h4>
+                            <h4 class="shc-name">College of Engineering</h4>
                         </div>
                     </div>
-                    <!-- 9.jpg = Cricket Ground -->
+                    <!-- 9.jpg = Gymnasium -->
                     <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/9.jpg', {
                                     title: 'Gymnasium',
@@ -288,52 +300,28 @@
                                     date: '2024',
                                 })
                             ">
-                        <img src="images/gallery/9.jpg" alt="Cricket Ground" loading="lazy" />
+                        <img src="images/gallery/9.jpg" alt="Gymnasium" loading="lazy" />
                         <div class="showcase-hover-label">
-                            <h4 class="shc-name">Cricket Ground</h4>
+                            <h4 class="shc-name">Gymnasium</h4>
                         </div>
                     </div>
-                    <!-- 10.jpg = College of Computer Science and IT -->
+                    <!-- 10.jpg = IT Block -->
                     <div class="showcase-item" onclick="
                                 openLightbox('images/gallery/10.jpg', {
                                     title: 'IT Block',
-                                    desc: 'IT Block equipped to handle the entire networking of the university',
+                                    desc: 'IT Block equipped with advanced technology and infrastructure to support the academic and administrative needs of the university.',
                                     category: 'Academic Block',
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
                                 })
                             ">
-                        <img src="images/gallery/10.jpg" alt="College of Computer Science and IT" loading="lazy" />
+                        <img src="images/gallery/10.jpg" alt="IT Block" loading="lazy" />
                         <div class="showcase-hover-label">
                             <h4 class="shc-name">
-                                CCSIT — Computer Science &amp; IT
+                                IT Block
                             </h4>
                         </div>
                     </div>
-                    <!-- 12.jpg = Bird Eye View of Admin and Medical College -->
-                    <!-- <div
-                            class="showcase-item"
-                            onclick="
-                                openLightbox('images/gallery/12.jpg', {
-                                    title: 'Admin & Medical College — Aerial View',
-                                    desc: 'A breathtaking bird\'s eye view of the TMU Administrative Block and Medical College complex, showcasing the scale and grandeur of the university campus.',
-                                    category: 'Aerial View',
-                                    location: 'TMU Campus, Moradabad',
-                                    date: '2024',
-                                })
-                            "
-                        >
-                            <img
-                                src="images/gallery/12.jpg"
-                                alt="Bird Eye View of Admin and Medical College"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">
-                                    Admin &amp; Medical College — Aerial View
-                                </h4>
-                            </div>
-                        </div> -->
                 </div>
             </div>
         </div>
@@ -778,7 +766,7 @@
                         <div class="yt-slide">
                             <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
                                 <div class="card-bg">
-                                    <img src="images/video-testimonial/shubhangitest.jpeg" alt="Student Testimonial"
+                                    <img src="images/video-testimonial/123.jpeg" alt="Student Testimonial"
                                         loading="lazy" />
                                 </div>
                                 <div class="yt-card-overlay">
@@ -786,7 +774,7 @@
                                         <i class="fas fa-play"></i>
                                     </div>
                                     <div class="student-info">
-                                        <h4>Subhangi Singh</h4>
+                                        <h4>Shubhangi Singh</h4>
                                         <p>College of Fine Arts</p>
                                     </div>
                                 </div>
@@ -796,7 +784,7 @@
                         <div class="yt-slide">
                             <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
                                 <div class="card-bg">
-                                    <img src="images/video-testimonial/12.jpeg" alt="Student Testimonial"
+                                    <img src="images/video-testimonial/1234.jpeg" alt="Student Testimonial"
                                         loading="lazy" />
                                 </div>
                                 <div class="yt-card-overlay">
@@ -814,7 +802,7 @@
                         <div class="yt-slide">
                             <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
                                 <div class="card-bg">
-                                    <img src="images/video-testimonial/13.jpeg" alt="Student Testimonial"
+                                    <img src="images/video-testimonial/12345.jpeg" alt="Student Testimonial"
                                         loading="lazy" />
                                 </div>
                                 <div class="yt-card-overlay">
@@ -832,7 +820,7 @@
                         <div class="yt-slide">
                             <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
                                 <div class="card-bg">
-                                    <img src="images/video-testimonial/14.jpeg" alt="Student Testimonial"
+                                    <img src="images/video-testimonial/123.jpeg" alt="Student Testimonial"
                                         loading="lazy" />
                                 </div>
                                 <div class="yt-card-overlay">
@@ -850,7 +838,7 @@
                         <div class="yt-slide">
                             <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
                                 <div class="card-bg">
-                                    <img src="images/video-testimonial/15.jpeg" alt="Astha Sharma" loading="lazy" />
+                                    <img src="images/video-testimonial/123.jpeg" alt="Astha Sharma" loading="lazy" />
                                 </div>
                                 <div class="yt-card-overlay">
                                     <div class="play-btn-glass">
@@ -867,7 +855,7 @@
                         <div class="yt-slide">
                             <div class="yt-thumb-card" onclick="openVideo('dQw4w9WgXcQ')">
                                 <div class="card-bg">
-                                    <img src="images/video-testimonial/16.jpeg" alt="Shubhangi" loading="lazy" />
+                                    <img src="images/video-testimonial/123.jpeg" alt="Shubhangi" loading="lazy" />
                                 </div>
                                 <div class="yt-card-overlay">
                                     <div class="play-btn-glass">
@@ -923,7 +911,7 @@
                         <!-- News Card 1 -->
                         <div class="news-card-v2">
                             <div class="news-image-wrap-v2">
-                                <img src="images/news/1772452291_jQO544ffXc.jpeg" class="card-image" alt="Culture"
+                                <img src="images/news/news1.png" class="card-image" alt="Culture"
                                     loading="lazy" />
                             </div>
                             <div class="card-content-v2">
@@ -942,7 +930,7 @@
                         <!-- News Card 2 -->
                         <div class="news-card-v2">
                             <div class="news-image-wrap-v2">
-                                <img src="images/news/1768641490_J8uLmK7xFH.jpg" class="card-image" alt="Travel"
+                                <img src="images/news/news2.jpeg" class="card-image" alt="Travel"
                                     loading="lazy" />
                             </div>
                             <div class="card-content-v2">
@@ -961,7 +949,7 @@
                         <!-- News Card 3 -->
                         <div class="news-card-v2">
                             <div class="news-image-wrap-v2">
-                                <img src="images/news/1771330652_PJpQ6BWZ3s.png" class="card-image" alt="Life Style"
+                                <img src="images/news/news3.png" class="card-image" alt="Life Style"
                                     loading="lazy" />
                             </div>
                             <div class="card-content-v2">
@@ -980,7 +968,7 @@
                         <!-- News Card 4 -->
                         <div class="news-card-v2">
                             <div class="news-image-wrap-v2">
-                                <img src="images/news/1772534975_6Ed46dKADO.png" class="card-image" alt="Education"
+                                <img src="images/news/news4.jpg" class="card-image" alt="Education"
                                     loading="lazy" />
                             </div>
                             <div class="card-content-v2">
