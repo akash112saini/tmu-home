@@ -6379,30 +6379,55 @@ body {
     .hero-subtext {
         font-size: 1rem;
     }
+<<<<<<< Updated upstream
 
+=======
+    .hero-layout-wrapper {
+        display: grid;
+    }
+>>>>>>> Stashed changes
     .hero-usp-card {
+        grid-row: 1;
+        grid-column: 1;
+        align-self: end;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
-        width: 85%;
-        max-width: 340px;
-        padding: 0;
+        width: 90%;
+        max-width: 400px;
+        padding: 5px 0;
         gap: 0;
+<<<<<<< Updated upstream
         bottom: 0;
         transform: translateY(50%) scale(0.95);
         /* Y-only entrance */
+=======
+        bottom: -50px;
+        margin: 0 auto;
+        transform: translateY(30px) scale(0.95); /* Y-only entrance */
+>>>>>>> Stashed changes
         box-shadow:
             0 8px 25px rgba(0, 0, 0, 0.4),
             0 0 10px rgba(100, 150, 255, 0.1);
     }
+<<<<<<< Updated upstream
 
     .usp-card-visible {
         transform: translateY(50%);
         /* Y-only, locked — no X drift */
+=======
+    .banner-showcase {
+        grid-row: 2;
+        grid-column: 1;
+        padding: 100px 0 40px; /* Pushed banner display down */
+    }
+    .usp-card-visible {
+        transform: translateY(0); /* Normal flow */
+>>>>>>> Stashed changes
     }
 
     .usp-card-visible:hover {
-        transform: translateY(calc(50% - 4px)) scale(1.02);
+        transform: translateY(-4px) scale(1.02);
     }
 
     /* Glowing + Divider via pseudo-elements */
@@ -6440,28 +6465,38 @@ body {
     }
 
     .usp-stat {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-areas:
+            "icon count"
+            "icon label";
         align-items: center;
         justify-content: center;
-        text-align: center;
-        gap: 2px;
-        padding: 12px 8px;
+        text-align: left;
+        column-gap: 12px;
+        row-gap: 2px;
+        padding: 10px 4px;
         position: relative;
         z-index: 2;
     }
 
     .usp-icon {
-        font-size: 1.4rem;
+        grid-area: icon;
+        font-size: 1.5rem;
         margin-bottom: 0px;
     }
 
     .usp-count {
-        font-size: 1.6rem;
+        grid-area: count;
+        font-size: 1.3rem; /* Reduced font size for numbers */
+    }
+    .usp-count .usp-suffix {
+        font-size: 0.85rem;
     }
 
     .usp-label {
-        font-size: 0.75rem;
+        grid-area: label;
+        font-size: 0.7rem;
     }
 
     .hero-ctas {
@@ -6488,18 +6523,19 @@ body {
 
     .hero-usp-card {
         width: 92%;
+        bottom: -50px;
     }
 
     .usp-icon {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .usp-count {
-        font-size: 1.6rem;
+        font-size: 1.15rem;
     }
 
     .usp-label {
-        font-size: 0.75rem;
+        font-size: 0.65rem;
     }
 
     .btn-hero-primary,
