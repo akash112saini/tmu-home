@@ -199,14 +199,40 @@
             <div class="showcase-outer">
                 <div class="showcase-slider" id="showcaseSlider">
                     <div class="showcase-track" id="showcaseTrack">
-                        <!-- 11.jpg = Nursing College and Dental College -->
+
+                        <!-- 1.jpg = Admin Block -->
+                        <div
+                            class="showcase-item"
+                            onclick="
+                                openLightbox('images/gallery/1.jpg', {
+                                    title: 'Administrative Block',
+                                    desc: 'Serving as the central hub of leadership and management, the Admin Block reflects TMU’s commitment to transparency, efficiency, and academic integrity. ',
+                                    category: 'Academic Block',
+                                    location: 'Admin, TMU Campus',
+                                    date: '2024',
+                                })
+                            "
+                        >
+                            <img
+                                src="images/gallery/1.jpg"
+                                alt="Administrative Block"
+                                loading="lazy"
+                            />
+                            <div class="showcase-hover-label">
+                                <h4 class="shc-name">
+                                    Administrative Block
+                                </h4>
+                            </div>
+                        </div>
+
+                        <!-- 11.jpg = Clock Tower -->
                         <div
                             class="showcase-item"
                             onclick="
                                 openLightbox('images/gallery/11.jpg', {
-                                    title: 'Nursing College & Dental College',
-                                    desc: 'State-of-the-art facilities housing the College of Nursing and the College of Dental Sciences at TMU Campus, Moradabad.',
-                                    category: 'Infrastructure',
+                                    title: 'Clock Tower',
+                                    desc: ' A timeless symbol at the heart of the university.',
+                                    category: 'Landmark',
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
                                 })
@@ -214,6 +240,29 @@
                         >
                             <img
                                 src="images/gallery/11.jpg"
+                                alt="Clock Tower"
+                                loading="lazy"
+                            />
+                            <div class="showcase-hover-label">
+                                <h4 class="shc-name">Clock Tower</h4>
+                            </div>
+                        </div>
+
+                        <!-- 5.jpg = Nursing College and Dental College -->
+                        <div
+                            class="showcase-item"
+                            onclick="
+                                openLightbox('images/gallery/5.jpg', {
+                                    title: 'Nursing College & Dental College',
+                                    desc: 'Empowering the next generation of healthcare leaders.',
+                                    category: 'Infrastructure',
+                                    location: 'TMU Campus, Moradabad',
+                                    date: '2024',
+                                })
+                            "
+                        >
+                            <img
+                                src="images/gallery/5.jpg"
                                 alt="Nursing College and Dental College"
                                 loading="lazy"
                             />
@@ -223,57 +272,12 @@
                                 </h4>
                             </div>
                         </div>
-                        <!-- 3.jpg = Clock Tower -->
+                        
+                        <!-- 8.png = Faculty of Engineering -->
                         <div
                             class="showcase-item"
                             onclick="
-                                openLightbox('images/gallery/3.jpg', {
-                                    title: 'Clock Tower',
-                                    desc: 'The iconic Clock Tower stands at the heart of TMU Campus, serving as a landmark and symbol of timeless academic excellence.',
-                                    category: 'Landmark',
-                                    location: 'TMU Campus, Moradabad',
-                                    date: '2024',
-                                })
-                            "
-                        >
-                            <img
-                                src="images/gallery/3.jpg"
-                                alt="Clock Tower"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">Clock Tower</h4>
-                            </div>
-                        </div>
-                        <!-- 1.jpg = CCSIT -->
-                        <div
-                            class="showcase-item"
-                            onclick="
-                                openLightbox('images/gallery/1.jpg', {
-                                    title: 'College of Computer Science & IT',
-                                    desc: 'The College of Computer Science and Information Technology (CCSIT) at TMU — a hub of innovation, coding, and cutting-edge research.',
-                                    category: 'Academic Block',
-                                    location: 'CCSIT, TMU Campus',
-                                    date: '2024',
-                                })
-                            "
-                        >
-                            <img
-                                src="images/gallery/1.jpg"
-                                alt="College of Computer Science and IT"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">
-                                    CCSIT — Computer Science &amp; IT
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- 2.png = Faculty of Engineering -->
-                        <div
-                            class="showcase-item"
-                            onclick="
-                                openLightbox('images/gallery/2.jpg', {
+                                openLightbox('images/gallery/8.jpg', {
                                     title: 'Faculty of Engineering',
                                     desc: 'The Faculty of Engineering (FOE) at TMU offers world-class technical education across mechanical, civil, electrical, and computer engineering disciplines.',
                                     category: 'Academic Block',
@@ -283,7 +287,7 @@
                             "
                         >
                             <img
-                                src="images/gallery/2.jpg"
+                                src="images/gallery/8.jpg"
                                 alt="Faculty of Engineering"
                                 loading="lazy"
                             />
@@ -293,43 +297,22 @@
                                 </h4>
                             </div>
                         </div>
-                        <!-- 4.jpg = MBBS Hostel Garden -->
+
+                        <!-- 7.jpg = Medical College -->
                         <div
                             class="showcase-item"
                             onclick="
-                                openLightbox('images/gallery/4.jpg', {
-                                    title: 'MBBS Hostel Garden',
-                                    desc: 'A serene and beautifully landscaped garden adjacent to the MBBS hostel, offering students a peaceful retreat within the campus.',
-                                    category: 'Campus Life',
-                                    location: 'Medical Campus, TMU',
-                                    date: '2024',
-                                })
-                            "
-                        >
-                            <img
-                                src="images/gallery/4.jpg"
-                                alt="MBBS Hostel Garden"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">MBBS Hostel Garden</h4>
-                            </div>
-                        </div>
-                        <!-- 5.jpg = Medical College -->
-                        <div
-                            class="showcase-item"
-                            onclick="
-                                openLightbox('images/gallery/5.jpg', {
+                                openLightbox('images/gallery/7.jpg', {
                                     title: 'Medical College',
-                                    desc: 'TMU Medical College is one of the premier medical institutes in North India, offering MBBS and postgraduate medical programmes with advanced clinical infrastructure.',
-                                    category: 'Academic Block',
+                                    desc: 'A centre of excellence in medical education, training future healthcare professionals with strong clinical exposure.',
+                                    category: 'Campus Life',
                                     location: 'Medical College, TMU',
                                     date: '2024',
                                 })
                             "
                         >
                             <img
-                                src="images/gallery/5.jpg"
+                                src="images/gallery/7.jpg"
                                 alt="Medical College"
                                 loading="lazy"
                             />
@@ -337,13 +320,14 @@
                                 <h4 class="shc-name">Medical College</h4>
                             </div>
                         </div>
+
                         <!-- 6.jpg = Faculty Apartments -->
                         <div
                             class="showcase-item"
                             onclick="
                                 openLightbox('images/gallery/6.jpg', {
                                     title: 'Faculty Apartments',
-                                    desc: 'Modern and well-maintained residential apartments for TMU faculty and staff, nestled within the lush green campus environment.',
+                                    desc: 'Well-spaced, modern apartments for TMU faculty and staff.',
                                     category: 'Residential',
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
@@ -359,57 +343,36 @@
                                 <h4 class="shc-name">Faculty Apartments</h4>
                             </div>
                         </div>
-                        <!-- 7.jpg = Admin Block -->
+                        
+                        <!-- 8.jpg = Cricket Ground -->
                         <div
                             class="showcase-item"
                             onclick="
-                                openLightbox('images/gallery/7.jpg', {
-                                    title: 'Admin Block',
-                                    desc: 'The Administrative Block of TMU serves as the central hub for all administrative functions, housing key offices and university governance bodies.',
-                                    category: 'Administration',
-                                    location: 'Admin Block, TMU Campus',
-                                    date: '2024',
-                                })
-                            "
-                        >
-                            <img
-                                src="images/gallery/7.jpg"
-                                alt="Admin Block"
-                                loading="lazy"
-                            />
-                            <div class="showcase-hover-label">
-                                <h4 class="shc-name">Admin Block</h4>
-                            </div>
-                        </div>
-                        <!-- 8.jpg = Pavilion -->
-                        <div
-                            class="showcase-item"
-                            onclick="
-                                openLightbox('images/gallery/8.jpg', {
-                                    title: 'Pavilion',
-                                    desc: 'The grand Pavilion at TMU Campus is used for major ceremonies, cultural events, and convocation gatherings, accommodating thousands of students and guests.',
-                                    category: 'Event Venue',
+                                openLightbox('images/gallery/4.jpg', {
+                                    title: 'Cricket Ground',
+                                    desc: 'A well-maintained cricket ground used for inter-university tournaments and practice sessions.',
+                                    category: 'Sports Facility',
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
                                 })
                             "
                         >
                             <img
-                                src="images/gallery/8.jpg"
+                                src="images/gallery/4.jpg"
                                 alt="Pavilion"
                                 loading="lazy"
                             />
                             <div class="showcase-hover-label">
-                                <h4 class="shc-name">Pavilion</h4>
+                                <h4 class="shc-name">Cricket Ground</h4>
                             </div>
                         </div>
-                        <!-- 9.jpg = Cricket Ground -->
+                        <!-- 9.jpg = Gymnasium -->
                         <div
                             class="showcase-item"
                             onclick="
                                 openLightbox('images/gallery/9.jpg', {
-                                    title: 'Cricket Ground',
-                                    desc: 'A full-sized cricket ground at TMU Campus offering students a professional sporting facility to nurture athletic talent and sportsmanship.',
+                                    title: 'Gymnasium',
+                                    desc: 'A full-sized gymnasium at TMU Campus offering students a professional sporting facility to nurture health and fitness.',
                                     category: 'Sports Facility',
                                     location: 'TMU Campus, Moradabad',
                                     date: '2024',
@@ -418,34 +381,34 @@
                         >
                             <img
                                 src="images/gallery/9.jpg"
-                                alt="Cricket Ground"
+                                alt="Gymnasium"
                                 loading="lazy"
                             />
                             <div class="showcase-hover-label">
-                                <h4 class="shc-name">Cricket Ground</h4>
+                                <h4 class="shc-name">Gymnasium</h4>
                             </div>
                         </div>
-                        <!-- 10.jpg = College of Computer Science and IT -->
+                        <!-- 10.jpg = IT Block -->
                         <div
                             class="showcase-item"
                             onclick="
                                 openLightbox('images/gallery/10.jpg', {
-                                    title: 'College of Computer Science & IT',
-                                    desc: 'Another view of the College of Computer Science and Information Technology (CCSIT) — a state-of-the-art academic block designed for the next generation of tech leaders.',
+                                    title: 'IT Block',
+                                    desc: 'IT Block equipped to handle the entire networking of the university',
                                     category: 'Academic Block',
-                                    location: 'CCSIT, TMU Campus',
+                                    location: 'TMU Campus, Moradabad',
                                     date: '2024',
                                 })
                             "
                         >
                             <img
                                 src="images/gallery/10.jpg"
-                                alt="College of Computer Science and IT"
+                                alt="IT Block"
                                 loading="lazy"
                             />
                             <div class="showcase-hover-label">
                                 <h4 class="shc-name">
-                                    CCSIT — Computer Science &amp; IT
+                                    IT Block
                                 </h4>
                             </div>
                         </div>
@@ -839,7 +802,7 @@
                 </div>
 
                 <div class="alm-static-testimonial">
-                    <img src="images/testimonials/bhenkrr.png" alt="Testimonial from our Alumni" />
+                    <img src="images/testimonials/test2.png" alt="Testimonial from our Alumni" />
                 </div>
 
                 <!-- Center-Locked Orbital Selector -->
