@@ -493,11 +493,15 @@
     if (slideCount === 0) return;
 
     // Clone all slides and append/prepend for infinite loop
+    const firstOriginal = originalSlides[0];
     originalSlides.forEach((slide) => {
-        const cloneBefore = slide.cloneNode(true);
+        // Appending to the end is always in order
         const cloneAfter = slide.cloneNode(true);
-        slider.insertBefore(cloneBefore, slider.firstChild);
         slider.appendChild(cloneAfter);
+
+        // Inserting before the firstOriginal keeps the prepended clones in order!
+        const cloneBefore = slide.cloneNode(true);
+        slider.insertBefore(cloneBefore, firstOriginal);
     });
 
     let isDown = false;
@@ -769,121 +773,148 @@ window.closeLightbox = function () {
     const grid = document.querySelector(".blog-grid");
     if (!grid) return;
 
+    const originalCards = Array.from(grid.querySelectorAll(".blog-card"));
+    const totalCards = originalCards.length;
+    if (totalCards === 0) return;
+
+    // Clone the entire set of cards to guarantee exact ordering (prefix, middle, suffix)
+    // We use cloneNode to keep original nodes intact so the IntersectionObserver properly triggers their fade-in.
+    // Buffer before
+    originalCards
+        .slice()
+        .reverse()
+        .forEach((card) => {
+            const clone = card.cloneNode(true);
+            clone.style.opacity = "1";
+            clone.style.transform = "translateY(0)";
+            grid.insertBefore(clone, grid.firstChild);
+        });
+
+    // Buffer after
+    originalCards.forEach((card) => {
+        const clone = card.cloneNode(true);
+        clone.style.opacity = "1";
+        clone.style.transform = "translateY(0)";
+        grid.appendChild(clone);
+    });
+
+    // Update NodeList after HTML changes
+    const allCards = grid.querySelectorAll(".blog-card");
+
+    let timer;
     let isDown = false;
-    let startX, scrollLeft, timer;
+    let startX, startScrollLeft;
+
+    const getSetWidth = () => {
+        // Width of one full set of cards. We can find this by measuring distance from card 0 to card `totalCards`
+        if (allCards.length >= totalCards * 2) {
+            return allCards[totalCards].offsetLeft - allCards[0].offsetLeft;
+        }
+        return grid.scrollWidth / 3;
+    };
+
+    const getCardWidth = () => {
+        const gap = parseInt(window.getComputedStyle(grid).gap) || 30;
+        return allCards[0].offsetWidth + gap;
+    };
+
+    const jumpToMiddle = () => {
+        grid.style.scrollBehavior = "auto";
+        grid.scrollLeft = getSetWidth();
+    };
+
+    // Initialize to start of the middle set
+    setTimeout(jumpToMiddle, 150);
 
     const startAuto = () => {
         clearInterval(timer);
         timer = setInterval(() => {
             if (isDown) return;
-            const card = grid.querySelector(".blog-card");
-            if (!card) return;
-
-            const gap = parseInt(getComputedStyle(grid).gap) || 30;
-            const amount = card.offsetWidth + gap;
-
             grid.style.scrollBehavior = "smooth";
-            grid.scrollLeft += amount;
-
-            // After transition, move first to last
-            setTimeout(() => {
-                if (!isDown) {
-                    // Only move if user isn't currently dragging
-                    grid.style.scrollBehavior = "auto";
-                    grid.appendChild(card);
-                    grid.scrollLeft -= amount;
-                    grid.style.scrollBehavior = "";
-                }
-            }, 600);
+            grid.scrollLeft += getCardWidth();
         }, 5000);
     };
 
-    const handleStart = (e) => {
+    // Keep the scroll within the middle region
+    grid.addEventListener("scroll", () => {
+        if (isDown) return;
+
+        const setWidth = getSetWidth();
+
+        // If we scrolled fully into the left buffer
+        if (grid.scrollLeft <= 5) {
+            grid.style.scrollBehavior = "auto";
+            grid.scrollLeft += setWidth;
+        }
+        // If we scrolled fully through the middle buffer
+        else if (grid.scrollLeft >= setWidth * 2 - 5) {
+            grid.style.scrollBehavior = "auto";
+            grid.scrollLeft -= setWidth;
+        }
+    });
+
+    // Arrow controls
+    const nextBtn = document.getElementById("blogNext");
+    const prevBtn = document.getElementById("blogPrev");
+
+    if (nextBtn) {
+        nextBtn.addEventListener("click", () => {
+            grid.style.scrollBehavior = "smooth";
+            grid.scrollLeft += getCardWidth();
+            startAuto();
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener("click", () => {
+            grid.style.scrollBehavior = "smooth";
+            grid.scrollLeft -= getCardWidth();
+            startAuto();
+        });
+    }
+
+    // Drag-to-scroll controls
+    const startDrag = (e) => {
         isDown = true;
         grid.style.cursor = "grabbing";
         grid.style.scrollSnapType = "none";
         grid.style.scrollBehavior = "auto";
         startX = (e.pageX || e.touches[0].pageX) - grid.offsetLeft;
-        scrollLeft = grid.scrollLeft;
+        startScrollLeft = grid.scrollLeft;
         clearInterval(timer);
     };
 
-    const handleEnd = () => {
+    const endDrag = () => {
         if (!isDown) return;
         isDown = false;
         grid.style.cursor = "grab";
         grid.style.scrollSnapType = "x mandatory";
 
-        const cards = grid.querySelectorAll(".blog-card");
-        const gap = parseInt(getComputedStyle(grid).gap) || 30;
-        const width = cards[0].offsetWidth + gap;
-
-        if (grid.scrollLeft > width) {
-            grid.appendChild(cards[0]);
-            grid.scrollLeft -= width;
-        } else if (grid.scrollLeft < 0) {
-            grid.insertBefore(cards[cards.length - 1], cards[0]);
-            grid.scrollLeft += width;
+        // After drag finishes, bounds check to enforce infinite feel
+        const setWidth = getSetWidth();
+        if (grid.scrollLeft <= 50) {
+            grid.scrollLeft += setWidth;
+        } else if (grid.scrollLeft >= setWidth * 2 - 50) {
+            grid.scrollLeft -= setWidth;
         }
-
         startAuto();
     };
 
-    // Manual Navigation
-    const nextSlide = () => {
-        const card = grid.querySelector(".blog-card");
-        const gap = parseInt(getComputedStyle(grid).gap) || 30;
-        const amount = card.offsetWidth + gap;
-
-        grid.style.scrollBehavior = "smooth";
-        grid.scrollLeft += amount;
-        setTimeout(() => {
-            grid.style.scrollBehavior = "auto";
-            grid.appendChild(card);
-            grid.scrollLeft -= amount;
-            grid.style.scrollBehavior = "";
-        }, 600);
-        startAuto(); // Reset auto timer
-    };
-
-    const prevSlide = () => {
-        const cards = grid.querySelectorAll(".blog-card");
-        const lastCard = cards[cards.length - 1];
-        const gap = parseInt(getComputedStyle(grid).gap) || 30;
-        const amount = lastCard.offsetWidth + gap;
-
-        grid.style.scrollBehavior = "auto";
-        grid.insertBefore(lastCard, cards[0]);
-        grid.scrollLeft += amount;
-
-        setTimeout(() => {
-            grid.style.scrollBehavior = "smooth";
-            grid.scrollLeft -= amount;
-        }, 50);
-        startAuto(); // Reset auto timer
-    };
-
-    document.getElementById("blogNext").addEventListener("click", nextSlide);
-    document.getElementById("blogPrev").addEventListener("click", prevSlide);
-
-    const handleMove = (e) => {
+    const moveDrag = (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = (e.pageX || e.touches[0].pageX) - grid.offsetLeft;
         const walk = (x - startX) * 1.5;
-        grid.scrollLeft = scrollLeft - walk;
+        grid.scrollLeft = startScrollLeft - walk;
     };
 
-    grid.addEventListener("mousedown", handleStart);
-    window.addEventListener("mouseup", handleEnd);
-    grid.addEventListener("mousemove", handleMove);
-    grid.addEventListener("touchstart", handleStart, {
-        passive: false,
-    });
-    grid.addEventListener("touchend", handleEnd);
-    grid.addEventListener("touchmove", handleMove, {
-        passive: false,
-    });
+    grid.addEventListener("mousedown", startDrag);
+    window.addEventListener("mouseup", endDrag);
+    grid.addEventListener("mousemove", moveDrag);
+
+    grid.addEventListener("touchstart", startDrag, { passive: false });
+    window.addEventListener("touchend", endDrag);
+    grid.addEventListener("touchmove", moveDrag, { passive: false });
 
     grid.style.cursor = "grab";
     startAuto();
@@ -1123,14 +1154,22 @@ window.closeLightbox = function () {
         let touchStartX = 0;
         let touchEndX = 0;
 
-        frame.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
+        frame.addEventListener(
+            "touchstart",
+            function (e) {
+                touchStartX = e.changedTouches[0].screenX;
+            },
+            { passive: true },
+        );
 
-        frame.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, { passive: true });
+        frame.addEventListener(
+            "touchend",
+            function (e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            },
+            { passive: true },
+        );
 
         function handleSwipe() {
             var threshold = 50; // minimum distance to be considered a swipe
@@ -1181,5 +1220,36 @@ window.closeLightbox = function () {
                 { once: true },
             );
         }
+    });
+})();
+
+// ── Static Testimonial Image Slider ──────────────────────────────────────
+(function () {
+    const track = document.querySelector(".alm-testimonial-track");
+    const images = document.querySelectorAll(".alm-testimonial-img");
+    const prevBtn = document.getElementById("almTestPrev");
+    const nextBtn = document.getElementById("almTestNext");
+    if (!track || images.length === 0 || !prevBtn || !nextBtn) return;
+
+    let currentIndex = 0;
+
+    const showImage = (index) => {
+        images.forEach((img, i) => {
+            if (i === index) {
+                img.classList.add("active");
+            } else {
+                img.classList.remove("active");
+            }
+        });
+    };
+
+    nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+    });
+
+    prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showImage(currentIndex);
     });
 })();

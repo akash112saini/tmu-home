@@ -1207,16 +1207,65 @@ body {
     width: 100%;
     max-width: 1200px;
     margin: 10px auto;
-    /* Removed the heavy bottom margin */
+    position: relative;
+}
+
+.alm-testimonial-track {
+    position: relative;
+    width: 100%;
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
-.alm-static-testimonial img {
+.alm-testimonial-img {
     width: 100%;
     height: auto;
     object-fit: contain;
-    background: transparent;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.alm-testimonial-img:not(.active) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Testimonial Nav Buttons */
+.alm-test-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: #ffffff;
+    border: 1px solid #eaecf0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    color: #003399;
+    font-size: 16px;
+}
+
+.alm-test-nav:hover {
+    background-color: #003399;
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(0, 51, 153, 0.2);
+}
+
+.alm-test-nav.prev-btn {
+    left: 10px;
+}
+
+.alm-test-nav.next-btn {
+    right: 10px;
 }
 
 /* ── Epicenter-Aligned Horizontal Selector ─────────────────── */
@@ -2401,14 +2450,7 @@ body {
 /* Redesigned YouTube Section */
 .testimonial-video-section {
     padding: 80px 0 100px;
-    background: linear-gradient(
-        180deg,
-        rgba(0, 16, 85, 0.04) 0%,
-        rgba(173, 204, 234, 0.28) 25%,
-        rgba(210, 228, 245, 0.45) 50%,
-        rgba(173, 204, 234, 0.28) 75%,
-        rgba(0, 16, 85, 0.04) 100%
-    );
+    background-color: #ffffff;
     text-align: center;
     overflow: hidden;
     position: relative;
@@ -2475,7 +2517,7 @@ body {
     border-radius: 24px;
     overflow: hidden;
     position: relative;
-    background: #0f172a;
+    /* background: #0f172a; */
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
     /* Removed Grayscale/Dimming - All cards in original color */
@@ -2957,7 +2999,7 @@ body {
 .notice-list {
     display: flex;
     flex-direction: column;
-    max-height: 580px;
+    max-height: 640px;
     /* Approximately 4 notices */
     overflow-y: auto;
     padding-right: 10px;
@@ -4143,7 +4185,7 @@ body {
    IMAGE SHOWCASE SECTION (Sliding & Expanding)
    ============================================ */
 .image-showcase {
-    padding: 100px 0;
+    padding: 60px 0;
     overflow: hidden;
     background: #fff;
     text-align: center;
@@ -4303,7 +4345,7 @@ body {
 
 @media (max-width: 768px) {
     .image-showcase {
-        padding: 40px 0; /* Reduced padding from 100px to reduce space */
+        padding: 60px 0; /* Reduced padding from 100px to reduce space */
     }
 
     .showcase-item {
