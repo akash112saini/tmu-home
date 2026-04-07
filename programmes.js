@@ -521,7 +521,7 @@ function buildProgrammeCard(prog, animIdx) {
             <div class="meta-tags">
                 <span class="meta-tag">${duration}</span>
             </div>
-            <h6 class="card-title">${prog.title}</h6>
+            <h3 class="card-title">${prog.title}</h3>
             <div class="card-footer">
                 
                 <div class="explore-cta" aria-label="Explore ${prog.title}">
@@ -572,7 +572,7 @@ function renderMobileAccordion() {
         accordion.dataset.id = cat.id;
 
         const icon = collegeIcons[cat.id] || collegeIcons["all"];
-        
+
         accordion.innerHTML = `
             <button class="college-accordion-header" aria-expanded="false">
                 <div class="cah-left">
@@ -588,7 +588,7 @@ function renderMobileAccordion() {
             </button>
             <div class="college-accordion-content">
                 <div class="college-accordion-inner" onscroll="updateMpcProgress(this)">
-                    ${programs.map(p => buildMobileProgCard(p)).join("")}
+                    ${programs.map((p) => buildMobileProgCard(p)).join("")}
                 </div>
                 <div class="mpc-progress-bar-wrap" style="${programs.length > 1 ? "" : "display:none"}">
                     <div class="mpc-progress-bar"></div>
@@ -599,10 +599,10 @@ function renderMobileAccordion() {
         const header = accordion.querySelector(".college-accordion-header");
         header.addEventListener("click", () => {
             const isActive = accordion.classList.contains("active");
-            
+
             // Optional: Close other accordions
             // document.querySelectorAll('.college-accordion').forEach(a => a.classList.remove('active'));
-            
+
             if (isActive) {
                 accordion.classList.remove("active");
                 header.setAttribute("aria-expanded", "false");
@@ -626,7 +626,12 @@ function renderMobileAccordion() {
 
 function buildMobileProgCard(prog) {
     const level = prog.level || "UG";
-    const badgeColor = level === "PG" ? "#002147" : (level === "Doctorate" ? "#722f37" : "#FF7900");
+    const badgeColor =
+        level === "PG"
+            ? "#002147"
+            : level === "Doctorate"
+              ? "#722f37"
+              : "#FF7900";
 
     let duration = "3 Years";
     if (level === "PG") duration = "2 Years";
@@ -656,19 +661,17 @@ function buildMobileProgCard(prog) {
     `;
 }
 
-
 function updateMpcProgress(el) {
-    const wrap = el.parentElement.querySelector('.mpc-progress-bar-wrap');
-    const bar = wrap.querySelector('.mpc-progress-bar');
+    const wrap = el.parentElement.querySelector(".mpc-progress-bar-wrap");
+    const bar = wrap.querySelector(".mpc-progress-bar");
     if (!bar) return;
-    
+
     const scrollLeft = el.scrollLeft;
     const maxScroll = el.scrollWidth - el.clientWidth;
     const progress = (scrollLeft / maxScroll) * 100;
-    
-    bar.style.width = Math.max(10, progress) + '%';
-}
 
+    bar.style.width = Math.max(10, progress) + "%";
+}
 
 // ═══════════════════════════════════════════════════════════════
 //  PARTICLES
