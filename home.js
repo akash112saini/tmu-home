@@ -1225,31 +1225,60 @@ window.closeLightbox = function () {
 
 // ── Static Testimonial Image Slider ──────────────────────────────────────
 (function () {
-    const track = document.querySelector(".alm-testimonial-track");
     const images = document.querySelectorAll(".alm-testimonial-img");
     const prevBtn = document.getElementById("almTestPrev");
     const nextBtn = document.getElementById("almTestNext");
-    if (!track || images.length === 0 || !prevBtn || !nextBtn) return;
+    const dots = document.querySelectorAll(".alm-dot");
+    const progressFill = document.getElementById("almProgressFill");
 
+    if (images.length === 0 || !prevBtn || !nextBtn) return;
+
+    const total = images.length;
     let currentIndex = 0;
+    let autoTimer = null;
 
-    const showImage = (index) => {
+    const updateUI = (index) => {
+        // Swap active image
         images.forEach((img, i) => {
-            if (i === index) {
-                img.classList.add("active");
-            } else {
-                img.classList.remove("active");
-            }
+            img.classList.toggle("active", i === index);
+        });
+
+        // Sync dots — force animation restart by toggling active class
+        dots.forEach((dot, i) => {
+            dot.classList.remove("active");
+            // Trigger reflow so ::before animation restarts cleanly
+            void dot.offsetWidth;
+            if (i === index) dot.classList.add("active");
         });
     };
 
-    nextBtn.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % images.length;
-        showImage(currentIndex);
+    const goTo = (index) => {
+        currentIndex = (index + total) % total;
+        updateUI(currentIndex);
+    };
+
+    const startAuto = () => {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => {
+            goTo(currentIndex + 1);
+        }, 5000);
+    };
+
+    // Arrow nav
+    nextBtn.addEventListener("click", () => { goTo(currentIndex + 1); startAuto(); });
+    prevBtn.addEventListener("click", () => { goTo(currentIndex - 1); startAuto(); });
+
+    // Dot nav
+    dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+            const idx = parseInt(dot.getAttribute("data-index"), 10);
+            goTo(idx);
+            startAuto();
+        });
     });
 
-    prevBtn.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        showImage(currentIndex);
-    });
+    // Init
+    updateUI(0);
+    startAuto();
 })();
+

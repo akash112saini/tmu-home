@@ -1074,14 +1074,14 @@ body {
 .alumni-section {
     position: relative;
     width: 100%;
-    min-height: calc(98vh - 70px);
-    max-height: calc(98vh - 70px);
+    min-height: auto;
+    max-height: none;
     background-color: #ffffff;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 0;
+    padding: 60px 0;
 }
 
 .alm-bg {
@@ -1153,7 +1153,7 @@ body {
     max-width: 1350px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0;
 }
 
 /* ── Header Row ─────────────────────────────────────── */
@@ -1164,7 +1164,7 @@ body {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
 }
 
 .alm-hero-text {
@@ -1206,8 +1206,9 @@ body {
 .alm-static-testimonial {
     width: 100%;
     max-width: 1200px;
-    margin: 10px auto;
+    margin: 4px auto;
     position: relative;
+    padding: 0 60px;
 }
 
 .alm-testimonial-track {
@@ -1238,34 +1239,104 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    background: #ffffff;
-    border: 1px solid #eaecf0;
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(0, 16, 85, 0.12);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 10;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    color: #003399;
-    font-size: 16px;
+    box-shadow:
+        0 8px 24px rgba(0, 16, 85, 0.1),
+        0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    color: var(--primary-color, #001055);
+    font-size: 18px;
 }
 
 .alm-test-nav:hover {
-    background-color: #003399;
+    background: var(--primary-color, #001055);
     color: #ffffff;
-    box-shadow: 0 6px 20px rgba(0, 51, 153, 0.2);
+    border-color: transparent;
+    box-shadow: 0 12px 32px rgba(0, 16, 85, 0.25);
+    transform: translateY(-50%) scale(1.1);
 }
 
 .alm-test-nav.prev-btn {
-    left: 10px;
+    left: 0;
 }
 
 .alm-test-nav.next-btn {
-    right: 10px;
+    right: 0;
+}
+
+/* ── Progress Bar & Dots ────────────────────────────── */
+.alm-progress-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.alm-dots {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alm-dot {
+    position: relative;
+    width: 9px;
+    height: 9px;
+    border-radius: 5px;
+    background: rgba(0, 16, 85, 0.25);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    overflow: hidden;
+    transition:
+        background 0.35s ease,
+        width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    outline: none;
+}
+
+.alm-dot:hover {
+    background: rgba(0, 16, 85, 0.45);
+}
+
+.alm-dot::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: #ff7900;
+    border-radius: 5px;
+}
+
+.alm-dot.active {
+    background: rgba(0, 16, 85, 0.15);
+    width: 50px;
+}
+
+.alm-dot.active::before {
+    animation: almProgress 5s linear forwards;
+}
+
+@keyframes almProgress {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
 }
 
 /* ── Epicenter-Aligned Horizontal Selector ─────────────────── */
@@ -2444,14 +2515,30 @@ body {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+}
+
+.testimonial-video-container {
+    width: 93%;
+    max-width: 1350px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 /* Redesigned YouTube Section */
 .testimonial-video-section {
-    padding: 80px 0 100px;
-    background-color: #ffffff;
-    text-align: center;
+    padding: 48px 0 56px;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 16, 85, 0.04) 0%,
+        rgba(173, 204, 234, 0.28) 25%,
+        rgba(210, 228, 245, 0.45) 50%,
+        rgba(173, 204, 234, 0.28) 75%,
+        rgba(0, 16, 85, 0.04) 100%
+    );
+    text-align: left;
     overflow: hidden;
     position: relative;
 }
@@ -2592,13 +2679,21 @@ body {
 }
 
 .student-info {
-    background: rgba(255, 255, 255, 0.15);
+    background: linear-gradient(
+        145deg,
+        rgba(0, 10, 30, 0.45) 0%,
+        rgba(0, 10, 30, 0.85) 100%
+    );
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 14px 20px;
     border-radius: 16px;
-    max-width: 90%;
+    width: 100%;
+    min-height: 96px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .student-info h4 {
@@ -2715,7 +2810,7 @@ body {
     position: relative;
     background: #000;
     border-radius: 20px;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     transform: scale(0.9);
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -2729,22 +2824,42 @@ body {
     width: 100%;
     height: 100%;
     border: none;
+    border-radius: 20px;
 }
 
 .video-close {
     position: absolute;
-    top: 20px;
-    right: 25px;
+    top: -24px;
+    right: -24px;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
-    font-size: 2.2rem;
+    font-size: 2rem;
+    font-weight: 300;
     cursor: pointer;
-    line-height: 1;
+    line-height: 0;
     z-index: 100;
-    transition: transform 0.3s ease;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1024px) {
+    .video-close {
+        top: -60px;
+        right: 0;
+    }
 }
 
 .video-close:hover {
+    background: rgba(255, 255, 255, 0.3);
     transform: rotate(90deg) scale(1.1);
 }
 
